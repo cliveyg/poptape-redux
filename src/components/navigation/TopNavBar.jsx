@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
+import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Badge from '@mui/material/Badge'
 import MenuItem from '@mui/material/MenuItem'
@@ -13,6 +14,8 @@ import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import TodayIcon from '@mui/icons-material/Today'
+import Launch from '@mui/icons-material/Launch'
+import Input from '@mui/icons-material/Input'
 import SearchBox from '../../helpers/SearchBox'
 import {ThemeProvider} from '@mui/material/styles'
 import { setupTheme } from '../../assets/scripts/theme'
@@ -92,6 +95,16 @@ export default function TopNavBar() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    function togglePopup(box) {
+        if (box === "login") {
+            setLoginPopup(!showLoginPopup)
+            setSignupPopup(false)
+        } else if (box === "signup") {
+            setSignupPopup(!showSignupPopup)
+            setLoginPopup(false)
+        }
+    }
+
     const menuId = 'primary-search-menu';
     const renderMenu = (
         <Menu
@@ -110,7 +123,7 @@ export default function TopNavBar() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}><Link href={userLink}>Profile</Link></MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}><Link href={userLink+'/account'}>My account</Link></MenuItem>
             <MenuItem onClick={handleMenuClose}>
                 <Link href="#">Noney</Link>
             </MenuItem>
@@ -134,38 +147,95 @@ export default function TopNavBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={5} color="success">
-                        <MailIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                >
-                    <Badge badgeContent={15} color="error">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
+            {!loggedIn ?
+                <MenuItem onClick={() => togglePopup("signup")}>
+                    <IconButton
+                        aria-label="account of current user"
+                        aria-controls="primary-search-account-menu"
+                        aria-haspopup="true"
+                        color="inherit"
+                    >
+                        <Launch />
+                    </IconButton>
+                    <p>Signup</p>
+                </MenuItem>
+                :
+                <span>
+      <MenuItem>
+        <IconButton aria-label="show 4 new mails" color="inherit">
+          <Badge
+              badgeContent={getMails()}
+              classes={{ badge: classes.customBadgeGreen }}
+          >
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton aria-label="show 11 new notifications" color="inherit">
+          <Badge
+              badgeContent={getNotifs()}
+              classes={{ badge: classes.customBadgeRed }}
+          >
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <Link className={classes.mlinky} to={userLink}>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+        >
+          <FaceIcon />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+      </Link>
+      <Link className={classes.mlinky} to={userLink+'/account'}>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Account</p>
+      </MenuItem>
+      </Link>
+      <MenuItem onClick={() => togglePopup("login")}>
+        <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+        >
+          <PowerSettingsNew />
+        </IconButton>
+        <p>Logout</p>
+      </MenuItem>
+      </span>
+            }
+            {!loggedIn ?
+                <MenuItem onClick={() => togglePopup("login")}>
+                    <IconButton
+                        aria-label="account of current user"
+                        aria-controls="primary-search-account-menu"
+                        aria-haspopup="true"
+                        color="inherit"
+                    >
+                        <Input />
+                    </IconButton>
+                    <p>Login</p>
+                </MenuItem>
+                : null
+            }
         </Menu>
     );
 
@@ -193,6 +263,16 @@ export default function TopNavBar() {
                     </Typography>
                     <SearchBox />
                     <Box sx={{ flexGrow: 1 }} />
+                    {!loggedIn ?
+                        <Button
+                            variant='outlined'
+                            onClick={() => togglePopup('signup')}
+                            sx={{ textTransform: 'none', alignSelf: 'center', color: 'white' }}>
+                            Signup
+                        </Button>
+                        :
+                        <Box>logged in</Box>
+                    }
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color='success'>
@@ -201,7 +281,7 @@ export default function TopNavBar() {
                         </IconButton>
                         <IconButton
                             size="large"
-                            aria-label="show 17 new notifications"
+                            aria-label="show 37 new notifications"
                             color="inherit"
                         >
                             <Badge badgeContent={37} sx={{ '& .MuiBadge-badge': { color: 'black', backgroundColor: 'meep' } }}>

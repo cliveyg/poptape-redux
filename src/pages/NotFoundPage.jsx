@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
 export default function NotFoundPage() {
-    document.title = 'poptape auctions | not found'
+    document.title = 'POPTAPE | not found'
     return (
         <>
             <header>
