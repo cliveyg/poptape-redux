@@ -5,6 +5,7 @@ import TopNavBar from "../components/navigation/TopNavBar"
 import Link from '@mui/material/Link'
 
 function HomePage() {
+    document.title = 'POPTAPE | home'
     return (
         <>
             <header>

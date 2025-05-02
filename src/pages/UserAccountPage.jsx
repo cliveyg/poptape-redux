@@ -6,7 +6,8 @@ import TopNavBar from "../components/navigation/TopNavBar"
 
 export default function UserAccountPage(props) {
 
-    const username = Cookies.get('username')
+    const username = Cookies.get('username') || 'guest'
+    document.title = 'POPTAPE | '+username+' | account'
     const [accountAuthed, setAccountAuthed] = React.useState(
         Cookies.get('account-access-token') || null);
 
