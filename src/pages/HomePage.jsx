@@ -1,8 +1,9 @@
 import React from 'react'
 import "@fontsource/varela-round"
 import '../css/poptape.css'
-import TopNavBar from "../components/navigation/TopNavBar"
+import TopNavBar from '../components/navigation/TopNavBar'
 import Link from '@mui/material/Link'
+import Box from '@mui/material/Box'
 
 function HomePage() {
     document.title = 'POPTAPE | home'
@@ -11,7 +12,7 @@ function HomePage() {
             <header>
                 <TopNavBar />
             </header>
-            <div className='testy'>homepage wibble<br />This is some text and a <Link href="#" underline='none' sx={{ textDecoration: 'none'}}>link</Link></div>
+            <Box className='testy'>homepage wibble<br />This is some text and a <Link href="#" underline='none' sx={{ textDecoration: 'none'}}>link</Link></Box>
         </>
     )
 }

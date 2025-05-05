@@ -1,48 +1,17 @@
 body {
-    font-family: "Varela Round", Arial, Helvetica, sans-serif;;
+    font-family: 'Inter Variable', 'Varela Round', 'Roboto', 'sans-serif';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.testy {
-    color: coral;
-}
-
-.linky {
-    color: white;
-}
-.linky:visited {
-    color: white;
-    text-decoration: none;
-}
-
-.mlinky {
-    color: inherit;
-}
-.mlinky:visited {
-    color: inherit;
-    text-decoration: none;
-}
-
-.customBadgeGreen {
-    background-color: #66bb6a;
-    color: black;
-}
-
-.customBadgeRed {
-    background-color: #c2185b;
-    color: white;
-}
-
-.menuButtonDark {
-    margin-right: 2px;
-    background-color: #1769aa;
-}
-
-.title {
-    display: block;
-}
-
-.button {
-    text-transform: none;
-    align-self: center;
-    color: white;
+.poptape-loader {
+    vertical-align: middle;
+    text-align: center;
+    position: absolute;
+    left: 35%;
+    right: 35%;
+    top: 47%;
+    bottom: 45%;
+    display: inline-block;
+    z-index: 1355
 }

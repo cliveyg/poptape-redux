@@ -8,24 +8,33 @@ export function setupTheme() {
     const palette = {
         meep: green[200],
         success: {
-            main: '#66bb6a', // another green
+            main: '#1e9d24', // another green
         },
         error: {
-            main: '#c2185b',
+            main: '#ce0909',
         },
         info: {
-            main: blue[200],
+            main: blue[300],
         },
         warning: {
-            main: amber[700],
+            main: '#f3740e',
         },
         noom: {
             color: 'black',
             backgroundColor: '#FFA500',
         },
+        primary: {
+          main: '#c4399f',
+        },
+        secondary: {
+            main: '#77ab82',
+        },
         message: {
             display: 'flex',
             alignItems: 'center',
+        },
+        snack: {
+            error: '#c2185b',
         },
     }
 

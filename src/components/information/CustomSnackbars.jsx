@@ -5,42 +5,52 @@ import ErrorIcon from '@mui/icons-material/Error'
 import InfoIcon from '@mui/icons-material/Info'
 import WarningIcon from '@mui/icons-material/Warning'
 import CloseIcon from '@mui/icons-material/Close'
-//import { amber, green } from '@mui/material/colors'
+import { pink, brown, orange, purple } from '@mui/material/colors'
 import IconButton from '@mui/material/IconButton'
 import Snackbar from '@mui/material/Snackbar'
 import SnackbarContent from '@mui/material/SnackbarContent'
 import { setupTheme } from '../../assets/scripts/theme.js'
+import { ThemeProvider } from '@mui/material/styles'
+import Box from '@mui/material/Box'
 
 const variantIcon = {
     success: CheckCircleIcon,
     warning: WarningIcon,
     error: ErrorIcon,
     info: InfoIcon,
-};
+}
+
+const variantTheme = {
+    success: 'success.dark',
+    warning: 'warning.main',
+    error: 'error.dark',
+    info: 'info.main',
+}
 
 function MySnackbarContentWrapper(props) {
-    const { className, message, onClose, variant, key_date, duration, ...other } = props;
-    const Icon = variantIcon[variant];
+    const { className, message, onClose, variant, key_date, duration, ...other } = props
+    const Icon = variantIcon[variant]
     const theme = setupTheme()
 
     return (
-
-        <SnackbarContent
-            sx={{ color: variant }}
-            aria-describedby="client-snackbar"
-            message={
-                <span id="client-snackbar">
-                    <Icon sx={{ fontSize: 20, opacity: 0.9, marginRight: theme.spacing(1), }} />
-                    {message}
-                </span>
-            }
-            action={[
-                <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
-                    <CloseIcon sx={{ fontSize: 20 }} />
-                </IconButton>,
-            ]}
-            {...other}
-        />
+        <ThemeProvider theme={theme}>
+            <SnackbarContent
+                sx={{ backgroundColor: variantTheme[variant] }}
+                aria-describedby="client-snackbar"
+                message={
+                    <Box id="client-snackbar" sx={{display: 'flex', alignItems: 'center', }}>
+                        <Icon sx={{ fontSize: 20, opacity: 0.9, marginRight: theme.spacing(1), }} />
+                        {message}
+                    </Box>
+                }
+                action={[
+                    <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
+                        <CloseIcon sx={{ fontSize: 20 }} />
+                    </IconButton>,
+                ]}
+                {...other}
+            />
+        </ThemeProvider>
     );
 }
 

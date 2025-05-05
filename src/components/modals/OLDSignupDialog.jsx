@@ -6,7 +6,7 @@ import CustomizedSnackbars from '../information/CustomSnackbars'
 //import { useLocation, useNavigate, useParams } from 'react-router'
 import CircularProgress from '@mui/material/CircularProgress'
 
-class SignupDialog extends Component {
+class OLDSignupDialog extends Component {
 
     constructor(props) {
         super(props);
@@ -108,7 +108,7 @@ class SignupDialog extends Component {
 
         this.setState({ showLoader: true })
 
-        console.log("[[ SignupDialog ]] -> onSubmit() ")
+        console.log("[[ OLDSignupDialog ]] -> onSubmit() ")
 
         const request = require('superagent')
         request.post('/authy/user')
@@ -120,7 +120,7 @@ class SignupDialog extends Component {
                 Cookies.set('access-token', res.body.token)
                 Cookies.set('username', data.username)
                 Cookies.set('public_id', this.getPublicId(res.body.token))
-                console.log("[[ SignupDialog ]] -> onSubmit() - success!")
+                console.log("[[ OLDSignupDialog ]] -> onSubmit() - success!")
                 const peckish = {
                     variant: "success",
                     message: "User [ "+data.username+" ] successfully created"
@@ -136,7 +136,7 @@ class SignupDialog extends Component {
                     })
             })
             .catch(err => {
-                console.log("[[ SignupDialog ]] -> onSubmit() - fail :(")
+                console.log("[[ OLDSignupDialog ]] -> onSubmit() - fail :(")
                 console.log(err)
                 if (err.status === 401 || err.status === 400) {
                     const peckish = {
@@ -237,4 +237,4 @@ class SignupDialog extends Component {
     }
 }
 
-export default SignupDialog
+export default OLDSignupDialog
