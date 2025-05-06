@@ -48,11 +48,9 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
         .set('Content-Type', 'application/json')
         .then(res => {
             setshowLoader(false)
-            console.log(res.body)
             Cookies.set('access-token', res.body.token)
             Cookies.set('username', getFieldFromToken(res.body.token, 'username'))
             Cookies.set('public_id', getFieldFromToken(res.body.token, 'public_id'))
-            //setshowSnack(true)
             handleClose()
             window.location.reload()
         })

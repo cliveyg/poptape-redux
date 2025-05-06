@@ -11,6 +11,7 @@ function UserAccountPage() {
 
     const username = Cookies.get('username') || null
     document.title = 'POPTAPE | '+username+' | account'
+
     const [accountAuthed, setAccountAuthed] = React.useState(
         Cookies.get('account-access-token') || null)
 
@@ -41,10 +42,8 @@ function UserAccountPage() {
             });
 
     }
-    const location = useLocation()
 
-    const urlPath = location.pathname
-    const urlArray = urlPath.split("/")
+    const urlArray = useLocation().pathname.split("/")
     const urlUsername = urlArray[2]
     if (urlUsername !== Cookies.get('username')) {
         if (accountAuthed) {

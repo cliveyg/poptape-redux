@@ -9,13 +9,8 @@ export default function AccountPageLoginForm({ onSubmit }) {
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
 
-    //const handleClose = () => {
-    //    handleCloseDialog(false);
-    //}
-
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log('in AccountPageLoginForm - handleSubmit')
 
         const data = {
             "username": username,
