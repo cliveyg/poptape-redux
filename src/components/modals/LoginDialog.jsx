@@ -38,7 +38,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
         return base64decoded[field]
     }
 
-    const handleSubmit = (data) =>{
+    const handleSubmit = (data) => {
 
         setshowLoader(true)
         const req = request

@@ -27,7 +27,8 @@ export function setupTheme() {
           main: '#c4399f',
         },
         secondary: {
-            main: '#77ab82',
+            main: '#2486F2',
+            smenu: '#ce6d05'
         },
         message: {
             display: 'flex',
@@ -46,6 +47,12 @@ export function setupTheme() {
                 'Varela Round',
                 'Roboto',
             ].join(','),
+        },
+        sideMenuButtons: {
+            marginTop: 15,
+            textTransform: 'none',
+            marginRight: 15,
+            width: 200,
         },
         components: {
             MuiLink: {

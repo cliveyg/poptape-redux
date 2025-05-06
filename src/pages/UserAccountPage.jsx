@@ -1,15 +1,18 @@
-import React from 'react'
-import "@fontsource/varela-round"
+import * as React from 'react'
 import '../css/poptape.css'
-import TopNavBar from "../components/navigation/TopNavBar"
 import Cookies from 'js-cookie'
+import Box from '@mui/material/Box'
+import request from 'superagent'
+import AccountPageLoginForm from '../components/account/AccountPageLoginForm'
+import AccountPageController from '../components/account/AccountPageController'
+import { useLocation } from 'react-router'
 
-export default function UserAccountPage(props) {
+function UserAccountPage() {
 
-    const username = Cookies.get('username') || 'guest'
+    const username = Cookies.get('username') || null
     document.title = 'POPTAPE | '+username+' | account'
     const [accountAuthed, setAccountAuthed] = React.useState(
-        Cookies.get('access-token') || null);
+        Cookies.get('account-access-token') || null)
 
     const getFieldFromToken = (token, field) => {
         const tokenArray = token.split(".")
@@ -17,20 +20,19 @@ export default function UserAccountPage(props) {
         return base64decoded[field]
     }
 
-    /*
-    const onSubmit = (event, data) => {
-        const request = require('superagent')
-        request.post('/authy/login')
+    const onSubmit = (data) => {
+        const req = request
+        req.post('/authy/login')
             .send(JSON.stringify(data))
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .then(res => {
-                if (getFieldFromToken(res.body.token) ===
+                if (getFieldFromToken(res.body.token, 'public_id') ===
                     getFieldFromToken(Cookies.get('access-token'), 'public_id')) {
+                    let inTenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
                     Cookies.set('account-access-token',
-                        res.body.token,
-                        { path: '/user/'+data.username+'/account' })
-
+                                res.body.token,
+                                { expires: inTenMinutes })
                     setAccountAuthed(true)
                 }
             })
@@ -39,27 +41,28 @@ export default function UserAccountPage(props) {
             });
 
     }
-    const urlPath = props.location.pathname
+    const location = useLocation()
+
+    const urlPath = location.pathname
     const urlArray = urlPath.split("/")
-
-
-
     const urlUsername = urlArray[2]
     if (urlUsername !== Cookies.get('username')) {
         if (accountAuthed) {
             setAccountAuthed(false)
         }
     }
-     */
 
     return (
         <>
-            <header>
-                <TopNavBar />
-            </header>
-            <div style={{ textAlign: "center", marginBottom: 20  }}>
-                User account page
-            </div>
+            {accountAuthed ?
+                <AccountPageController username={username} />
+            :
+                <Box sx={{textAlign: 'center'}}>
+                    <AccountPageLoginForm onSubmit={onSubmit} />
+                </Box>
+            }
         </>
     )
 }
+
+export default UserAccountPage
