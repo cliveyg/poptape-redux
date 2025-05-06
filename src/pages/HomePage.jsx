@@ -12,7 +12,7 @@ function HomePage() {
             <header>
                 <TopNavBar />
             </header>
-            <Box className='testy'>homepage wibble<br />This is some text and a <Link href="#" underline='none' sx={{ textDecoration: 'none'}}>link</Link></Box>
+            <Box className='testy'>homepage wibble<br />This is some text and a <Link href="/item/create" underline='none' sx={{ textDecoration: 'none'}}>create item</Link></Box>
         </>
     )
 }

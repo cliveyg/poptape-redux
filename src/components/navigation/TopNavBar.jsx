@@ -19,9 +19,10 @@ import Launch from '@mui/icons-material/Launch'
 import Input from '@mui/icons-material/Input'
 import PowerSettingsNew from '@mui/icons-material/PowerSettingsNew'
 import SearchBox from '../../helpers/SearchBox'
-import {ThemeProvider} from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
 import { setupTheme } from '../../assets/scripts/theme'
 import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router'
 
 import LoginDialog from '../modals/LoginDialog'
 import SignupDialog from '../modals/SignupDialog'
@@ -31,6 +32,7 @@ import '../../css/poptape.css'
 import request from 'superagent'
 
 export default function TopNavBar() {
+
     const theme = setupTheme()
     const [anchorEl, setAnchorEl] = React.useState(null)
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -38,9 +40,11 @@ export default function TopNavBar() {
     const isMenuOpen = Boolean(anchorEl)
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
     const [loggedIn, setLoggedIn] = React.useState(!!Cookies.get('access-token'))
-    const [notifs, setNotifs] = React.useState(0)
+    const [username, setUsername] = React.useState(!!Cookies.get('username'))
+    const [notifs, setNotifs] = React.useState(43)
     const [mails, setMails] = React.useState(0)
     const [messagesSet, setMessages] = React.useState(false)
+    const navigate = useNavigate()
 
     const [isLoginOpen, setIsLoginOpen] = React.useState(false)
     const handleLoginOpen = () => {
@@ -93,25 +97,39 @@ export default function TopNavBar() {
     }
 
     function getNotifs() {
-        return notifs
+        console.log('notifs is ['+notifs+']')
+        return 39
     }
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
-    };
+    }
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
-    };
+    }
 
     const handleMenuClose = () => {
         setAnchorEl(null);
         handleMobileMenuClose();
-    };
+    }
+
+    const handleLogout = () => {
+        const pathy = '/user/'+Cookies.get('username')+'/account'
+        Cookies.remove('username')
+        Cookies.remove('access-token')
+        Cookies.remove('public_id')
+        Cookies.remove('account-access-token')
+        if (window.location.pathname === '/') {
+            window.location.reload()
+        } else {
+            navigate('/', {replace: true})
+        }
+    }
 
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
-    };
+    }
 
     const menuId = 'primary-search-menu'
     const renderMenu = (
@@ -155,7 +173,7 @@ export default function TopNavBar() {
                         <Box>Account</Box>
                     </MenuItem>
                 </Link>
-                <MenuItem sx={{color: 'inherit'}} onClick={() => alert('Logout')}>
+                <MenuItem sx={{color: 'inherit'}} onClick={handleLogout}>
                     <IconButton
                         aria-label='account of current user'
                         aria-controls='primary-search-account-menu'
@@ -213,11 +231,35 @@ export default function TopNavBar() {
                     </MenuItem>
                 </Box>
                 :
-                <span>
+                <Box>
+                  <MenuItem>
+                      <Button variant='contained' sx={{ '&:hover': {
+                                                        backgroundColor: 'primary.main',
+                                                        color: 'white',
+                                                      },
+                                                      textTransform: 'none',
+                                                      width: '100%',
+                                                      textAlign: 'center',
+                                                      fontWeight: 500,
+                                                      fontSize: '1.0em',
+                                                      padding: 0,
+                      }}>
+                          <Typography
+                                variant='inherit'
+                                color='inherit'
+                          >
+                                {Cookies.get('username')}
+                          </Typography>
+                      </Button>
+                  </MenuItem>
                   <MenuItem>
                     <IconButton aria-label='show 4 new mails' color='inherit'>
                       <Badge
-                          badgeContent={getMails()}
+                          badgeContent={mails}
+                          anchorOrigin={{
+                              vertical: 'top',
+                              horizontal: 'left',
+                          }}
                           sx={{
                               '& .MuiBadge-badge':
                                   (theme) => ({
@@ -233,7 +275,11 @@ export default function TopNavBar() {
                   <MenuItem>
                     <IconButton aria-label='show 11 new notifications' color='inherit'>
                       <Badge
-                          badgeContent={getNotifs()}
+                          badgeContent={notifs}
+                          anchorOrigin={{
+                              vertical: 'top',
+                              horizontal: 'left',
+                          }}
                           sx={{
                                   '& .MuiBadge-badge':
                                       (theme) => ({
@@ -246,33 +292,29 @@ export default function TopNavBar() {
                     </IconButton>
                     <Box>Notifications</Box>
                   </MenuItem>
-                  <Link color='inherit' href={'/user/'+Cookies.get('username')}>
-                    <MenuItem onClick={handleProfileMenuOpen}>
-                        <IconButton
-                            aria-label='account of current user'
-                            aria-controls='primary-search-account-menu'
-                            aria-haspopup='true'
-                            color='inherit'
-                        >
-                          <FaceIcon />
-                        </IconButton>
-                        <Box>Profile</Box>
-                    </MenuItem>
-                  </Link>
-                  <Link color='inherit' href={'/user/'+Cookies.get('username')+'/account'}>
-                      <MenuItem onClick={handleProfileMenuOpen}>
-                        <IconButton
-                            aria-label='account of current user'
-                            aria-controls='primary-search-account-menu'
-                            aria-haspopup='true'
-                            color='inherit'
-                        >
-                          <AccountCircle />
-                        </IconButton>
-                        <Box>Account</Box>
-                      </MenuItem>
-                  </Link>
-                  <MenuItem onClick={() => alert('Logout')}>
+                  <MenuItem onClick={() => navigate('/user/'+username)}>
+                    <IconButton
+                        aria-label='account of current user'
+                        aria-controls='primary-search-account-menu'
+                        aria-haspopup='true'
+                        color='inherit'
+                    >
+                      <FaceIcon />
+                    </IconButton>
+                    <Box>Profile</Box>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate('/user/'+username+'/account')}>
+                    <IconButton
+                        aria-label='account of current user'
+                        aria-controls='primary-search-account-menu'
+                        aria-haspopup='true'
+                        color='inherit'
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                    <Box>Accounte</Box>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
                     <IconButton
                         aria-label='account of current user'
                         aria-controls='primary-search-account-menu'
@@ -283,7 +325,7 @@ export default function TopNavBar() {
                     </IconButton>
                     <Box>Logout</Box>
                   </MenuItem>
-                </span>
+                </Box>
             }
         </Menu>
     );
@@ -321,7 +363,7 @@ export default function TopNavBar() {
                                     handleLoginOpen()
                                 }}
                                 sx={{mr: 1,
-                                    display: { xs: 'none', sm: 'block' },
+                                    display: { xs: 'none', sm: 'none', md: 'block' },
                                     borderColor: 'white',
                                     textTransform: 'none',
                                     alignSelf: 'center',
@@ -334,7 +376,7 @@ export default function TopNavBar() {
                                     handleSignupOpen()
                                 }}
                                 sx={{mr: 1,
-                                    display: { xs: 'none', sm: 'block' },
+                                    display: { xs: 'none', sm: 'none', md: 'block' },
                                     borderColor: 'white',
                                     textTransform: 'none',
                                     alignSelf: 'center',
@@ -379,6 +421,13 @@ export default function TopNavBar() {
                                     <TodayIcon/>
                                 </Badge>
                             </IconButton>
+                            <Typography
+                                variant='inherit'
+                                color='inherit'
+                                sx={{ mt: '0.9em', paddingLeft: '0.7em' }}
+                            >
+                                {Cookies.get('username')}
+                            </Typography>
                             <IconButton
                                 size='large'
                                 edge='end'
