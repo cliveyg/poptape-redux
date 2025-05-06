@@ -7,10 +7,15 @@ import Paper from '@mui/material/Paper'
 import SideMenu from '../components/navigation/SideMenu'
 import UserAccountPage from '../pages/UserAccountPage'
 import UserProfilePage from '../pages/UserProfilePage'
+import Cookies from 'js-cookie'
 
-export default function DisplayPage({page}) {
+export default function DisplayPage({loggedIn, page}) {
 
     const theme = setupTheme()
+
+    if (Cookies.get('access-token') === undefined || Cookies.get('access-token') === null) {
+        window.location.replace('/')
+    }
 
     return (
         <Box sx={{ width: '100%'}}>

@@ -14,10 +14,8 @@ export default function UserProfilePage(props) {
 
     const username = Cookies.get('username')
     const [owner, setOwner] = React.useState(null)
-    const location = useLocation()
 
-    const urlPath = location.pathname
-    const urlArray = urlPath.split("/")
+    const urlArray = useLocation().pathname.split("/")
     const urlUsername = urlArray[2]
     //TODO: Check this is not a security issue
     if (urlUsername === username) {

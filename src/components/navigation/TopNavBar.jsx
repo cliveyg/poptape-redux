@@ -39,8 +39,8 @@ export default function TopNavBar() {
 
     const isMenuOpen = Boolean(anchorEl)
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-    const [loggedIn, setLoggedIn] = React.useState(!!Cookies.get('access-token'))
-    const [username, setUsername] = React.useState(!!Cookies.get('username'))
+    const [loggedIn, setLoggedIn] = React.useState(Cookies.get('access-token') || false)
+    const [username, setUsername] = React.useState(Cookies.get('username') || null)
     const [notifs, setNotifs] = React.useState(43)
     const [mails, setMails] = React.useState(0)
     const [messagesSet, setMessages] = React.useState(false)
@@ -115,7 +115,7 @@ export default function TopNavBar() {
     }
 
     const handleLogout = () => {
-        const pathy = '/user/'+Cookies.get('username')+'/account'
+        //const pathy = '/user/'+Cookies.get('username')+'/account'
         Cookies.remove('username')
         Cookies.remove('access-token')
         Cookies.remove('public_id')
@@ -148,7 +148,7 @@ export default function TopNavBar() {
                 open={isMenuOpen}
                 onClose={handleMenuClose}
             >
-                <Link color='inherit' href={'/user/'+Cookies.get('username')}>
+                <Link color='inherit' onClick={() => navigate('/user/'+Cookies.get('username'))}>
                     <MenuItem sx={{color: 'inherit'}} onClick={handleMenuClose}>
                         <IconButton
                             aria-label='account of current user'
@@ -161,7 +161,7 @@ export default function TopNavBar() {
                         <Box>Profile</Box>
                     </MenuItem>
                 </Link>
-                <Link color='inherit' href={'/user/'+Cookies.get('username')+'/account'}>                    <MenuItem sx={{color: 'inherit'}} onClick={handleMenuClose}>
+                <Link color='inherit' onClick={() => navigate('/user/'+Cookies.get('username')+'/account')}>                    <MenuItem sx={{color: 'inherit'}} onClick={handleMenuClose}>
                         <IconButton
                             aria-label='account of current user'
                             aria-controls='primary-search-account-menu'
