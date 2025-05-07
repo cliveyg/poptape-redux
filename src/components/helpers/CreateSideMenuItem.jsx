@@ -61,6 +61,20 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
     let variant = 'outlined'
     let ariaLabel = 'go to '+texty()
 
+    function borderSize() {
+        if (selected) {
+            return 1
+        }
+        return 0
+    }
+
+    function highlighted() {
+        if (selected) {
+            return 'secondary.main'
+        }
+        return 'primary.main'
+    }
+
     if (selected) {
         variant = 'contained'
     }
@@ -90,8 +104,8 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
                 <IconButton
                     sx={{
                         textTransform: 'none',
-                        color: 'secondary.main',
-                        border: 1,
+                        color: highlighted(),
+                        border: borderSize(),
                         borderRadius: 1,
                         height: '40px',
                         width: '40px',
