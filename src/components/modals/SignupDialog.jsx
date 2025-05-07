@@ -11,7 +11,6 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
 
     const [showLoader, setshowLoader] = React.useState(false)
     //setshowLoader(false)
-    //console.log('At start and showLoader is ['+showLoader+']')
 
     React.useEffect(() => {
         handleClickOpen();
@@ -26,9 +25,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
     };
 
     const handleSubmit = (data) =>{
-        console.log(data)
         setshowLoader(true)
-
     }
 
     return (

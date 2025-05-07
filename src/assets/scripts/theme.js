@@ -19,6 +19,9 @@ export function setupTheme() {
         warning: {
             main: '#f3740e',
         },
+        offwhite: {
+          main: '#efefef'
+        },
         noom: {
             color: 'black',
             backgroundColor: '#FFA500',

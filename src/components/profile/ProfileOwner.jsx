@@ -8,10 +8,12 @@ export default function ProfileOwner(props) {
     const theme = setupTheme()
 
     return (
-        <Box sx={{ width: '100%'}}>
-            <ThemeProvider theme={theme}>
-                <Box>profile owner</Box>
-            </ThemeProvider>
-        </Box>
+        <ThemeProvider theme={theme}>
+            <Box sx={{ width: '100%'}}>
+
+                    <Box>profile owner</Box>
+
+            </Box>
+        </ThemeProvider>
     )
 }

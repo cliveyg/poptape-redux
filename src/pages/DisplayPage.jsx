@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper'
 import SideMenu from '../components/navigation/SideMenu'
 import UserAccountPage from '../pages/UserAccountPage'
 import UserProfilePage from '../pages/UserProfilePage'
+import UserReviewsPage from './UserReviewsPage'
 import Cookies from 'js-cookie'
 
 export default function DisplayPage({loggedIn, page}) {
@@ -29,6 +30,7 @@ export default function DisplayPage({loggedIn, page}) {
                             margin: theme.spacing(1),
                             padding: 1,
                             variant: 'outlined',
+                            backgroundColor: 'offwhite.main',
                         }}
                         >
                             <Box sx={{ display: 'flex', flexDirection: 'row'}}>
@@ -41,6 +43,11 @@ export default function DisplayPage({loggedIn, page}) {
                                     }
                                     {page === 'account' ?
                                         <UserAccountPage />
+                                        :
+                                        null
+                                    }
+                                    {page === 'reviews' ?
+                                        <UserReviewsPage />
                                         :
                                         null
                                     }

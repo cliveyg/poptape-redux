@@ -5,10 +5,7 @@ import Cookies from 'js-cookie'
 import ProfileViewer from '../components/profile/ProfileViewer'
 import ProfileOwner from '../components/profile/ProfileOwner'
 import Box from '@mui/material/Box'
-import Paper from '@mui/material/Paper'
 import { useLocation } from 'react-router'
-import SideMenu from '../components/navigation/SideMenu'
-//import Typography from "@mui/material/Typography";
 
 export default function UserProfilePage(props) {
 
