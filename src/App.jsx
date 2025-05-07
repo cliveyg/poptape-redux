@@ -16,7 +16,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={ <HomePage/> } />
                     <Route exact path='/user/:username' element={<DisplayPage page='profile'/>} />
-                    <Route exact path="/user/:username/reviews" element={<DisplayPage page='review'/>} />
+                    <Route exact path="/user/:username/reviews" element={<DisplayPage page='reviews'/>} />
                     <Route exact path='/user/:username/account' element={<DisplayPage page='account'/>} />
                     <Route exact path='/item/create' element={<CreateItemPage/>} />
                     <Route path='*' element={ <NotFoundPage/> } />

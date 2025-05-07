@@ -18,7 +18,7 @@ import TodayIcon from '@mui/icons-material/Today'
 import Launch from '@mui/icons-material/Launch'
 import Input from '@mui/icons-material/Input'
 import PowerSettingsNew from '@mui/icons-material/PowerSettingsNew'
-import SearchBox from '../../helpers/SearchBox'
+import SearchBox from '../helpers/SearchBox'
 import { ThemeProvider } from '@mui/material/styles'
 import { setupTheme } from '../../assets/scripts/theme'
 import Cookies from 'js-cookie'
@@ -207,17 +207,6 @@ export default function TopNavBar() {
         >
             {!loggedIn ?
                 <Box>
-                    <MenuItem onClick={() => handleSignupOpen()}>
-                        <IconButton
-                            aria-label='account of current user'
-                            aria-controls='primary-search-account-menu'
-                            aria-haspopup='true'
-                            color='inherit'
-                        >
-                            <Launch />
-                        </IconButton>
-                        <Box>Signup</Box>
-                    </MenuItem>
                     <MenuItem onClick={() => handleLoginOpen()}>
                         <IconButton
                             aria-label='account of current user'
@@ -228,6 +217,17 @@ export default function TopNavBar() {
                             <Input />
                         </IconButton>
                         <Box>Login</Box>
+                    </MenuItem>
+                    <MenuItem onClick={() => handleSignupOpen()}>
+                        <IconButton
+                            aria-label='account of current user'
+                            aria-controls='primary-search-account-menu'
+                            aria-haspopup='true'
+                            color='inherit'
+                        >
+                            <Launch />
+                        </IconButton>
+                        <Box>Signup</Box>
                     </MenuItem>
                 </Box>
                 :
@@ -312,7 +312,7 @@ export default function TopNavBar() {
                     >
                       <AccountCircle />
                     </IconButton>
-                    <Box>Accounte</Box>
+                    <Box>Account</Box>
                   </MenuItem>
                   <MenuItem onClick={handleLogout}>
                     <IconButton
