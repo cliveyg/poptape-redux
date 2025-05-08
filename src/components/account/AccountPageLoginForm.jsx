@@ -57,7 +57,7 @@ export default function AccountPageLoginForm({ onSubmit }) {
                     onChange = {(event) => handleChange(event)}
                 />
                 <br /><br />
-                <Button type="submit" variant="outlined"  onClick={(event) => handleSubmit(event)} color="primary">
+                <Button type="submit" sx={{textTransform: 'none'}} variant="outlined"  onClick={(event) => handleSubmit(event)} color="primary">
                     Login
                 </Button>
             </form>

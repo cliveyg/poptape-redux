@@ -7,7 +7,7 @@ import AccountPageLoginForm from '../components/account/AccountPageLoginForm'
 import AccountPageController from '../components/account/AccountPageController'
 import { useLocation } from 'react-router'
 
-function UserAccountPage() {
+export default function UserAccountPage() {
 
     const username = Cookies.get('username') || null
     document.title = 'POPTAPE | '+username+' | account'
@@ -63,5 +63,3 @@ function UserAccountPage() {
         </>
     )
 }
-
-export default UserAccountPage

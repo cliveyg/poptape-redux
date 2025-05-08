@@ -5,10 +5,10 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import request from 'superagent'
 import CircularProgress from '@mui/material/CircularProgress'
 import Cookies from 'js-cookie'
 import CustomizedSnackbars from '../information/CustomSnackbars'
+import request from 'superagent'
 
 export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
 
