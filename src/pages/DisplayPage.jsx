@@ -5,10 +5,11 @@ import TopNavBar from '../components/navigation/TopNavBar'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import SideMenu from '../components/navigation/SideMenu'
-import UserAccountPage from '../pages/UserAccountPage'
-import UserProfilePage from '../pages/UserProfilePage'
+import UserAccountPage from './UserAccountPage'
+import UserProfilePage from './UserProfilePage'
 import UserReviewsPage from './UserReviewsPage'
 import Cookies from 'js-cookie'
+import UserDashboardPage from './UserDashboardPage'
 
 export default function DisplayPage({loggedIn, page}) {
 
@@ -36,6 +37,21 @@ export default function DisplayPage({loggedIn, page}) {
                             <Box sx={{ display: 'flex', flexDirection: 'row'}}>
                                 <SideMenu selected={page} />
                                 <Box sx={{flexGrow: 1}}>
+                                    {page === 'dashboard' ?
+                                        <UserDashboardPage />
+                                        :
+                                        null
+                                    }
+                                    {page === 'notifications' ?
+                                        <UserProfilePage />
+                                        :
+                                        null
+                                    }
+                                    {page === 'messages' ?
+                                        <UserProfilePage />
+                                        :
+                                        null
+                                    }
                                     {page === 'profile' ?
                                         <UserProfilePage />
                                     :
@@ -47,6 +63,16 @@ export default function DisplayPage({loggedIn, page}) {
                                         null
                                     }
                                     {page === 'reviews' ?
+                                        <UserReviewsPage />
+                                        :
+                                        null
+                                    }
+                                    {page === 'myitems' ?
+                                        <UserReviewsPage />
+                                        :
+                                        null
+                                    }
+                                    {page === 'auctions' ?
                                         <UserReviewsPage />
                                         :
                                         null

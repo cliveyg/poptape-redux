@@ -8,19 +8,30 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import PageviewIcon from '@mui/icons-material/Pageview'
 import PaymentsIcon from "@mui/icons-material/Payments"
 import RateReviewIcon from '@mui/icons-material/RateReview'
-import { setupTheme } from '../../assets/scripts/theme.js'
+import InventoryIcon from '@mui/icons-material/Inventory'
+import GavelIcon from '@mui/icons-material/Gavel'
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import { setupTheme } from '../../assets/scripts/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip'
+//import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
+import NotificationsIcon from '@mui/icons-material/Notifications'
+import { styled } from '@mui/material/styles'
 
 export default function CreateSideMenuItem({menuItem, username, selected}) {
 
     const navigate = useNavigate()
     const menuIcon = {
+        dashboard: DashboardIcon,
+        notifications: NotificationsIcon,
         profile: FaceIcon,
         account: AccountCircle,
         messages: MailIcon,
+        myitems: InventoryIcon,
+        auctions: GavelIcon,
         watchlist: VisibilityIcon,
         favourites: FavoriteBorderIcon,
         viewed: PageviewIcon,
@@ -28,9 +39,13 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
         reviews: RateReviewIcon,
     }
     const menuText = {
+        dashboard: 'dashboard',
+        notifications: 'notifications',
         profile: 'profile',
         account: 'account',
         messages: 'messages',
+        myitems: 'items',
+        auctions: 'auctions',
         watchlist: 'watchlist',
         favourites: 'favourites',
         viewed: 'recently viewed',
@@ -38,9 +53,13 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
         reviews: 'reviews',
     }
     const menuLink = {
+        dashboard: '/user/dashboard',
+        notifications: '/user/'+username+'/notifications',
         profile: '/user/'+username,
         account: '/user/'+username+'/account',
         messages: '/user/'+username+'/messages',
+        myitems: '/user/'+username+'/items',
+        auctions: '/user/'+username+'/auctions',
         watchlist: '/user/'+username+'/watchlist',
         favourites: '/user/'+username+'/favourites',
         viewed: '/user/'+username+'/viewed',
@@ -79,6 +98,17 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
         variant = 'contained'
     }
 
+    const CustomTooltip = styled(({ className, ...props }) => (
+        <Tooltip {...props} classes={{ popper: className }} />
+    ))(({ theme }) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: theme.palette.secondary.light,
+            color: 'white',
+            boxShadow: theme.shadows[1],
+            fontSize: '0.7em',
+        },
+    }));
+
     return(
         <>
             <ThemeProvider theme={theme}>
@@ -101,24 +131,28 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
                         <Box>{texty()}</Box>
                     </Button>
                 </Box>
-                <IconButton
-                    sx={{
-                        textTransform: 'none',
-                        color: highlighted(),
-                        border: borderSize(),
-                        borderRadius: 1,
-                        height: '40px',
-                        width: '40px',
-                        display: { xs: 'block', sm: 'block', md: 'none', lg: 'none', xl: 'none', },
-                    }}
-                    variant={variant}
-                    color='primary'
-                    aria-label={ariaLabel}
-                    onClick={() => navigate(linky())}
-                    size='small'
+                <CustomTooltip
+                    title={texty()}
                 >
-                    <MenuIcon />
-                </IconButton>
+                    <IconButton
+                        sx={{
+                            textTransform: 'none',
+                            color: highlighted(),
+                            border: borderSize(),
+                            borderRadius: 1,
+                            height: '40px',
+                            width: '40px',
+                            display: { xs: 'block', sm: 'block', md: 'none', lg: 'none', xl: 'none', },
+                        }}
+                        variant={variant}
+                        color='primary'
+                        aria-label={ariaLabel}
+                        onClick={() => navigate(linky())}
+                        size='small'
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                </CustomTooltip>
             </ThemeProvider>
         </>
     )

@@ -19,6 +19,16 @@ export default function SideMenu({selected}) {
         <Box sx={{width: { xs: '40px', sm: '40px', md: '170px', lg: '170px', xl: '170px'}}}>
             <ThemeProvider theme={theme}>
                 <Stack direction='column' spacing={0}>
+                    {selected === 'dashboard' ?
+                        <CreateSideMenuItem menuItem={selected} username={username} selected={true} />
+                        :
+                        <CreateSideMenuItem menuItem={'dashboard'} username={username} selected={false} />
+                    }
+                    {selected === 'notifications' ?
+                        <CreateSideMenuItem menuItem={selected} username={username} selected={true} />
+                        :
+                        <CreateSideMenuItem menuItem={'notifications'} username={username} selected={false} />
+                    }
                     {selected === 'profile' ?
                         <CreateSideMenuItem menuItem={selected} username={username} selected={true} />
                         :
@@ -28,6 +38,16 @@ export default function SideMenu({selected}) {
                         <CreateSideMenuItem menuItem={selected} username={username} selected={true} />
                         :
                         <CreateSideMenuItem menuItem={'account'} username={username} selected={false} />
+                    }
+                    {selected === 'myitems' ?
+                        <CreateSideMenuItem menuItem={selected} username={username} selected={true} />
+                        :
+                        <CreateSideMenuItem menuItem={'myitems'} username={username} selected={false} />
+                    }
+                    {selected === 'auctions' ?
+                        <CreateSideMenuItem menuItem={selected} username={username} selected={true} />
+                        :
+                        <CreateSideMenuItem menuItem={'auctions'} username={username} selected={false} />
                     }
                     {selected === 'messages' ?
                         <CreateSideMenuItem menuItem={selected} username={username} selected={true} />

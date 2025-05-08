@@ -15,6 +15,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import FaceIcon from '@mui/icons-material/Face'
 import TodayIcon from '@mui/icons-material/Today'
+import DashboardIcon from '@mui/icons-material/Dashboard'
 import Launch from '@mui/icons-material/Launch'
 import Input from '@mui/icons-material/Input'
 import PowerSettingsNew from '@mui/icons-material/PowerSettingsNew'
@@ -148,6 +149,19 @@ export default function TopNavBar() {
                 open={isMenuOpen}
                 onClose={handleMenuClose}
             >
+                <Link color='inherit' onClick={() => navigate('/user/dashboard')}>
+                    <MenuItem sx={{color: 'inherit'}} onClick={handleMenuClose}>
+                        <IconButton
+                            aria-label='go to dashboard'
+                            aria-controls='primary-search-account-menu'
+                            aria-haspopup='true'
+                            sx={{color: 'inherit'}}
+                        >
+                            <DashboardIcon />
+                        </IconButton>
+                        <Box>Dashboard</Box>
+                    </MenuItem>
+                </Link>
                 <Link color='inherit' onClick={() => navigate('/user/'+Cookies.get('username'))}>
                     <MenuItem sx={{color: 'inherit'}} onClick={handleMenuClose}>
                         <IconButton
@@ -252,7 +266,13 @@ export default function TopNavBar() {
                           </Typography>
                       </Button>
                   </MenuItem>
-                  <MenuItem>
+                  <MenuItem onClick={() => navigate('/user/dashboard')}>
+                      <IconButton aria-label='go to dashboard' color='inherit'>
+                          <DashboardIcon />
+                      </IconButton>
+                      <Box>Dashboard</Box>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate('/user/'+Cookies.get('username')+'/messages')}>
                     <IconButton aria-label='show 4 new mails' color='inherit'>
                       <Badge
                           badgeContent={mails}
@@ -272,7 +292,7 @@ export default function TopNavBar() {
                     </IconButton>
                     <Box>Messages</Box>
                   </MenuItem>
-                  <MenuItem>
+                  <MenuItem onClick={() => navigate('/user/'+Cookies.get('username')+'/notifications')}>
                     <IconButton aria-label='show 11 new notifications' color='inherit'>
                       <Badge
                           badgeContent={notifs}
@@ -291,6 +311,12 @@ export default function TopNavBar() {
                       </Badge>
                     </IconButton>
                     <Box>Notifications</Box>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate('/user/'+Cookies.get('username')+'/calender')}>
+                        <IconButton aria-label='go to calendar' color='inherit'>
+                            <TodayIcon />
+                        </IconButton>
+                        <Box>Calendar</Box>
                   </MenuItem>
                   <MenuItem onClick={() => navigate('/user/'+username)}>
                     <IconButton
@@ -340,10 +366,11 @@ export default function TopNavBar() {
                         size='large'
                         edge='start'
                         color='inherit'
-                        aria-label='open drawer'
+                        aria-label='go to homepage'
                         sx={{ mr: 2 }}
+                        onClick={() => navigate('/', {replace: true})}
                     >
-                        <Link sx={{color: 'white'}} href='/'><HiveIcon /></Link>
+                        <HiveIcon />
                     </IconButton>
                     <Typography
                         variant='h6'
@@ -391,7 +418,18 @@ export default function TopNavBar() {
                         </>
                     :
                         <Box sx={{display: {xs: 'none', md: 'flex'}}}>
-                            <IconButton size='large' aria-label='show 4 new mails' color='inherit'>
+                            <IconButton onClick={() => navigate('/user/dashboard')}
+                                        size='large'
+                                        aria-label='show dashboard'
+                                        color='inherit'
+                            >
+                                <DashboardIcon/>
+                            </IconButton>
+                            <IconButton onClick={() => navigate('/user/')}
+                                        size='large'
+                                        aria-label='show 4 new mails'
+                                        color='inherit'
+                            >
                                 <Badge badgeContent={4} color='success'>
                                     <MailIcon/>
                                 </Badge>
