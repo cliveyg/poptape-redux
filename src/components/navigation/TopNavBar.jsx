@@ -27,12 +27,15 @@ import { useNavigate } from 'react-router'
 
 import LoginDialog from '../modals/LoginDialog'
 import SignupDialog from '../modals/SignupDialog'
+import { useTranslation } from 'react-i18next'
 
 import Link from '@mui/material/Link'
 import '../../css/poptape.css'
 import request from 'superagent'
 
 export default function TopNavBar() {
+
+    const { t } = useTranslation()
 
     const theme = setupTheme()
     const [anchorEl, setAnchorEl] = React.useState(null)
@@ -395,7 +398,7 @@ export default function TopNavBar() {
                                     textTransform: 'none',
                                     alignSelf: 'center',
                                     color: 'white'}}>
-                                Login
+                                {t('login')}
                             </Button>
                             <Button
                                 variant='outlined'
@@ -407,7 +410,8 @@ export default function TopNavBar() {
                                     borderColor: 'white',
                                     textTransform: 'none',
                                     alignSelf: 'center',
-                                    color: 'white'}}>                                Signup
+                                    color: 'white'}}>
+                                {t('signup')}
                             </Button>
                             <LoginDialog isDialogOpened={isLoginOpen}
                                          handleCloseDialog={() => setIsLoginOpen(false)}

@@ -1,7 +1,8 @@
-import {alpha, styled} from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-import * as React from "react";
+import {alpha, styled} from '@mui/material/styles'
+import InputBase from '@mui/material/InputBase'
+import SearchIcon from '@mui/icons-material/Search'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 
 function SearchBox() {
 
@@ -47,14 +48,16 @@ function SearchBox() {
         },
     }));
 
+    const { t } = useTranslation()
+
     return (
         <Search>
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-                placeholder="Searchy…"
-                inputProps={{ 'aria-label': 'search' }}
+                placeholder={t('search')}
+                inputProps={{ 'aria-label': t('search') }}
             />
         </Search>
     )
