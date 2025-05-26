@@ -9,6 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Cookies from 'js-cookie'
 import CustomizedSnackbars from '../information/CustomSnackbars'
 import request from 'superagent'
+import {useTranslation} from 'react-i18next'
 
 export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
 
@@ -18,6 +19,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
     const [message, setMessage] = React.useState('Something went bang!')
     const duration = 2000
     const date = new Date().getTime()
+    const { t } = useTranslation()
 
     React.useEffect(() => {
         handleClickOpen();
@@ -60,7 +62,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
             if (error.response.body['message'] !== null) {
                 setMessage(error.response.body['message'])
             } else {
-                setMessage('Something went pop!')
+                setMessage(t('ld_error_message_default'))
             }
             setshowSnack(true)
             setTimeout(function() {
@@ -89,13 +91,13 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
                     },
                 }}
             >
-                <DialogTitle>Login</DialogTitle>
+                <DialogTitle>{t('ld_login')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
                         required
                         margin='dense'
-                        label='Username'
+                        label={t('ld_username')}
                         name='username'
                         type='text'
                         sx={{ mr: 1 }}
@@ -103,7 +105,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
                     <TextField
                         required
                         margin='dense'
-                        label='Password'
+                        label={t('ld_password')}
                         name='password'
                         type='password'
                         sx={{ mr: 1 }}
@@ -116,8 +118,8 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
                     }
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined'  sx={{textTransform: 'none',}} onClick={handleClose}>Cancel</Button>
-                    <Button variant='outlined' sx={{textTransform: 'none',}} type='submit'>Login</Button>
+                    <Button variant='outlined'  sx={{textTransform: 'none',}} onClick={handleClose}>{t('ld_cancel')}</Button>
+                    <Button variant='outlined' sx={{textTransform: 'none',}} type='submit'>{t('ld_login')}</Button>
                 </DialogActions>
             </Dialog>
             </form>

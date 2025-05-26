@@ -56,7 +56,7 @@ function SearchBox() {
                 <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-                placeholder={t('search')}
+                placeholder={t('tm_search')}
                 inputProps={{ 'aria-label': t('search') }}
             />
         </Search>
