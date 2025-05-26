@@ -16,12 +16,14 @@ import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip'
-//import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import { styled } from '@mui/material/styles'
+import {useTranslation} from 'react-i18next'
 
 export default function CreateSideMenuItem({menuItem, username, selected}) {
+
+    const { t } = useTranslation()
 
     const navigate = useNavigate()
     const menuIcon = {
@@ -39,18 +41,18 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
         reviews: RateReviewIcon,
     }
     const menuText = {
-        dashboard: 'dashboard',
-        notifications: 'notifications',
-        profile: 'profile',
-        account: 'account',
-        messages: 'messages',
-        myitems: 'items',
-        auctions: 'auctions',
-        watchlist: 'watchlist',
-        favourites: 'favourites',
-        viewed: 'recently viewed',
-        purchased: 'purchase history',
-        reviews: 'reviews',
+        dashboard: t('sm_dashboard'),
+        notifications: t('sm_notifications'),
+        profile: t('sm_profile'),
+        account: t('sm_account'),
+        messages: t('sm_messages'),
+        myitems: t('sm_items'),
+        auctions: t('sm_auctions'),
+        watchlist: t('sm_watchlist'),
+        favourites: t('sm_favourites'),
+        viewed: t('sm_viewed'),
+        purchased: t('sm_purchased'),
+        reviews: t('sm_reviews'),
     }
     const menuLink = {
         dashboard: '/user/dashboard',

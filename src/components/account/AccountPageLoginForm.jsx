@@ -3,11 +3,13 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import {useTranslation} from 'react-i18next'
 
 export default function AccountPageLoginForm({ onSubmit }) {
 
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const { t } = useTranslation()
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -36,12 +38,12 @@ export default function AccountPageLoginForm({ onSubmit }) {
         <Box>
             <form>
                 <Typography sx={{fontSize: '1em', margin: 3}}>
-                    Account page login
+                    {t('ap_login_title')}
                 </Typography>
                 <TextField
                     autoFocus
                     margin="dense"
-                    label="Username"
+                    label={t('ap_username')}
                     name="username"
                     type="text"
                     value={username}
@@ -50,7 +52,7 @@ export default function AccountPageLoginForm({ onSubmit }) {
                 <br />
                 <TextField
                     margin="dense"
-                    label="Password"
+                    label={t('ap_password')}
                     name="password"
                     type="password"
                     value={password}
@@ -58,7 +60,7 @@ export default function AccountPageLoginForm({ onSubmit }) {
                 />
                 <br /><br />
                 <Button type="submit" sx={{textTransform: 'none'}} variant="outlined"  onClick={(event) => handleSubmit(event)} color="primary">
-                    Login
+                    {t('ap_login')}
                 </Button>
             </form>
         </Box>

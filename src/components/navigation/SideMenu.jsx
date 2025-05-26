@@ -2,7 +2,6 @@ import * as React from 'react'
 import Cookies from 'js-cookie'
 import { setupTheme } from '../../assets/scripts/theme'
 import { ThemeProvider } from '@mui/material/styles'
-import { useNavigate } from 'react-router'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import CreateSideMenuItem from '../helpers/CreateSideMenuItem'
@@ -11,9 +10,9 @@ export default function SideMenu({selected}) {
 
     const [username, setUsername] = React.useState(Cookies.get('username') || null)
 
+    //TODO: fix doc title so it translates
     document.title = 'POPTAPE | ' + selected
     const theme = setupTheme()
-    const navigate = useNavigate()
 
     return(
         <Box sx={{width: { xs: '40px', sm: '40px', md: '170px', lg: '170px', xl: '170px'}}}>

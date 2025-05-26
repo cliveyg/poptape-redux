@@ -119,11 +119,12 @@ export default function TopNavBar() {
     }
 
     const handleLogout = () => {
-        //const pathy = '/user/'+Cookies.get('username')+'/account'
         Cookies.remove('username')
         Cookies.remove('access-token')
         Cookies.remove('public_id')
         Cookies.remove('account-access-token')
+        // not sure whether to remove lang setting or not
+        //localStorage.removeItem('i18nextLng')
         if (window.location.pathname === '/') {
             window.location.reload()
         } else {
@@ -162,7 +163,7 @@ export default function TopNavBar() {
                         >
                             <DashboardIcon />
                         </IconButton>
-                        <Box>Dashboard</Box>
+                        <Box>{t('tm_dashboard')}</Box>
                     </MenuItem>
                 </Link>
                 <Link color='inherit' onClick={() => navigate('/user/'+Cookies.get('username'))}>
@@ -175,7 +176,7 @@ export default function TopNavBar() {
                         >
                             <FaceIcon />
                         </IconButton>
-                        <Box>Profile</Box>
+                        <Box>{t('tm_profile')}</Box>
                     </MenuItem>
                 </Link>
                 <Link color='inherit' onClick={() => navigate('/user/'+Cookies.get('username')+'/account')}>                    <MenuItem sx={{color: 'inherit'}} onClick={handleMenuClose}>
@@ -187,7 +188,7 @@ export default function TopNavBar() {
                         >
                             <AccountCircle />
                         </IconButton>
-                        <Box>Account</Box>
+                        <Box>{t('tm_account')}</Box>
                     </MenuItem>
                 </Link>
                 <MenuItem sx={{color: 'inherit'}} onClick={handleLogout}>
@@ -199,7 +200,7 @@ export default function TopNavBar() {
                     >
                         <PowerSettingsNew />
                     </IconButton>
-                    <Box>Logout</Box>
+                    <Box>{t('tm_logout')}</Box>
                 </MenuItem>
             </Menu>
         </>
@@ -233,7 +234,7 @@ export default function TopNavBar() {
                         >
                             <Input />
                         </IconButton>
-                        <Box>Login</Box>
+                        <Box>{t('tm_login')}</Box>
                     </MenuItem>
                     <MenuItem onClick={() => handleSignupOpen()}>
                         <IconButton
@@ -244,7 +245,7 @@ export default function TopNavBar() {
                         >
                             <Launch />
                         </IconButton>
-                        <Box>Signup</Box>
+                        <Box>{t('tm_signup')}</Box>
                     </MenuItem>
                 </Box>
                 :
@@ -273,7 +274,7 @@ export default function TopNavBar() {
                       <IconButton aria-label='go to dashboard' color='inherit'>
                           <DashboardIcon />
                       </IconButton>
-                      <Box>Dashboard</Box>
+                      <Box>{t('tm_dashboard')}</Box>
                   </MenuItem>
                   <MenuItem onClick={() => navigate('/user/'+Cookies.get('username')+'/messages')}>
                     <IconButton aria-label='show 4 new mails' color='inherit'>
@@ -293,7 +294,7 @@ export default function TopNavBar() {
                         <MailIcon />
                       </Badge>
                     </IconButton>
-                    <Box>Messages</Box>
+                    <Box>{t('tm_messages')}</Box>
                   </MenuItem>
                   <MenuItem onClick={() => navigate('/user/'+Cookies.get('username')+'/notifications')}>
                     <IconButton aria-label='show 11 new notifications' color='inherit'>
@@ -313,13 +314,13 @@ export default function TopNavBar() {
                         <NotificationsIcon />
                       </Badge>
                     </IconButton>
-                    <Box>Notifications</Box>
+                    <Box>{t('tm_notifications')}</Box>
                   </MenuItem>
                   <MenuItem onClick={() => navigate('/user/'+Cookies.get('username')+'/calender')}>
                         <IconButton aria-label='go to calendar' color='inherit'>
                             <TodayIcon />
                         </IconButton>
-                        <Box>Calendar</Box>
+                        <Box>{t('tm_calendar')}</Box>
                   </MenuItem>
                   <MenuItem onClick={() => navigate('/user/'+username)}>
                     <IconButton
@@ -330,7 +331,7 @@ export default function TopNavBar() {
                     >
                       <FaceIcon />
                     </IconButton>
-                    <Box>Profile</Box>
+                    <Box>{t('tm_profile')}</Box>
                   </MenuItem>
                   <MenuItem onClick={() => navigate('/user/'+username+'/account')}>
                     <IconButton
@@ -341,7 +342,7 @@ export default function TopNavBar() {
                     >
                       <AccountCircle />
                     </IconButton>
-                    <Box>Account</Box>
+                    <Box>{t('tm_account')}</Box>
                   </MenuItem>
                   <MenuItem onClick={handleLogout}>
                     <IconButton
@@ -352,7 +353,7 @@ export default function TopNavBar() {
                     >
                       <PowerSettingsNew />
                     </IconButton>
-                    <Box>Logout</Box>
+                    <Box>{t('tm_logout')}</Box>
                   </MenuItem>
                 </Box>
             }
@@ -398,7 +399,7 @@ export default function TopNavBar() {
                                     textTransform: 'none',
                                     alignSelf: 'center',
                                     color: 'white'}}>
-                                {t('login')}
+                                {t('tm_login')}
                             </Button>
                             <Button
                                 variant='outlined'
@@ -411,7 +412,7 @@ export default function TopNavBar() {
                                     textTransform: 'none',
                                     alignSelf: 'center',
                                     color: 'white'}}>
-                                {t('signup')}
+                                {t('tm_signup')}
                             </Button>
                             <LoginDialog isDialogOpened={isLoginOpen}
                                          handleCloseDialog={() => setIsLoginOpen(false)}
