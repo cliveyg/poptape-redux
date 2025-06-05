@@ -13,7 +13,10 @@ export default function UserProfilePage(props) {
     const { t } = useTranslation()
     const username = Cookies.get('username')
     const [owner, setOwner] = React.useState(null)
-    document.title = 'POPTAPE | ' + username + ' | '+ t('profile:pr_title')
+
+    React.useEffect(() => {
+        document.title = 'POPTAPE | ' + username + ' | '+ t('profile:pr_title')
+    }, []);
 
     const urlArray = useLocation().pathname.split("/")
     const urlUsername = urlArray[2]

@@ -43,12 +43,18 @@ const resources = {
     },
 };
 
+let default_language = 'en'
+if (localStorage.getItem('i18nextLng') !== null) {
+    default_language = localStorage.getItem('i18nextLng')
+}
+
 i18n
     .use(initReactI18next)
     .use(backend)
     .init({
         resources,
-        lng: 'en',
+        //lng: 'en',
+        lng: default_language,
         defaultNS: 'menus',
         interpolation: {
             escapeValue: false
