@@ -2,14 +2,16 @@ import * as React from 'react'
 import '../css/poptape.css'
 import Cookies from 'js-cookie'
 import Box from '@mui/material/Box'
-import {setupTheme} from "../assets/scripts/theme.js";
-import {ThemeProvider} from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import {setupTheme} from '../assets/scripts/theme.js'
+import {ThemeProvider} from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
+import {useTranslation} from 'react-i18next'
 
 export default function UserDashboardPage() {
 
+    const { t } = useTranslation()
     const username = Cookies.get('username') || null
-    document.title = 'POPTAPE | ' + username + ' | dashboard'
+    document.title = 'POPTAPE | ' + username + ' | '+ t('dashboard:dp_title')
 
     const theme = setupTheme()
 

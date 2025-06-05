@@ -1,15 +1,45 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import backend from 'i18next-http-backend'
-import translationEN_GB from './locales/en/translations.json'
-import translationPT_BR from './locales/pt/translations.json'
+
+import accountEN_GB from './locales/en/account.json'
+import dashboardEN_GB from './locales/en/dashboard.json'
+import errorsEN_GB from './locales/en/errors.json'
+import homepageEN_GB from './locales/en/homepage.json'
+import menusEN_GB from './locales/en/menus.json'
+import modalsEN_GB from './locales/en/modals.json'
+import profileEN_GB from './locales/en/profile.json'
+import validationEN_GB from './locales/en/validation.json'
+
+import accountPT_BR from './locales/pt/account.json'
+import dashboardPT_BR from './locales/pt/dashboard.json'
+import errorsPT_BR from './locales/pt/errors.json'
+import homepagePT_BR from './locales/pt/homepage.json'
+import menusPT_BR from './locales/pt/menus.json'
+import modalsPT_BR from './locales/pt/modals.json'
+import profilePT_BR from './locales/pt/profile.json'
+import validationPT_BR from './locales/pt/validation.json'
 
 const resources = {
     en: {
-        translation: translationEN_GB,
+        account: accountEN_GB,
+        dashboard: dashboardEN_GB,
+        errors: errorsEN_GB,
+        homepage: homepageEN_GB,
+        menus: menusEN_GB,
+        modals: modalsEN_GB,
+        profile: profileEN_GB,
+        validation: validationEN_GB
     },
     pt: {
-        translation: translationPT_BR,
+        account: accountPT_BR,
+        dashboard: dashboardPT_BR,
+        errors: errorsPT_BR,
+        homepage: homepagePT_BR,
+        menus: menusPT_BR,
+        modals: modalsPT_BR,
+        profile: profilePT_BR,
+        validation: validationPT_BR
     },
 };
 
@@ -19,6 +49,7 @@ i18n
     .init({
         resources,
         lng: 'en',
+        defaultNS: 'menus',
         interpolation: {
             escapeValue: false
         }

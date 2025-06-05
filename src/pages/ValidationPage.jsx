@@ -9,9 +9,9 @@ import Paper from '@mui/material/Paper'
 import { setupTheme } from '../assets/scripts/theme'
 import {useTranslation} from 'react-i18next'
 
-function HomePage() {
+function ValidationPage() {
     const { t } = useTranslation()
-    document.title = 'POPTAPE | '+t('homepage:hp_title')
+    document.title = 'POPTAPE | '+t('vp_title')
     const theme = setupTheme()
     return (
         <>
@@ -25,19 +25,12 @@ function HomePage() {
                 backgroundColor: 'offwhite.main',
             }}
             >
-                <Box className='testy'>homepage wibble<br />This is some text and a <Link href="/item/create" underline='none' sx={{ textDecoration: 'none'}}>create item</Link></Box>
-                <Box>This is a <Link href="/item/f7884d63-7507-43ed-8196-8ee0b6455ed6" underline='none'>linky</Link> to a non existent item</Box>
-                <Box>Link to <Link href="/test/woop">test page</Link></Box>
-                <Box>{t('homepage:hp_test')}</Box>
                 <Box>
-                    <LanguageSwitcher />
-                </Box>
-                <Box>
-                    Woop
+                    {t('validation:vp_blurb')}
                 </Box>
             </Paper>
         </>
     )
 }
 
-export default HomePage
+export default ValidationPage
