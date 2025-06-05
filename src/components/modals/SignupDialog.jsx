@@ -36,27 +36,16 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
         handleCloseDialog(false);
     };
 
-    /*
-    function getFieldFromToken(token, field) {
-        const tokenArray = token.split(".")
-        const base64decoded = JSON.parse(atob(tokenArray[1]))
-        return base64decoded[field]
-    }
-
-     */
-
     const handleSubmit = (data) => {
 
         setshowLoader(true)
         const req = request
-        req.post('/apiserver/signup')
+        req.post('/api/signup')
             .send(JSON.stringify(data))
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .then(res => {
                 setshowLoader(false)
-                console.log("RES BODY")
-                console.log(res.body)
                 Cookies.set('access-token', res.body.token)
                 Cookies.set('username', getFieldFromToken(res.body.token, 'username'))
                 Cookies.set('public_id', getFieldFromToken(res.body.token, 'public_id'))

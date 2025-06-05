@@ -39,7 +39,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
 
         setshowLoader(true)
         const req = request
-        req.post('/apiserver/login')
+        req.post('/api/login')
         .send(JSON.stringify(data))
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
