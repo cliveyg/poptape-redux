@@ -18,7 +18,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
     const [showLoader, setshowLoader] = React.useState(false)
     const [showSnack, setshowSnack] = React.useState(false)
     const [variant, setVariant] = React.useState('error')
-    const [message, setMessage] = React.useState(t('ld_error_message_default'))
+    const [message, setMessage] = React.useState(t('modals:ld_error_message_default'))
     const duration = 2000
     const date = new Date().getTime()
 
@@ -59,7 +59,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
             } else if (error.response.body['errors'][0]['data']['error'] !== undefined) {
                 setMessage(error.response.body['errors'][0]['data']['error'])
             } else {
-                setMessage(t('sd_error_message_default'))
+                setMessage(t('modals:sd_error_message_default'))
             }
             setshowSnack(true)
             setTimeout(function() {
@@ -88,13 +88,13 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
                     },
                 }}
             >
-                <DialogTitle>{t('ld_title')}</DialogTitle>
+                <DialogTitle>{t('modals:ld_title')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
                         required
                         margin='dense'
-                        label={t('ld_username')}
+                        label={t('modals:ld_username')}
                         name='username'
                         type='text'
                         sx={{ mr: 1 }}
@@ -102,7 +102,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
                     <TextField
                         required
                         margin='dense'
-                        label={t('ld_password')}
+                        label={t('modals:ld_password')}
                         name='password'
                         type='password'
                         sx={{ mr: 1 }}
@@ -115,8 +115,8 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
                     }
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined'  sx={{textTransform: 'none',}} onClick={handleClose}>{t('ld_cancel')}</Button>
-                    <Button variant='outlined' sx={{textTransform: 'none',}} type='submit'>{t('ld_login')}</Button>
+                    <Button variant='outlined'  sx={{textTransform: 'none',}} onClick={handleClose}>{t('modals:ld_cancel')}</Button>
+                    <Button variant='outlined' sx={{textTransform: 'none',}} type='submit'>{t('modals:ld_login')}</Button>
                 </DialogActions>
             </Dialog>
             </form>

@@ -6,11 +6,13 @@ import request from 'superagent'
 import AccountPageLoginForm from '../components/account/AccountPageLoginForm'
 import AccountPageController from '../components/account/AccountPageController'
 import { useLocation } from 'react-router'
+import {useTranslation} from 'react-i18next'
 
 export default function UserAccountPage() {
 
     const username = Cookies.get('username') || null
-    document.title = 'POPTAPE | '+username+' | account'
+    const { t } = useTranslation()
+    document.title = 'POPTAPE | '+username+' | '+t('account:ap_title')
 
     const [accountAuthed, setAccountAuthed] = React.useState(
         Cookies.get('account-access-token') || null)
@@ -23,7 +25,7 @@ export default function UserAccountPage() {
 
     const onSubmit = (data) => {
         const req = request
-        req.post('/authy/login')
+        req.post('/api/login')
             .send(JSON.stringify(data))
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')

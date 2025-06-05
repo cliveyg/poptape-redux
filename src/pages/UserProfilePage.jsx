@@ -6,11 +6,14 @@ import ProfileViewer from '../components/profile/ProfileViewer'
 import ProfileOwner from '../components/profile/ProfileOwner'
 import Box from '@mui/material/Box'
 import { useLocation } from 'react-router'
+import {useTranslation} from 'react-i18next'
 
 export default function UserProfilePage(props) {
 
+    const { t } = useTranslation()
     const username = Cookies.get('username')
     const [owner, setOwner] = React.useState(null)
+    document.title = 'POPTAPE | ' + username + ' | '+ t('profile:pr_title')
 
     const urlArray = useLocation().pathname.split("/")
     const urlUsername = urlArray[2]

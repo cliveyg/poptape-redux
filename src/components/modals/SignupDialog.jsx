@@ -19,7 +19,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
     const [showLoader, setshowLoader] = React.useState(false)
     const [showSnack, setshowSnack] = React.useState(false)
     const [variant, setVariant] = React.useState('error')
-    const [message, setMessage] = React.useState(t('sd_error_message_default'))
+    const [message, setMessage] = React.useState(t('modals:sd_error_message_default'))
     const duration = 2000
     const date = new Date().getTime()
 
@@ -60,7 +60,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                 } else if (error.response.body['errors'][0]['data']['error'] !== undefined) {
                     setMessage(error.response.body['errors'][0]['data']['error'])
                 } else {
-                    setMessage(t('sd_error_message_default'))
+                    setMessage(t('modals:sd_error_message_default'))
                 }
                 setshowSnack(true)
                 setTimeout(function() {
@@ -95,7 +95,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                         autoFocus
                         required
                         margin='dense'
-                        label={t('sd_username')}
+                        label={t('modals:sd_username')}
                         name='username'
                         type='text'
                         sx={{ mr: 1 }}
@@ -103,7 +103,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     <TextField
                         required
                         margin='dense'
-                        label={t('sd_email')}
+                        label={t('modals:sd_email')}
                         name='email'
                         type='email'
                         sx={{ mr: 1 }}
@@ -111,7 +111,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     <TextField
                         required
                         margin='dense'
-                        label={t('sd_password')}
+                        label={t('modals:sd_password')}
                         name='password'
                         type='password'
                         sx={{ mr: 1 }}
@@ -119,7 +119,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     <TextField
                         required
                         margin='dense'
-                        label={t('sd_confirm_password')}
+                        label={t('modals:sd_confirm_password')}
                         name='confirm_password'
                         type='password'
                         sx={{ mr: 1 }}
@@ -132,8 +132,8 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     }
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined'  sx={{textTransform: 'none',}} onClick={handleClose}>{t('sd_cancel')}</Button>
-                    <Button variant='outlined' sx={{textTransform: 'none',}} type='submit'>{t('sd_signup')}</Button>
+                    <Button variant='outlined'  sx={{textTransform: 'none',}} onClick={handleClose}>{t('modals:sd_cancel')}</Button>
+                    <Button variant='outlined' sx={{textTransform: 'none',}} type='submit'>{t('modals:sd_signup')}</Button>
                 </DialogActions>
             </Dialog>
             </form>

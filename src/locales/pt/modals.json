@@ -1,0 +1,16 @@
+{
+  "ld_title": "Entre",
+  "ld_username": "Nome de Usuário",
+  "ld_password": "Senha",
+  "ld_cancel": "Cancelar",
+  "ld_login": "Entre",
+  "ld_error_message_default": "Algo deu errado",
+  "sd_title": "Crie a sua conta",
+  "sd_username": "Nome de Usuário",
+  "sd_email": "Email",
+  "sd_password": "Senha",
+  "sd_confirm_password": "Confirme sua senha",
+  "sd_cancel": "Cancelar",
+  "sd_signup": "Entre",
+  "sd_error_message_default": "Algo deu errado"
+}

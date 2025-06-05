@@ -3,9 +3,11 @@ import { Link } from 'react-router'
 import TopNavBar from '../components/navigation/TopNavBar'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
+import {useTranslation} from 'react-i18next'
 
 export default function NotFoundPage() {
-    document.title = 'POPTAPE | not found'
+    const { t } = useTranslation()
+    document.title = 'POPTAPE | '+ t('errors:not_found')
     return (
         <>
             <header>
