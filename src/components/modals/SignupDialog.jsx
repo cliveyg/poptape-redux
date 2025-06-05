@@ -6,11 +6,22 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import CircularProgress from '@mui/material/CircularProgress'
+import CustomizedSnackbars from '../information/CustomSnackbars'
+import request from 'superagent'
+import {useTranslation} from 'react-i18next'
+import Cookies from 'js-cookie'
+import {getFieldFromToken} from '../../assets/scripts/general'
+
 
 export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
 
+    const { t } = useTranslation()
     const [showLoader, setshowLoader] = React.useState(false)
-    //setshowLoader(false)
+    const [showSnack, setshowSnack] = React.useState(false)
+    const [variant, setVariant] = React.useState('error')
+    const [message, setMessage] = React.useState(t('sd_error_message_default'))
+    const duration = 2000
+    const date = new Date().getTime()
 
     React.useEffect(() => {
         handleClickOpen();
@@ -18,14 +29,57 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
 
     const handleClickOpen = () => {
         // nowt
+        setshowLoader(false)
     };
 
     const handleClose = () => {
         handleCloseDialog(false);
     };
 
-    const handleSubmit = (data) =>{
+    /*
+    function getFieldFromToken(token, field) {
+        const tokenArray = token.split(".")
+        const base64decoded = JSON.parse(atob(tokenArray[1]))
+        return base64decoded[field]
+    }
+
+     */
+
+    const handleSubmit = (data) => {
+
         setshowLoader(true)
+        const req = request
+        req.post('/apiserver/signup')
+            .send(JSON.stringify(data))
+            .set('Accept', 'application/json')
+            .set('Content-Type', 'application/json')
+            .then(res => {
+                setshowLoader(false)
+                console.log("RES BODY")
+                console.log(res.body)
+                Cookies.set('access-token', res.body.token)
+                Cookies.set('username', getFieldFromToken(res.body.token, 'username'))
+                Cookies.set('public_id', getFieldFromToken(res.body.token, 'public_id'))
+                handleClose()
+                window.location.reload()
+            })
+            .catch(error => {
+                setshowLoader(false)
+                setVariant('error')
+                if (error.response.body['message'] !== undefined) {
+                    setMessage(error.response.body['message'])
+                } else if (error.response.body['errors'][0]['data']['error'] !== undefined) {
+                    setMessage(error.response.body['errors'][0]['data']['error'])
+                } else {
+                    setMessage(t('sd_error_message_default'))
+                }
+                setshowSnack(true)
+                setTimeout(function() {
+                    handleClose()
+                    setshowSnack(false)
+                }, duration)
+
+            })
     }
 
     return (
@@ -46,13 +100,13 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     },
                 }}
             >
-                <DialogTitle>Signup</DialogTitle>
+                <DialogTitle>{t('sd_title')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
                         required
                         margin='dense'
-                        label='Username'
+                        label={t('sd_username')}
                         name='username'
                         type='text'
                         sx={{ mr: 1 }}
@@ -60,7 +114,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     <TextField
                         required
                         margin='dense'
-                        label='Email'
+                        label={t('sd_email')}
                         name='email'
                         type='email'
                         sx={{ mr: 1 }}
@@ -68,7 +122,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     <TextField
                         required
                         margin='dense'
-                        label='Password'
+                        label={t('sd_password')}
                         name='password'
                         type='password'
                         sx={{ mr: 1 }}
@@ -76,7 +130,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     <TextField
                         required
                         margin='dense'
-                        label='Confirm password'
+                        label={t('sd_confirm_password')}
                         name='confirm_password'
                         type='password'
                         sx={{ mr: 1 }}
@@ -89,11 +143,20 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     }
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined'  sx={{textTransform: 'none',}} onClick={handleClose}>Cancel</Button>
-                    <Button variant='outlined' sx={{textTransform: 'none',}} type='submit'>Signup</Button>
+                    <Button variant='outlined'  sx={{textTransform: 'none',}} onClick={handleClose}>{t('sd_cancel')}</Button>
+                    <Button variant='outlined' sx={{textTransform: 'none',}} type='submit'>{t('sd_signup')}</Button>
                 </DialogActions>
             </Dialog>
             </form>
+            {showSnack ?
+                <CustomizedSnackbars
+                    duration={duration}
+                    key_date={date}
+                    variant={variant}
+                    message={message}
+                />
+                : null
+            }
         </React.Fragment>
 
     );

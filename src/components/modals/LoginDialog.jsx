@@ -10,16 +10,17 @@ import Cookies from 'js-cookie'
 import CustomizedSnackbars from '../information/CustomSnackbars'
 import request from 'superagent'
 import {useTranslation} from 'react-i18next'
+import {getFieldFromToken} from '../../assets/scripts/general'
 
 export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
 
+    const { t } = useTranslation()
     const [showLoader, setshowLoader] = React.useState(false)
     const [showSnack, setshowSnack] = React.useState(false)
     const [variant, setVariant] = React.useState('error')
-    const [message, setMessage] = React.useState('Something went bang!')
+    const [message, setMessage] = React.useState(t('ld_error_message_default'))
     const duration = 2000
     const date = new Date().getTime()
-    const { t } = useTranslation()
 
     React.useEffect(() => {
         handleClickOpen();
@@ -34,17 +35,11 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
         handleCloseDialog(false);
     }
 
-    function getFieldFromToken(token, field) {
-        const tokenArray = token.split(".")
-        const base64decoded = JSON.parse(atob(tokenArray[1]))
-        return base64decoded[field]
-    }
-
     const handleSubmit = (data) => {
 
         setshowLoader(true)
         const req = request
-        req.post('/authy/login')
+        req.post('/apiserver/login')
         .send(JSON.stringify(data))
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
@@ -58,11 +53,13 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
         })
         .catch(error => {
             setshowLoader(false)
-            setVariant(data.username)
-            if (error.response.body['message'] !== null) {
+            setVariant('error')
+            if (error.response.body['message'] !== undefined) {
                 setMessage(error.response.body['message'])
+            } else if (error.response.body['errors'][0]['data']['error'] !== undefined) {
+                setMessage(error.response.body['errors'][0]['data']['error'])
             } else {
-                setMessage(t('ld_error_message_default'))
+                setMessage(t('sd_error_message_default'))
             }
             setshowSnack(true)
             setTimeout(function() {
@@ -91,7 +88,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
                     },
                 }}
             >
-                <DialogTitle>{t('ld_login')}</DialogTitle>
+                <DialogTitle>{t('ld_title')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus

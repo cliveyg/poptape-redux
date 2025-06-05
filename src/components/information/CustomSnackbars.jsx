@@ -32,18 +32,27 @@ function MySnackbarContentWrapper(props) {
     const Icon = variantIcon[variant]
     const theme = setupTheme()
 
+    console.log("MySnackbarContentWrapper - message is ["+message+"]")
+
+    /*
+                    <Box id="client-snackbar" sx={{display: 'flex', alignItems: 'center', }}>
+                        <Icon sx={{ fontSize: 20, opacity: 0.9, marginRight: theme.spacing(1), }} />
+                        {message}
+                    </Box>
+     */
+
+
     return (
         <ThemeProvider theme={theme}>
             <SnackbarContent
                 sx={{ backgroundColor: variantTheme[variant] }}
                 aria-describedby="client-snackbar"
-                message={
-                    <Box id="client-snackbar" sx={{display: 'flex', alignItems: 'center', }}>
+                message={[
+                    <Box key="message1" id="client-snackbar" sx={{display: 'flex', alignItems: 'center', }}>
                         <Icon sx={{ fontSize: 20, opacity: 0.9, marginRight: theme.spacing(1), }} />
                         {message}
                     </Box>
-                }
-                action={[
+                ]}          action={[
                     <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
                         <CloseIcon sx={{ fontSize: 20 }} />
                     </IconButton>,
