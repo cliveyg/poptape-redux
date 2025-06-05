@@ -32,16 +32,6 @@ function MySnackbarContentWrapper(props) {
     const Icon = variantIcon[variant]
     const theme = setupTheme()
 
-    console.log("MySnackbarContentWrapper - message is ["+message+"]")
-
-    /*
-                    <Box id="client-snackbar" sx={{display: 'flex', alignItems: 'center', }}>
-                        <Icon sx={{ fontSize: 20, opacity: 0.9, marginRight: theme.spacing(1), }} />
-                        {message}
-                    </Box>
-     */
-
-
     return (
         <ThemeProvider theme={theme}>
             <SnackbarContent
