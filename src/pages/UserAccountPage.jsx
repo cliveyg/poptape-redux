@@ -12,7 +12,10 @@ export default function UserAccountPage() {
 
     const username = Cookies.get('username') || null
     const { t } = useTranslation()
-    document.title = 'POPTAPE | '+username+' | '+t('account:ap_title')
+
+    React.useEffect(() => {
+        document.title = 'POPTAPE | ' + username + ' | '+ t('account:ap_title')
+    }, []);
 
     const [accountAuthed, setAccountAuthed] = React.useState(
         Cookies.get('account-access-token') || null)
@@ -35,7 +38,7 @@ export default function UserAccountPage() {
                     let inTenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
                     Cookies.set('account-access-token',
                                 res.body.token,
-                                { expires: inTenMinutes })
+                                { expires: inTenMinutes, secure: true })
                     setAccountAuthed(true)
                 }
             })

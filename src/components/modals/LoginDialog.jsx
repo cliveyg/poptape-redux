@@ -10,7 +10,7 @@ import Cookies from 'js-cookie'
 import CustomizedSnackbars from '../information/CustomSnackbars'
 import request from 'superagent'
 import {useTranslation} from 'react-i18next'
-import {getFieldFromToken} from '../../assets/scripts/general'
+import {getErrorMessage, getFieldFromToken} from '../../assets/scripts/general'
 
 export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
 
@@ -46,23 +46,25 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
         .then(res => {
             setshowLoader(false)
             Cookies.set('access-token', res.body.token)
-            Cookies.set('username', getFieldFromToken(res.body.token, 'username'))
-            Cookies.set('public_id', getFieldFromToken(res.body.token, 'public_id'))
+            Cookies.set('username', getFieldFromToken(res.body.token, 'username'), { secure: true })
+            Cookies.set('public_id', getFieldFromToken(res.body.token, 'public_id'), { secure: true })
             handleClose()
             window.location.reload()
         })
         .catch(error => {
+
             setshowLoader(false)
             setVariant('error')
-            if (error.response.body['message'] !== undefined) {
-                setMessage(error.response.body['message'])
-            } else if (error.response.body['errors'][0]['data']['error'] !== undefined) {
-                setMessage(error.response.body['errors'][0]['data']['error'])
+
+            const mess = getErrorMessage(error.response.body, error.status, 'login')
+            if (mess.translate) {
+                setMessage(t(mess.message))
             } else {
-                setMessage(t('modals:sd_error_message_default'))
+                setMessage(mess.message)
             }
+
             setshowSnack(true)
-            setTimeout(function() {
+            setTimeout(function () {
                 handleClose()
                 setshowSnack(false)
             }, duration)

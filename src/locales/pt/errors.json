@@ -1,3 +1,6 @@
 {
-  "not_found": "não encontrado"
+  "not_found_page_title": "não encontrado",
+  "user_pass_incorrect": "Nome de usuário e/ou senha estão incorretos",
+  "user_pass_not_valid": "Algumas das suas informações são inválidas",
+  "server": "Descupla, temos uma problema na sistema. Tenta mais tarde"
 }

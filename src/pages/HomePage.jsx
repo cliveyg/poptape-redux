@@ -11,7 +11,11 @@ import {useTranslation} from 'react-i18next'
 
 function HomePage() {
     const { t } = useTranslation()
-    document.title = 'POPTAPE | '+t('homepage:hp_title')
+
+    React.useEffect(() => {
+        document.title = 'POPTAPE | ' + t('homepage:hp_title')
+    }, []);
+
     const theme = setupTheme()
     return (
         <>

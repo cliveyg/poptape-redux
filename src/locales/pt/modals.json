@@ -12,5 +12,6 @@
   "sd_confirm_password": "Confirme sua senha",
   "sd_cancel": "Cancelar",
   "sd_signup": "Entre",
-  "sd_error_message_default": "Algo deu errado"
+  "sd_error_message_default": "Algo deu errado",
+  "sd_success_validate": "Você foi registrado com sucesso! Para usar todas as funcionalidades do Poptape, você precisa validar seu endereço de e-mail que lhe enviamos."
 }

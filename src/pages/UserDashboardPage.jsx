@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import '../css/poptape.css'
 import Cookies from 'js-cookie'
 import Box from '@mui/material/Box'
@@ -11,9 +11,11 @@ export default function UserDashboardPage() {
 
     const { t } = useTranslation()
     const username = Cookies.get('username') || null
-    document.title = 'POPTAPE | ' + username + ' | '+ t('dashboard:dp_title')
-
     const theme = setupTheme()
+
+    React.useEffect(() => {
+        document.title = 'POPTAPE | ' + username + ' | '+ t('dashboard:dp_title')
+    }, []);
 
     return (
         <>

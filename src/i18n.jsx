@@ -53,7 +53,6 @@ i18n
     .use(backend)
     .init({
         resources,
-        //lng: 'en',
         lng: default_language,
         defaultNS: 'menus',
         interpolation: {
