@@ -7,7 +7,11 @@ import {useTranslation} from 'react-i18next'
 
 export default function NotFoundPage() {
     const { t } = useTranslation()
-    document.title = 'POPTAPE | '+ t('errors:not_found_page_title')
+
+    React.useEffect(() => {
+        document.title = 'POPTAPE | '+ t('errors:not_found_page_title')
+    }, []);
+
     return (
         <>
             <header>
