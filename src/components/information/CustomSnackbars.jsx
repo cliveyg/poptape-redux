@@ -5,8 +5,8 @@ import ErrorIcon from '@mui/icons-material/Error'
 import InfoIcon from '@mui/icons-material/Info'
 import WarningIcon from '@mui/icons-material/Warning'
 import CloseIcon from '@mui/icons-material/Close'
-import { pink, brown, orange, purple } from '@mui/material/colors'
 import IconButton from '@mui/material/IconButton'
+import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 import SnackbarContent from '@mui/material/SnackbarContent'
 import { setupTheme } from '../../assets/scripts/theme.js'
@@ -63,7 +63,7 @@ MySnackbarContentWrapper.propTypes = {
 }
 
 export default function CustomizedSnackbars(props) {
-    const {message, variant, key_date, duration} = props;
+    const {message, variant, key_date, duration, nohide} = props;
     const [open, setOpen] = useState(true);
 
     function handleClose(event, reason) {
@@ -75,23 +75,64 @@ export default function CustomizedSnackbars(props) {
 
     return (
         <>
-            <Snackbar
-                key={key_date}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
-                open={open}
-                autoHideDuration={duration}
-                onClose={handleClose}
-            >
-                <MySnackbarContentWrapper
+            {!nohide ?
+                <Snackbar
+                    key={key_date}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={open}
+                    autoHideDuration={duration}
                     onClose={handleClose}
-                    variant={variant}
-                    key_date={key_date}
-                    message={message}
-                />
-            </Snackbar>
+                >
+                    { /*
+                    <MySnackbarContentWrapper
+                        onClose={handleClose}
+                        variant={variant}
+                        key_date={key_date}
+                        message={message}
+                    />
+                    */
+                    }
+                    <Alert
+                        onClose={handleClose}
+                        severity={variant}
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                    >
+                        {message}
+                    </Alert>
+                </Snackbar>
+            :
+                <Snackbar
+                    key={key_date}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                >
+                    { /*
+                    <MySnackbarContentWrapper
+                        onClose={handleClose}
+                        variant={variant}
+                        key_date={key_date}
+                        message={message}
+                    />
+                    */
+                    }
+                    <Alert
+                        onClose={handleClose}
+                        severity={variant}
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                    >
+                        {message}
+                    </Alert>
+                </Snackbar>
+            }
         </>
     );
 }

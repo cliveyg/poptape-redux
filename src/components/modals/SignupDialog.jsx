@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Dialog from '@mui/material/Dialog'
@@ -10,7 +10,8 @@ import CustomizedSnackbars from '../information/CustomSnackbars'
 import request from 'superagent'
 import {useTranslation} from 'react-i18next'
 import Cookies from 'js-cookie'
-import {getFieldFromToken} from '../../assets/scripts/general'
+import {getFieldFromToken, getErrorMessage} from '../../assets/scripts/general'
+import { useNavigate } from 'react-router'
 
 
 export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
@@ -20,8 +21,10 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
     const [showSnack, setshowSnack] = React.useState(false)
     const [variant, setVariant] = React.useState('error')
     const [message, setMessage] = React.useState(t('modals:sd_error_message_default'))
-    const duration = 2000
+    const [duration, setDuration] = React.useState(7000)
+    const [nohide, setNoHide] = React.useState(false)
     const date = new Date().getTime()
+    const navigate = useNavigate()
 
     React.useEffect(() => {
         handleClickOpen();
@@ -47,26 +50,38 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
             .then(res => {
                 setshowLoader(false)
                 Cookies.set('access-token', res.body.token)
-                Cookies.set('username', getFieldFromToken(res.body.token, 'username'))
-                Cookies.set('public_id', getFieldFromToken(res.body.token, 'public_id'))
-                handleClose()
-                window.location.reload()
+                Cookies.set('username', getFieldFromToken(res.body.token, 'username'), { secure: true })
+                Cookies.set('public_id', getFieldFromToken(res.body.token, 'public_id'), { secure: true })
+
+                setMessage(t('modals:sd_success_validate'))
+                setVariant('success')
+                setshowSnack(true)
+                setNoHide(true)
+                setTimeout(function() {
+                    handleClose()
+                    setshowSnack(false)
+                    setNoHide(false)
+                    window.location.reload()
+                }, 7000)
             })
             .catch(error => {
                 setshowLoader(false)
                 setVariant('error')
-                if (error.response.body['message'] !== undefined) {
-                    setMessage(error.response.body['message'])
-                } else if (error.response.body['errors'][0]['data']['error'] !== undefined) {
-                    setMessage(error.response.body['errors'][0]['data']['error'])
+                setDuration(2000)
+
+                const mess = getErrorMessage(error.response.body, error.response.status, 'signup')
+                if (mess.translate) {
+                    setMessage(t(mess.message))
                 } else {
-                    setMessage(t('modals:sd_error_message_default'))
+                    setMessage(mess.message)
                 }
+
                 setshowSnack(true)
                 setTimeout(function() {
                     handleClose()
                     setshowSnack(false)
-                }, duration)
+                    setDuration(7000)
+                }, 2000)
 
             })
     }
@@ -89,7 +104,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     },
                 }}
             >
-                <DialogTitle>{t('sd_title')}</DialogTitle>
+                <DialogTitle>{t('modals:sd_title')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
@@ -143,6 +158,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     key_date={date}
                     variant={variant}
                     message={message}
+                    nohide={nohide}
                 />
                 : null
             }
