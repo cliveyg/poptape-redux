@@ -11,7 +11,8 @@ import RateReviewIcon from '@mui/icons-material/RateReview'
 import InventoryIcon from '@mui/icons-material/Inventory'
 import GavelIcon from '@mui/icons-material/Gavel'
 import DashboardIcon from '@mui/icons-material/Dashboard'
-import { setupTheme } from '../../assets/scripts/theme'
+import SettingsIcon from '@mui/icons-material/Settings'
+import { selectTheme } from '../../assets/scripts/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -39,6 +40,7 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
         viewed: PageviewIcon,
         purchased: PaymentsIcon,
         reviews: RateReviewIcon,
+        settings: SettingsIcon,
     }
     const menuText = {
         dashboard: t('sm_dashboard'),
@@ -53,6 +55,7 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
         viewed: t('sm_viewed'),
         purchased: t('sm_purchased'),
         reviews: t('sm_reviews'),
+        settings: t('sm_settings')
     }
     const menuLink = {
         dashboard: '/user/dashboard',
@@ -67,8 +70,9 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
         viewed: '/user/'+username+'/viewed',
         purchased: '/user/'+username+'/purchased',
         reviews: '/user/'+username+'/reviews',
+        settings: '/user/'+username+'/settings',
     }
-    const theme = setupTheme()
+    const theme = selectTheme()
 
     function linky() {
         return menuLink[menuItem]

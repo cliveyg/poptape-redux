@@ -2,5 +2,9 @@
   "not_found_page_title": "não encontrado",
   "user_pass_incorrect": "Nome de usuário e/ou senha estão incorretos",
   "user_pass_not_valid": "Algumas das suas informações são inválidas",
-  "server": "Descupla, temos uma problema na sistema. Tenta mais tarde"
+  "server": "Descupla, temos uma problema na sistema. Tenta mais tarde",
+  "fields_incorrect": "Alguns dos seus dados estão incorretos",
+  "something_went_bang": "Algo deu errado",
+  "bad_gqteway": "O servidor não está disponível no momento",
+  "unauthorized": "Não autorizado"
 }

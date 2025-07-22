@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Cookies from 'js-cookie'
-import { setupTheme } from '../../assets/scripts/theme'
+import { selectTheme } from '../../assets/scripts/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
@@ -12,7 +12,7 @@ export default function SideMenu({selected}) {
 
     //TODO: fix doc title so it translates
     document.title = 'POPTAPE | ' + selected
-    const theme = setupTheme()
+    const theme = selectTheme()
 
     return(
         <Box sx={{width: { xs: '40px', sm: '40px', md: '170px', lg: '170px', xl: '170px'}}}>
@@ -77,6 +77,11 @@ export default function SideMenu({selected}) {
                         <CreateSideMenuItem menuItem={selected} username={username} selected={true} />
                         :
                         <CreateSideMenuItem menuItem={'reviews'} username={username} selected={false} />
+                    }
+                    {selected === 'settings' ?
+                        <CreateSideMenuItem menuItem={selected} username={username} selected={true} />
+                        :
+                        <CreateSideMenuItem menuItem={'settings'} username={username} selected={false} />
                     }
                 </Stack>
             </ThemeProvider>

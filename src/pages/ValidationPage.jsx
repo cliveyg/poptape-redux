@@ -6,13 +6,13 @@ import LanguageSwitcher from '../components/helpers/LanguageSwitcher'
 import Link from '@mui/material/Link'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
-import { setupTheme } from '../assets/scripts/theme'
+import { selectTheme } from '../assets/scripts/theme'
 import {useTranslation} from 'react-i18next'
 
 function ValidationPage() {
     const { t } = useTranslation()
     document.title = 'POPTAPE | '+t('vp_title')
-    const theme = setupTheme()
+    const theme = selectTheme()
     return (
         <>
             <header>

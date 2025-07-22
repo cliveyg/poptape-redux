@@ -6,6 +6,7 @@ import accountEN_GB from './locales/en/account.json'
 import dashboardEN_GB from './locales/en/dashboard.json'
 import errorsEN_GB from './locales/en/errors.json'
 import homepageEN_GB from './locales/en/homepage.json'
+import itemsEN_GB from './locales/en/items.json'
 import menusEN_GB from './locales/en/menus.json'
 import modalsEN_GB from './locales/en/modals.json'
 import profileEN_GB from './locales/en/profile.json'
@@ -15,6 +16,7 @@ import accountPT_BR from './locales/pt/account.json'
 import dashboardPT_BR from './locales/pt/dashboard.json'
 import errorsPT_BR from './locales/pt/errors.json'
 import homepagePT_BR from './locales/pt/homepage.json'
+import itemsPT_BR from './locales/pt/items.json'
 import menusPT_BR from './locales/pt/menus.json'
 import modalsPT_BR from './locales/pt/modals.json'
 import profilePT_BR from './locales/pt/profile.json'
@@ -26,6 +28,7 @@ const resources = {
         dashboard: dashboardEN_GB,
         errors: errorsEN_GB,
         homepage: homepageEN_GB,
+        items: itemsEN_GB,
         menus: menusEN_GB,
         modals: modalsEN_GB,
         profile: profileEN_GB,
@@ -36,6 +39,7 @@ const resources = {
         dashboard: dashboardPT_BR,
         errors: errorsPT_BR,
         homepage: homepagePT_BR,
+        items: itemsPT_BR,
         menus: menusPT_BR,
         modals: modalsPT_BR,
         profile: profilePT_BR,

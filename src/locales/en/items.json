@@ -1,0 +1,17 @@
+{
+  "cif_form_builder_title": "Standard product fields",
+  "cif_form_builder_blurb": "Enter details for a standard item",
+  "cif_default_message": "Item created",
+  "cif_create_item_title": "Create item",
+  "cif_create_cat_dropdown": "Categories",
+  "cif_create_item_blurb": "Enter item into the system",
+  "ata_form_builder_title": "Auction details",
+  "ata_form_builder_blurb": "Add this item to an auction",
+  "ata_default_message": "Added to auction",
+  "ata_no_item_id": "No supplied item ID",
+  "ata_sell_singly": "Sell Singly",
+  "ata_sell_multiple": "Sell As Part Of Multiple Auction",
+  "ata_show_item": "Show This Item",
+  "ata_show_my_items": "Show My Items",
+  "ata_create_another": "Create Another"
+}

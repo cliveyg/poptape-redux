@@ -43,6 +43,13 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
 
         setshowLoader(true)
         const req = request
+        let utf8Bytes = new TextEncoder().encode(data['password'])
+        let base64Encoded = btoa(String.fromCharCode(...utf8Bytes))
+        data['password'] = base64Encoded
+        utf8Bytes = new TextEncoder().encode(data['confirm_password'])
+        base64Encoded = btoa(String.fromCharCode(...utf8Bytes))
+        data['confirm_password'] = base64Encoded
+
         req.post('/api/signup')
             .send(JSON.stringify(data))
             .set('Accept', 'application/json')

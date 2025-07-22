@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 import '../css/poptape.css'
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
-import { setupTheme } from '../assets/scripts/theme'
+import { selectTheme } from '../assets/scripts/theme'
 import CustomizedSnackbars from '../components/information/CustomSnackbars'
 import TopNavBar from "../components/navigation/TopNavBar.jsx";
 import Button from "@mui/material/Button";
@@ -20,7 +20,7 @@ export default function TestPage() {
     console.log('In TestPage')
     console.log('Pass me in daddy ['+params.daddy+']')
 
-    const theme = setupTheme()
+    const theme = selectTheme()
 
     const showSnackFn = () => {
         setshowSnack(true)

@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
+import {SvgIcon} from '@mui/material'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Badge from '@mui/material/Badge'
@@ -10,10 +11,11 @@ import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
 import HiveIcon from '@mui/icons-material/Hive'
 import AccountCircle from '@mui/icons-material/AccountCircle'
+import SettingsIcon from '@mui/icons-material/Settings'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
-import FaceIcon from '@mui/icons-material/Face'
+import MenuIcon from '@mui/icons-material/Menu'
 import TodayIcon from '@mui/icons-material/Today'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import Launch from '@mui/icons-material/Launch'
@@ -21,13 +23,15 @@ import Input from '@mui/icons-material/Input'
 import PowerSettingsNew from '@mui/icons-material/PowerSettingsNew'
 import SearchBox from '../helpers/SearchBox'
 import { ThemeProvider } from '@mui/material/styles'
-import { setupTheme } from '../../assets/scripts/theme'
+import { selectTheme } from '../../assets/scripts/theme'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router'
 
 import LoginDialog from '../modals/LoginDialog'
 import SignupDialog from '../modals/SignupDialog'
 import { useTranslation } from 'react-i18next'
+
+import { useGlobalSettings } from '../helpers/GlobalSettings.jsx'
 
 import Link from '@mui/material/Link'
 import '../../css/poptape.css'
@@ -36,8 +40,9 @@ import request from 'superagent'
 export default function TopNavBar() {
 
     const { t } = useTranslation()
+    const { profileIcon, setProfileIcon } = useGlobalSettings()
 
-    const theme = setupTheme()
+    const theme = selectTheme()
     const [anchorEl, setAnchorEl] = React.useState(null)
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
 
@@ -174,12 +179,13 @@ export default function TopNavBar() {
                             aria-haspopup='true'
                             sx={{color: 'inherit'}}
                         >
-                            <FaceIcon />
+                            {profileIcon}
                         </IconButton>
                         <Box>{t('tm_profile')}</Box>
                     </MenuItem>
                 </Link>
-                <Link color='inherit' onClick={() => navigate('/user/'+Cookies.get('username')+'/account')}>                    <MenuItem sx={{color: 'inherit'}} onClick={handleMenuClose}>
+                <Link color='inherit' onClick={() => navigate('/user/'+Cookies.get('username')+'/account')}>
+                    <MenuItem sx={{color: 'inherit'}} onClick={handleMenuClose}>
                         <IconButton
                             aria-label='account of current user'
                             aria-controls='primary-search-account-menu'
@@ -189,6 +195,19 @@ export default function TopNavBar() {
                             <AccountCircle />
                         </IconButton>
                         <Box>{t('tm_account')}</Box>
+                    </MenuItem>
+                </Link>
+                <Link color='inherit' onClick={() => navigate('/user/'+Cookies.get('username')+'/settings')}>
+                    <MenuItem sx={{color: 'inherit'}} onClick={handleMenuClose}>
+                        <IconButton
+                            aria-label='settings of current user'
+                            aria-controls='primary-search-account-menu'
+                            aria-haspopup='true'
+                            sx={{color: 'inherit'}}
+                        >
+                            <SettingsIcon />
+                        </IconButton>
+                        <Box>{t('tm_settings')}</Box>
                     </MenuItem>
                 </Link>
                 <MenuItem sx={{color: 'inherit'}} onClick={handleLogout}>
@@ -262,12 +281,7 @@ export default function TopNavBar() {
                                                       fontSize: '1.0em',
                                                       padding: 0,
                       }}>
-                          <Typography
-                                variant='inherit'
-                                color='inherit'
-                          >
-                                {Cookies.get('username')}
-                          </Typography>
+                          <Typography>{Cookies.get('username')}</Typography>
                       </Button>
                   </MenuItem>
                   <MenuItem onClick={() => navigate('/user/dashboard')}>
@@ -329,7 +343,7 @@ export default function TopNavBar() {
                         aria-haspopup='true'
                         color='inherit'
                     >
-                      <FaceIcon />
+                        {profileIcon}
                     </IconButton>
                     <Box>{t('tm_profile')}</Box>
                   </MenuItem>
@@ -343,6 +357,17 @@ export default function TopNavBar() {
                       <AccountCircle />
                     </IconButton>
                     <Box>{t('tm_account')}</Box>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate('/user/'+username+'/settings')}>
+                    <IconButton
+                        aria-label='settings of current user'
+                        aria-controls='primary-search-account-menu'
+                        aria-haspopup='true'
+                        color='inherit'
+                    >
+                        <SettingsIcon />
+                    </IconButton>
+                    <Box>{t('tm_settings')}</Box>
                   </MenuItem>
                   <MenuItem onClick={handleLogout}>
                     <IconButton
@@ -363,7 +388,6 @@ export default function TopNavBar() {
     return (
         <ThemeProvider theme={theme}>
         <Box sx={{ flexGrow: 1 }}>
-
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
@@ -430,7 +454,7 @@ export default function TopNavBar() {
                             >
                                 <DashboardIcon/>
                             </IconButton>
-                            <IconButton onClick={() => navigate('/user/')}
+                            <IconButton onClick={() => navigate('/user/'+username+'/messages')}
                                         size='large'
                                         aria-label='show 4 new mails'
                                         color='inherit'
@@ -440,12 +464,13 @@ export default function TopNavBar() {
                                 </Badge>
                             </IconButton>
                             <IconButton
+                                onClick={() => navigate('/user/'+username+'/notifications')}
                                 size='large'
                                 aria-label='show 37 new notifications'
                                 color='inherit'
                             >
                                 <Badge badgeContent={37}
-                                       sx={{'& .MuiBadge-badge': {color: 'black', backgroundColor: 'meep'}}}>
+                                       sx={{'& .MuiBadge-badge': {color: 'black', backgroundColor: 'notifications'}}}>
                                     <NotificationsIcon/>
                                 </Badge>
                             </IconButton>
@@ -464,11 +489,7 @@ export default function TopNavBar() {
                                     <TodayIcon/>
                                 </Badge>
                             </IconButton>
-                            <Typography
-                                variant='inherit'
-                                color='inherit'
-                                sx={{ mt: '0.9em', paddingLeft: '0.7em' }}
-                            >
+                            <Typography sx={{ fontWeight: 500, mt: '0.7em', pl: '0.7em' }}>
                                 {Cookies.get('username')}
                             </Typography>
                             <IconButton
@@ -480,7 +501,7 @@ export default function TopNavBar() {
                                 onClick={handleProfileMenuOpen}
                                 color='inherit'
                             >
-                                <AccountCircle/>
+                                <MenuIcon/>
                             </IconButton>
                         </Box>
                     }

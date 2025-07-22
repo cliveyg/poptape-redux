@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import svgr from 'vite-plugin-svgr'
 import commonjs from 'vite-plugin-commonjs'
 
 //TODO: put server names into .env files
 
 export default defineConfig({
-  plugins: [react(),commonjs()],
+  plugins: [react(),commonjs(),svgr()],
   server: {
     allowedHosts: ['poptape.local'],
     hmr: {

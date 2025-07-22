@@ -1,6 +1,6 @@
 import React from 'react'
 import {ThemeProvider} from '@mui/material/styles'
-import { setupTheme } from '../assets/scripts/theme'
+import { selectTheme } from '../assets/scripts/theme'
 import TopNavBar from '../components/navigation/TopNavBar'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
@@ -13,7 +13,7 @@ import UserDashboardPage from './UserDashboardPage'
 
 export default function DisplayPage({loggedIn, page}) {
 
-    const theme = setupTheme()
+    const theme = selectTheme()
 
     if (Cookies.get('access-token') === undefined || Cookies.get('access-token') === null) {
         window.location.replace('/')
@@ -32,6 +32,7 @@ export default function DisplayPage({loggedIn, page}) {
                             padding: 1,
                             variant: 'outlined',
                             backgroundColor: 'offwhite.main',
+                            fontFamily: {...theme.typography.body1},
                         }}
                         >
                             <Box sx={{ display: 'flex', flexDirection: 'row'}}>
