@@ -1,9 +1,10 @@
 import React from 'react'
 import {ThemeProvider} from '@mui/material/styles'
-import { setupTheme } from '../assets/scripts/theme'
+import { selectTheme } from '../assets/scripts/theme'
 import Cookies from 'js-cookie'
 import ProfileViewer from '../components/profile/ProfileViewer'
 import ProfileOwner from '../components/profile/ProfileOwner'
+//import Profile from '../components/profile/Profile'
 import Box from '@mui/material/Box'
 import { useLocation } from 'react-router'
 import {useTranslation} from 'react-i18next'
@@ -26,7 +27,7 @@ export default function UserProfilePage(props) {
             setOwner(true)
         }
     }
-    const theme = setupTheme()
+    const theme = selectTheme()
 
     return (
         <>

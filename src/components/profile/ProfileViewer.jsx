@@ -1,11 +1,11 @@
 import React from 'react'
 import {ThemeProvider} from '@mui/material/styles'
-import { setupTheme } from '../../assets/scripts/theme'
+import { selectTheme } from '../../assets/scripts/theme'
 import Box from '@mui/material/Box'
 
 export default function ProfileViewer(props) {
 
-    const theme = setupTheme()
+    const theme = selectTheme()
 
     return (
         <Box sx={{ width: '100%'}}>

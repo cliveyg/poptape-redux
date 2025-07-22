@@ -1,27 +1,28 @@
 import * as React from 'react'
 import {ThemeProvider} from '@mui/material/styles'
-import { setupTheme } from '../assets/scripts/theme'
+import { selectTheme } from '../assets/scripts/theme'
 import '../css/poptape.css'
 import MainNavBar from '../components/navigation/TopNavBar'
 import Paper from '@mui/material/Paper'
 
 import CreateItemForm from '../components/items/CreateItemForm'
-import Box from "@mui/material/Box";
 
 export default function CreateItemPage() {
-    const theme = setupTheme()
+    const theme = selectTheme()
     return (
-        <Box sx={{ width: '100%' }}>
-            <ThemeProvider theme={theme}>
-            <header>
-                <MainNavBar />
-            </header>
-            <Box>
-                <Paper sx={{ margin: 20 }}>
-                    <CreateItemForm />
-                </Paper>
-            </Box>
-            </ThemeProvider>
-        </Box>
+        <ThemeProvider theme={theme}>
+        <header>
+            <MainNavBar />
+        </header>
+        <Paper sx={{
+            margin: theme.spacing(1),
+            padding: 1,
+            variant: 'outlined',
+            backgroundColor: 'offwhite.main',
+        }}
+        >
+            <CreateItemForm />
+        </Paper>
+        </ThemeProvider>
     )
 }

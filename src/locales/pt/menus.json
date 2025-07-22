@@ -9,6 +9,7 @@
   "tm_messages": "Mensagens",
   "tm_notifications": "Avisos",
   "tm_calendar": "Calendário",
+  "tm_settings": "Configurações",
   "sm_dashboard": "painel",
   "sm_notifications": "avisos",
   "sm_profile": "perfil",
@@ -20,5 +21,6 @@
   "sm_favourites": "favoritos",
   "sm_viewed": "visualizado",
   "sm_purchased": "compras",
-  "sm_reviews": "avaliações"
+  "sm_reviews": "avaliações",
+  "sm_settings": "configurações"
 }

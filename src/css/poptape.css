@@ -1,5 +1,12 @@
+/*
 body {
     font-family: 'Inter Variable', 'Varela Round', 'Roboto', 'sans-serif';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+*/
+
+body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

@@ -1,0 +1,17 @@
+{
+  "cif_form_builder_title": "Opções de produtos",
+  "cif_form_builder_blurb": "Insira detalhes para um item",
+  "cif_default_message": "Item criado",
+  "cif_create_item_title": "Criar item",
+  "cif_create_item_blurb": "Insira o item no sistema",
+  "cif_create_cat_dropdown": "Categorias",
+  "ata_form_builder_title": "Detalhes do leilão",
+  "ata_form_builder_blurb": "Adicionar este item a um leilão",
+  "ata_default_message": "Adicionado ao leilão",
+  "ata_no_item_id": "Nenhum ID de item",
+  "ata_sell_singly": "Vender Individualmente",
+  "ata_sell_multiple": "Vender Em Um Leilão Múltiplo",
+  "ata_show_item": "Mostrar Este Item",
+  "ata_show_my_items": "Mostrar Meus Itens",
+  "ata_create_another": "Criar Mais"
+}

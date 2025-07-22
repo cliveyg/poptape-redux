@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import ErrorIcon from '@mui/icons-material/Error'
 import InfoIcon from '@mui/icons-material/Info'
@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 import SnackbarContent from '@mui/material/SnackbarContent'
-import { setupTheme } from '../../assets/scripts/theme.js'
+import { selectTheme } from '../../assets/scripts/theme.js'
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 
@@ -30,7 +30,7 @@ const variantTheme = {
 function MySnackbarContentWrapper(props) {
     const { className, message, onClose, variant, key_date, duration, ...other } = props
     const Icon = variantIcon[variant]
-    const theme = setupTheme()
+    const theme = selectTheme()
 
     return (
         <ThemeProvider theme={theme}>
@@ -53,6 +53,7 @@ function MySnackbarContentWrapper(props) {
     );
 }
 
+/*
 MySnackbarContentWrapper.propTypes = {
     className: PropTypes.string,
     message: PropTypes.string,
@@ -61,6 +62,7 @@ MySnackbarContentWrapper.propTypes = {
     onClose: PropTypes.func,
     variant: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
 }
+*/
 
 export default function CustomizedSnackbars(props) {
     const {message, variant, key_date, duration, nohide} = props;

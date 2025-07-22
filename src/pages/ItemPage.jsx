@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React from 'react'
 import { useParams } from 'react-router'
 import '../css/poptape.css'
 import ItemPageController from '../components/items/ItemPageController'
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
-import { setupTheme } from '../assets/scripts/theme'
+import { selectTheme } from '../assets/scripts/theme'
 import { isValidUUID } from '../assets/scripts/general'
 import CustomizedSnackbars from '../components/information/CustomSnackbars'
 import request from 'superagent'
@@ -104,7 +104,7 @@ export default function ItemPage({inItem}) {
         }
     }
 
-    const theme = setupTheme()
+    const theme = selectTheme()
 
     return (
         <>

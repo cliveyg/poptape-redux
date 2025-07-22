@@ -38,6 +38,11 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
     const handleSubmit = (data) => {
 
         setshowLoader(true)
+        const utf8Bytes = new TextEncoder().encode(data['password'])
+        const base64Encoded = btoa(String.fromCharCode(...utf8Bytes))
+        data['password'] = base64Encoded
+        //console.log(data)
+
         const req = request
         req.post('/api/login')
         .send(JSON.stringify(data))
@@ -117,8 +122,8 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
                     }
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined'  sx={{textTransform: 'none',}} onClick={handleClose}>{t('modals:ld_cancel')}</Button>
-                    <Button variant='outlined' sx={{textTransform: 'none',}} type='submit'>{t('modals:ld_login')}</Button>
+                    <Button variant='outlined' sx={{textTransform: 'none'}} onClick={handleClose}>{t('modals:ld_cancel')}</Button>
+                    <Button variant='outlined' sx={{textTransform: 'none'}} type='submit'>{t('modals:ld_login')}</Button>
                 </DialogActions>
             </Dialog>
             </form>

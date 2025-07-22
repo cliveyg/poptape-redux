@@ -2,5 +2,9 @@
   "not_found_page_title": "not found",
   "user_pass_incorrect": "Username and/or password is incorrect",
   "user_pass_not_valid": "Some of your signup info is not valid",
-  "server": "Sorry, we have a problem in our system. Please try again later"
+  "server": "Sorry, we have a problem in our system. Please try again later",
+  "fields_incorrect": "Some of your fields are incorrect",
+  "something_went_bang": "Something went wrong",
+  "bad_gqteway": "The server is unavailable right now",
+  "unauthorized": "Unauthorized"
 }

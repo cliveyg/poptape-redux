@@ -1,11 +1,11 @@
 import * as React from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import { setupTheme } from '../../assets/scripts/theme'
+import { selectTheme } from '../../assets/scripts/theme'
 import { ThemeProvider } from '@mui/material/styles'
 
 function AccountPageController({username}) {
-    const theme = setupTheme()
+    const theme = selectTheme()
 
     return (
         <>
