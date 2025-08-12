@@ -1,3 +1,6 @@
 {
-  "pr_title": "profile"
+  "pr_title": "profile",
+  "pr_about_you_label": "About you",
+  "pr_update_button": "Update",
+  "pr_choose_avatar": "Update avatar"
 }

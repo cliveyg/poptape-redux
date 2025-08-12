@@ -10,6 +10,8 @@ import itemsEN_GB from './locales/en/items.json'
 import menusEN_GB from './locales/en/menus.json'
 import modalsEN_GB from './locales/en/modals.json'
 import profileEN_GB from './locales/en/profile.json'
+import reviewsEN_GB from './locales/en/reviews.json'
+import settingsEN_GB from './locales/en/settings.json'
 import validationEN_GB from './locales/en/validation.json'
 
 import accountPT_BR from './locales/pt/account.json'
@@ -20,6 +22,8 @@ import itemsPT_BR from './locales/pt/items.json'
 import menusPT_BR from './locales/pt/menus.json'
 import modalsPT_BR from './locales/pt/modals.json'
 import profilePT_BR from './locales/pt/profile.json'
+import reviewsPT_BR from './locales/en/reviews.json'
+import settingsPT_BR from './locales/pt/settings.json'
 import validationPT_BR from './locales/pt/validation.json'
 
 const resources = {
@@ -32,6 +36,8 @@ const resources = {
         menus: menusEN_GB,
         modals: modalsEN_GB,
         profile: profileEN_GB,
+        reviews: reviewsEN_GB,
+        settings: settingsEN_GB,
         validation: validationEN_GB
     },
     pt: {
@@ -43,6 +49,8 @@ const resources = {
         menus: menusPT_BR,
         modals: modalsPT_BR,
         profile: profilePT_BR,
+        reviews: reviewsPT_BR,
+        settings: settingsPT_BR,
         validation: validationPT_BR
     },
 };

@@ -10,7 +10,7 @@ import CustomizedSnackbars from '../information/CustomSnackbars'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
-import request from 'superagent'
+import superagent from 'superagent'
 
 // Styles
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -126,8 +126,7 @@ function AddToAuction(props) {
         model['currency'] = 'GBP'
         model['item_id'] = itemId
         setModel(model)
-        const req = request
-        req.post('/auctionhouse/solo/auction/')
+        superagent.post('/auctionhouse/solo/auction/')
             .send(JSON.stringify(model))
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')

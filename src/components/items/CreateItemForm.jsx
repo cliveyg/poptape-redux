@@ -11,7 +11,7 @@ import FormBuilder from '../helpers/FormBuilder'
 import MenuItem from '@mui/material/MenuItem'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
-import request from 'superagent'
+import superagent from 'superagent'
 import { styled } from '@mui/material/styles'
 
 // Styles
@@ -149,11 +149,10 @@ export default function CreateItemForm() {
     };
 
     const onSubmit = (formModel) => {
-        const req = request
         formModel['category'] = chosenCat
         setModel(formModel);
 
-        req.post('/items')
+        superagent.post('/items')
             .send(JSON.stringify(formModel))
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
@@ -239,9 +238,7 @@ export default function CreateItemForm() {
                 fotoData['lastModified'] = currentFile.lastModified
                 fotoData['idx'] = idx
 
-                let req = request()
-
-                return req
+                return superagent
                     .post(bucket)
                     .set('Accept', 'application/json')
                     .send(formData)

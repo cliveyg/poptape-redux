@@ -1,6 +1,6 @@
 import * as React from 'react'
 import '../../css/poptape.css'
-import request from 'superagent'
+import superagent from 'superagent'
 import OwnerView from './OwnerView'
 import BidderView from './BidderView'
 import Box from '@mui/material/Box'
@@ -22,10 +22,9 @@ export default function ItemPageController({item}) {
     const [currentLot, setCurrentLot] = React.useState(null)
 
     const getAuctionHouseData = () => {
-        const req = request
         const auctionhouseURL = '/auctionhouse/auction/item/'
             +item.item_id+'/'
-        req.get(auctionhouseURL)
+        superagent.get(auctionhouseURL)
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .then(res => {

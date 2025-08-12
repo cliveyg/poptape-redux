@@ -1,0 +1,19 @@
+{
+  "st_title": "settings",
+  "st_header": "Settings",
+  "st_theme": "Themes",
+  "st_language": "Language",
+  "st_font": "Fonts",
+  "st_theme_default": "Default",
+  "st_theme_pink": "Pink",
+  "st_theme_blue": "Blue",
+  "st_theme_funky": "Funky",
+  "st_theme_royal": "Royal Blue",
+  "st_theme_sweet": "Sweet",
+  "st_theme_wine": "Wine",
+  "st_theme_grey": "Grey",
+  "st_theme_mulberry": "Mulberry",
+  "st_theme_green": "Green",
+  "st_theme_dark1": "Dark 1",
+  "st_theme_dark2": "Dark 2"
+}

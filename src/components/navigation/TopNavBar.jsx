@@ -35,7 +35,7 @@ import { useGlobalSettings } from '../helpers/GlobalSettings.jsx'
 
 import Link from '@mui/material/Link'
 import '../../css/poptape.css'
-import request from 'superagent'
+import superagent from 'superagent'
 
 export default function TopNavBar() {
 
@@ -84,8 +84,7 @@ export default function TopNavBar() {
 
     function getMessageData() {
 
-        const req = request
-        req.get('/messages/info')
+        superagent.get('/messages/info')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
         .set('x-access-token', Cookies.get('access-token'))

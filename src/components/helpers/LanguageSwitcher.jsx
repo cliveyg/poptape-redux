@@ -8,6 +8,7 @@ import UKFlag from '../../assets/images/flags/GB.svg'
 import BRFlag from '../../assets/images/flags/BR.svg'
 import '../../css/poptape.css'
 
+
 const LanguageSwitcher = () => {
     const { i18n } = useTranslation()
     const [lang, setLang] = useState(localStorage.getItem('i18nextLng') || 'en')
@@ -29,10 +30,11 @@ const LanguageSwitcher = () => {
         i18n.changeLanguage(lang)
     }, []);
 
+    const { t } = useTranslation()
 
     return (
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id='lang'>Language</InputLabel>
+            <InputLabel id='lang'>{t('settings:st_language')}</InputLabel>
             <Select
                 labelId='select-language'
                 value={lang}
