@@ -34,7 +34,7 @@ import '@fontsource/narnoor'
 import '@fontsource-variable/alumni-sans'
 
 // list of themes
-const ta = ["default", "blue", "pink", "funky", "royal", "sweet", "wine", "grey", "mulberry", "green", "dark 1"]
+const ta = ["default", "blue", "pink", "funky", "royal", "sweet", "wine", "grey", "mulberry", "green", "dark 1", "dark 2"]
 
 //=============================================================================
 
@@ -727,6 +727,63 @@ const dark1Theme = createTheme({
 
 //=============================================================================
 
+const dark2Theme = createTheme({
+    palette: {
+        notifications: green[200],
+        success: {
+            main: '#1e9d24', // another green
+        },
+        error: {
+            main: '#ce0909',
+        },
+        info: {
+            main: blue[300],
+        },
+        warning: {
+            main: '#f3740e',
+        },
+        offwhite: {
+            main: '#423b3b'
+        },
+        mode: 'dark',
+        noom: {
+            color: 'black',
+            backgroundColor: '#FFA500',
+        },
+        primary: {
+            main: '#7eb489',
+        },
+        secondary: {
+            main: '#92D1C3',
+            smenu: '#ce6d05'
+        },
+        message: {
+            display: 'flex',
+            alignItems: 'center',
+        },
+        snack: {
+            //error: '#c2185b',
+            error: '#941b0c',
+        },
+    },
+    sideMenuButtons: {
+        marginTop: 15,
+        textTransform: 'none',
+        marginRight: 15,
+        width: 200,
+    },
+    components: {
+        MuiLink: {
+            defaultProps: {
+                underline: 'none',
+                color: '#c2185b',
+            },
+        },
+    },
+})
+
+//=============================================================================
+
 export function setFontFam(ff) {
 
     if (typeof ff !== 'undefined') {
@@ -792,6 +849,8 @@ export function selectTheme(tn) {
         return createTheme(wineTheme, {typography: getFontFam()})
     } else if (theme === 'dark 1') {
         return createTheme(dark1Theme, {typography: getFontFam()})
+    } else if (theme === 'dark 2') {
+        return createTheme(dark2Theme, {typography: getFontFam()})
     } else if (theme === 'default') {
         return createTheme(defaultTheme, {typography: getFontFam()})
     } else {

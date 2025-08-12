@@ -8,7 +8,6 @@ import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
 import Select from '@mui/material/Select'
 import { styled } from '@mui/material/styles'
-import PropTypes from 'prop-types'
 
 const variantComponent = {
     standard: Input,
@@ -165,42 +164,5 @@ const MaxTextField = React.forwardRef(function MaxTextField(props, ref) {
         </StyledFormControl>
     )
 })
-/*
-MaxTextField.propTypes = {
-    characterLimit: PropTypes.number,
-    autoComplete: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    children: PropTypes.node,
-    className: PropTypes.string,
-    defaultValue: PropTypes.any,
-    disabled: PropTypes.bool,
-    error: PropTypes.bool,
-    FormHelperTextProps: PropTypes.object,
-    fullWidth: PropTypes.bool,
-    helperText: PropTypes.node,
-    id: PropTypes.string,
-    InputLabelProps: PropTypes.object,
-    InputProps: PropTypes.object,
-    inputProps: PropTypes.object,
-    inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    label: PropTypes.node,
-    margin: PropTypes.oneOf(["none", "dense", "normal"]),
-    multiline: PropTypes.bool,
-    name: PropTypes.string,
-    onBlur: PropTypes.func,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    placeholder: PropTypes.string,
-    required: PropTypes.bool,
-    rows: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    rowsmax: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    select: PropTypes.bool,
-    SelectProps: PropTypes.object,
-    type: PropTypes.string,
-    value: PropTypes.any,
-    variant: PropTypes.oneOf(["standard", "outlined", "filled"])
-}
-
- */
 
 export default MaxTextField

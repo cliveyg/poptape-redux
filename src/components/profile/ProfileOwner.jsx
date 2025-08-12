@@ -10,14 +10,16 @@ import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import Grid from '@mui/material/Grid'
-//import MetaViewer from '../reviews/MetaViewer'
 import { useNavigate } from 'react-router'
-import request from 'superagent'
+import superagent from 'superagent'
 import {selectTheme} from '../../assets/scripts/theme'
-import {getIcon} from '../../assets/scripts/profile_helpers.jsx'
+import {getIcon} from '../helpers/ProfileIcon.jsx'
 import {ThemeProvider} from '@mui/material/styles'
 import {useGlobalSettings} from '../helpers/GlobalSettings'
 import Avatar from '@mui/material/Avatar'
+import MetaViewer from '../reviews/MetaViewer'
+import MaxTextField from '../helpers/MaxTextField'
+import {useTranslation} from 'react-i18next'
 
 const initialPeckish = {
     variant: "success",
@@ -25,6 +27,8 @@ const initialPeckish = {
 }
 
 function ProfileOwner() {
+
+    const { t } = useTranslation()
     const [showSnack, setShowSnack] = useState(false)
     const [duration] = useState(1500)
     const [peckish, setPeckish] = useState(initialPeckish)
@@ -55,8 +59,7 @@ function ProfileOwner() {
     const selectTile = (tile) => {
         handleClose()
 
-        const req = request
-        req.post("/profile/avatar")
+        superagent.post("/profile/avatar")
             .send(JSON.stringify({ standard_avatar: tile.name }))
             .set("Accept", "application/json")
             .set("Content-Type", "application/json")
@@ -77,8 +80,7 @@ function ProfileOwner() {
     };
 
     const submitAboutMe = () => {
-        const req = request
-        req.post("/profile")
+        superagent.post("/profile")
             .send(JSON.stringify({ about_me: aboutMe }))
             .set("Accept", "application/json")
             .set("Content-Type", "application/json")
@@ -108,8 +110,7 @@ function ProfileOwner() {
 
         reader.onload = (event) => {
             formData["bespoke_avatar"] = event.target.result
-            const req = request
-            req.post("/profile/avatar")
+            superagent.post("/profile/avatar")
                 .send(JSON.stringify(formData))
                 .set("Content-Type", "application/json")
                 .set("Accept", "application/json")
@@ -127,7 +128,7 @@ function ProfileOwner() {
     const handleAboutMeChange = (e) => setAboutMe(e.target.value)
 
     useEffect(() => {
-        document.title = `poptape auctions | ${Cookies.get("username")} | profile`
+        document.title = 'POPTAPE | ' + username + ' | '+ t('profile:pr_title')
     }, [])
 
     const theme = selectTheme()
@@ -136,7 +137,7 @@ function ProfileOwner() {
         <ThemeProvider theme={theme}>
             <Container sx={{maxWidth: 'lg'}}>
                 <Grid container spacing={0}>
-                    <Grid sx={{backgroundColor: '#49898f'}} size={{ xs: 12, md: 3 }}>
+                    <Grid size={{ xs: 6, md: 1 }}>
                         <Box
                             sx={{
                                 display: 'flex',
@@ -146,13 +147,13 @@ function ProfileOwner() {
                             }}
                         >
                             <Avatar
-                                alt='my avatar'
+                                alt={username}
                                 src={profileImageString}
-                                sx='large'
+                                sx='xl'
                             />
                         </Box>
                     </Grid>
-                    <Grid sx={{backgroundColor: '#939f22'}} size={{ xs: 12, md: 9 }}>
+                    <Grid size={{ xs: 6, md: 3 }}>
                         <Box
                             sx={{
                                 display: 'flex',
@@ -166,9 +167,15 @@ function ProfileOwner() {
                                 variant="outlined"
                                 size="small"
                                 onClick={handleStandard}
+                                sx={{textTransform: 'none'}}
                             >
-                                Select from existing
+                                {t('profile:pr_choose_avatar')}
                             </Button>
+                        </Box>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 8 }}>
+                        <Box>
+                            <MetaViewer/>
                         </Box>
                     </Grid>
                 </Grid>
@@ -176,65 +183,63 @@ function ProfileOwner() {
 
             <Container sx={{maxWidth: 'lg'}}>
                 <Grid container spacing={0}>
-                    <Grid sx={{backgroundColor: '#583f5d'}} size={{ xs: 12, md: 6 }}>
-                        <h2>Column 3</h2>
-                        <p>Content of column 3.</p>
+                    <Grid size={{ xs: 12, md: 12 }}>
+                        <MaxTextField
+                            multiline
+                            rows={5}
+                            margin="dense"
+                            label={t('profile:pr_about_you_label')}
+                            name="about_me"
+                            type="text"
+                            inputProps={{
+                                maxLength: 500,
+                            }}
+                            characterLimit={500}
+                            helperText="Number of characters:&nbsp;&nbsp;&nbsp;"
+                            fullWidth
+                            value={aboutMe}
+                            onChange={handleAboutMeChange}
+                        />
+
                     </Grid>
-                    <Grid sx={{backgroundColor: '#9f224e', p: 1}} size={{ xs: 12, md: 6 }}>
+                    <Grid sx={{pt: 1}} size={{ xs: 12, md: 12 }}>
                         <Box sx={{display: 'flex'}}>
-                            <Box sx={{flexGrow: 1, backgroundColor: '#6b498f'}}>
-                                <h2>Column 4a</h2>
-                                <p>Content of column 4a.</p>
-                            </Box>
-                            <Box sx={{width: 1, backgroundColor: '#d2d52b'}}>
-                                <h2>Column 4b</h2>
-                                <p>Content of column 4b.</p>
-                            </Box>
+                            <Button
+                                color="secondary"
+                                variant="outlined"
+                                size="small"
+                                sx={{textTransform: 'none'}}
+                                onClick={submitAboutMe}
+                            >
+                                {t('profile:pr_update_button')}
+                            </Button>
                         </Box>
                     </Grid>
                 </Grid>
             </Container>
 
-            <Container sx={{maxWidth: 'lg'}}>
-                <Box sx={{display: 'flex'}}>
-                    <Box sx={{width: 1, backgroundColor: '#608f49'}}>
-                        <h2>Column 5</h2>
-                        <p>Content of column 5.</p>
-                    </Box>
-                    <Box sx={{flexGrow: 1, backgroundColor: '#9f5a22'}}>
-                        <h2>Column 6</h2>
-                        <p>Content of column 6.</p>
-                    </Box>
-                    <Box sx={{flexShrink: 1, backgroundColor: '#295def'}}>
-                        <h2>Column 7</h2>
-                        <p>Content of column 7.</p>
-                    </Box>
-                </Box>
-            </Container>
+            <Box>
+                <Dialog
+                    onClose={handleClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={openDialog}
+                >
+                    <DialogTitle id="customized-dialog-title" onClose={handleClose}>
 
-
-                <Box>
-                    <Dialog
-                        onClose={handleClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={openDialog}
-                    >
-                        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                            Select avatar
-                        </DialogTitle>
-                        <DialogContent dividers>
-                            <AvatarGrid selectTile={selectTile} />
-                        </DialogContent>
-                    </Dialog>
-                </Box>
-                {showSnack ? (
-                    <CustomizedSnackbars
-                        duration={duration}
-                        key_date={date}
-                        variant={peckish.variant}
-                        message={peckish.message}
-                    />
-                ) : null}
+                    </DialogTitle>
+                    <DialogContent dividers>
+                        <AvatarGrid selectTile={selectTile} />
+                    </DialogContent>
+                </Dialog>
+            </Box>
+            {showSnack ? (
+                <CustomizedSnackbars
+                    duration={duration}
+                    key_date={date}
+                    variant={peckish.variant}
+                    message={peckish.message}
+                />
+            ) : null}
         </ThemeProvider>
     );
 }

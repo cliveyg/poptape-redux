@@ -7,12 +7,11 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import CircularProgress from '@mui/material/CircularProgress'
 import CustomizedSnackbars from '../information/CustomSnackbars'
-import request from 'superagent'
+import superagent from 'superagent'
 import {useTranslation} from 'react-i18next'
 import Cookies from 'js-cookie'
 import {getFieldFromToken, getErrorMessage} from '../../assets/scripts/general'
 import { useNavigate } from 'react-router'
-
 
 export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
 
@@ -42,7 +41,6 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
     const handleSubmit = (data) => {
 
         setshowLoader(true)
-        const req = request
         let utf8Bytes = new TextEncoder().encode(data['password'])
         let base64Encoded = btoa(String.fromCharCode(...utf8Bytes))
         data['password'] = base64Encoded
@@ -50,7 +48,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
         base64Encoded = btoa(String.fromCharCode(...utf8Bytes))
         data['confirm_password'] = base64Encoded
 
-        req.post('/api/signup')
+        superagent.post('/api/signup')
             .send(JSON.stringify(data))
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')

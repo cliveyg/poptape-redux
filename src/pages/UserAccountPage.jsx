@@ -2,7 +2,7 @@ import * as React from 'react'
 import '../css/poptape.css'
 import Cookies from 'js-cookie'
 import Box from '@mui/material/Box'
-import request from 'superagent'
+import superagent from 'superagent'
 import AccountPageLoginForm from '../components/account/AccountPageLoginForm'
 import AccountPageController from '../components/account/AccountPageController'
 import { useLocation } from 'react-router'
@@ -34,8 +34,12 @@ export default function UserAccountPage() {
     }
 
     const onSubmit = (data) => {
-        const req = request
-        req.post('/api/login')
+
+        const utf8Bytes = new TextEncoder().encode(data['password'])
+        const base64Encoded = btoa(String.fromCharCode(...utf8Bytes))
+        data['password'] = base64Encoded
+
+        superagent.post('/api/login')
             .send(JSON.stringify(data))
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')

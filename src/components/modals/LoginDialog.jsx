@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import CircularProgress from '@mui/material/CircularProgress'
 import Cookies from 'js-cookie'
 import CustomizedSnackbars from '../information/CustomSnackbars'
-import request from 'superagent'
+import superagent from 'superagent'
 import {useTranslation} from 'react-i18next'
 import {getErrorMessage, getFieldFromToken} from '../../assets/scripts/general'
 
@@ -43,8 +43,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
         data['password'] = base64Encoded
         //console.log(data)
 
-        const req = request
-        req.post('/api/login')
+        superagent.post('/api/login')
         .send(JSON.stringify(data))
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')

@@ -295,9 +295,10 @@ function Profile() {
                                 color="secondary"
                                 variant="outlined"
                                 size="small"
+                                sx={{textTransform: 'none'}}
                                 onClick={handleStandard}
                             >
-                                Select from existing
+                                Select Avatar
                             </Button>
                     </Grid>
                 </Grid>

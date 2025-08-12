@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper'
 import { selectTheme } from '../assets/scripts/theme'
 import { isValidUUID } from '../assets/scripts/general'
 import CustomizedSnackbars from '../components/information/CustomSnackbars'
-import request from 'superagent'
+import superagent from 'superagent'
 import TopNavBar from '../components/navigation/TopNavBar'
 
 export default function ItemPage({inItem}) {
@@ -30,15 +30,14 @@ export default function ItemPage({inItem}) {
     function getItemData(ip) {
 
         if (item === null) {
-            const req = request
 
-            req.get('/items/'+ip.item_id)
+            superagent.get('/items/'+ip.item_id)
                 .set('Accept', 'application/json')
                 .set('Content-Type', 'application/json')
                 .then(res => {
                     let rItem = res.body
                     rItem['item_id'] = ip.item_id
-                    request.get('/fotos/item/'+rItem.item_id)
+                    superagent.get('/fotos/item/'+rItem.item_id)
                         .set('Accept', 'application/json')
                         .set('Content-Type', 'application/json')
                         .then(res => {

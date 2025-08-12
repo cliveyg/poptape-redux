@@ -1,0 +1,19 @@
+{
+  "st_title": "configurações",
+  "st_header": "Configurações",
+  "st_theme": "Tema",
+  "st_language": "Idioma",
+  "st_font": "Fontes",
+  "st_theme_default": "Normal",
+  "st_theme_pink": "Rosa",
+  "st_theme_blue": "Azul",
+  "st_theme_funky": "Funky",
+  "st_theme_royal": "Azul Royal",
+  "st_theme_sweet": "Doce",
+  "st_theme_wine": "Vinho",
+  "st_theme_grey": "Cinza",
+  "st_theme_mulberry": "Amoreira",
+  "st_theme_green": "Verde",
+  "st_theme_dark1": "Escuro 1",
+  "st_theme_dark2": "Escuro 2"
+}

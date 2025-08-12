@@ -8,7 +8,8 @@ import DisplayPage from './pages/DisplayPage'
 import ItemPage from './pages/ItemPage'
 import CreateItemPage from './pages/CreateItemPage'
 import TestPage from './pages/TestPage'
-import { GlobalProvider } from './components/helpers/GlobalSettings.jsx'
+import { GlobalProvider } from './components/helpers/GlobalSettings'
+import UserSettingsPage from './pages/UserSettingsPage'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
                         <Route exact path='/user/:username/account' element={<DisplayPage page='account'/>} />
                         <Route exact path='/user/:username/items' element={<DisplayPage page='myitems'/>} />
                         <Route exact path='/user/:username/auctions' element={<DisplayPage page='auctions'/>} />
+                        <Route exact path='/user/:username/settings' element={<UserSettingsPage/>} />
                         <Route exact path='/item/create' element={<CreateItemPage/>} />
                         <Route path='/test/woop/:daddy' element={<TestPage/>} />
                         {/*<Route exact path='/item' element={<ItemPage inItem={null}/>}/>*/}

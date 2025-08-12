@@ -1,8 +1,6 @@
 import React from 'react'
 import {SvgIcon} from '@mui/material'
 
-// for some reason we have to load these twice - once with ?react and once without
-// as mui icon needs the ?react and avatar doesn't work with it
 import avatar_01 from '../../assets/images/avatars/svg-avatars/avatar-1-svgrepo-com.svg?react'
 import avatar_02 from '../../assets/images/avatars/svg-avatars/avatar-2-svgrepo-com.svg?react'
 import avatar_03 from '../../assets/images/avatars/svg-avatars/avatar-3-svgrepo-com.svg?react'
