@@ -1,1 +1,10 @@
-{}
+{
+  "rating": "avaliação",
+  "no_rating": "Ainda não classificado",
+  "reviews_of_you": "avaliações sobre você",
+  "reviews_by_you": "avaliações suas",
+  "about_you": "Sobre você",
+  "no_of_chars": "Número de caracteres",
+  "update": "Atualizar",
+  "go_to_reviews": "Ir para avaliações"
+}

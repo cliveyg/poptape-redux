@@ -22,7 +22,7 @@ import itemsPT_BR from './locales/pt/items.json'
 import menusPT_BR from './locales/pt/menus.json'
 import modalsPT_BR from './locales/pt/modals.json'
 import profilePT_BR from './locales/pt/profile.json'
-import reviewsPT_BR from './locales/en/reviews.json'
+import reviewsPT_BR from './locales/pt/reviews.json'
 import settingsPT_BR from './locales/pt/settings.json'
 import validationPT_BR from './locales/pt/validation.json'
 
