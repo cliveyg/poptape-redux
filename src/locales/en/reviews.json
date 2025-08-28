@@ -1,1 +1,10 @@
-{}
+{
+  "rating": "rating",
+  "no_rating": "Not rated yet",
+  "reviews_of_you": "reviews of you",
+  "reviews_by_you": "reviews by you",
+  "about_you": "About you",
+  "no_of_chars": "Number of characters",
+  "update": "Update",
+  "go_to_reviews": "Go to reviews"
+}

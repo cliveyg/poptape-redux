@@ -7,8 +7,11 @@ import Typography from '@mui/material/Typography'
 import { Link as RouterLink } from 'react-router'
 import Link from '@mui/material/Link'
 import superagent from 'superagent'
+import {useTranslation} from 'react-i18next'
 
 const MetaViewer = () => {
+
+    const { t } = useTranslation()
     const [rating, setRating] = useState(0)
     const [reviewsBy, setReviewsBy] = useState(0)
     const [reviewsOf, setReviewsOf] = useState(0)
@@ -24,9 +27,10 @@ const MetaViewer = () => {
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
             .then((res) => {
-                setRating(res.body.calculated_score)
-                setReviewsOf(res.body.total_reviews_of)
-                setReviewsBy(res.body.total_reviews_by)
+                console.log(res.body)
+                setRating(res.body.scores.meta_average)
+                setReviewsOf(res.body.total_reviews_of_user)
+                setReviewsBy(res.body.total_reviews_by_user)
             })
             .catch((err) => {
                 console.log(err)
@@ -36,18 +40,22 @@ const MetaViewer = () => {
     return (
         <Box sx={{p: 2}}>
                 <Typography variant="h4">
-                    {rating}% <span style={{ fontSize: '0.6em' }}> rating</span>
+                    {rating > 0 ?
+                        <>{rating}% <span style={{ fontSize: '0.6em' }}> {t('reviews:rating')}</span></>
+                    :
+                        <span style={{ fontSize: '0.6em' }}>{t('reviews:no_rating')}</span>
+                    }
                 </Typography>
                 <br />
                 <Typography variant="subtitle1">
-                    {reviewsOf} reviews of you. <br />
-                    {reviewsBy} reviews by you. <br />
+                    {reviewsOf} {t('reviews:reviews_of_you')}<br />
+                    {reviewsBy} {t('reviews:reviews_by_you')}<br />
                     <Box sx={{ mt: 1 }}>
                         <Link
                             component={RouterLink}
                             to={reviewsURL}
                         >
-                            Go to reviews &gt;&gt;
+                            {t('reviews:go_to_reviews')} &gt;&gt;
                         </Link>
                     </Box>
                 </Typography>
