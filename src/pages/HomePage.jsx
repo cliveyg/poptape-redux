@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useReducer} from 'react'
 import '../css/poptape.css'
 import TopNavBar from '../components/navigation/TopNavBar'
 import LanguageSwitcher from '../components/helpers/LanguageSwitcher'
@@ -20,6 +20,7 @@ function HomePage() {
     const { t } = useTranslation()
     const { profileIcon, setProfileIcon, profileImageString, setProfileImageString } = useGlobalSettings()
 
+    const [duration, setDuration] = useState(7)
     React.useEffect(() => {
         document.title = 'POPTAPE | ' + t('homepage:hp_title')
     }, [])
@@ -28,7 +29,10 @@ function HomePage() {
         console.log("Completed")
     }
 
+    const [, forceUpdate] = React.useReducer(x => x + 1, 0)
+
     const [theme, setTheme] = React.useState(selectTheme())
+    const [key, setKey] = useState(0)
     const [displayValue, setDisplayValue] = React.useState(localStorage.getItem('theme'))
     const [font, setFont] = React.useState(localStorage.getItem('font'))
 
@@ -60,12 +64,20 @@ function HomePage() {
                     profileIcon:<br/>
                     {profileIcon}
                 </Box>
+                <div key={key}>
                 <CountDownTimer
-                    duration={10}
-                    colors={["#ff9248", "#a20000"]}
-                    colorValues={[20, 10]}
+                    duration={duration}
+                    //colors={["#ff9248", "#a20000"]}
+                    //colorValues={[20, 10]}
                     onComplete={handleOnComplete}
                 />
+                </div>
+                <Button
+                    onClick={() => setKey((k) => k + 1)}
+                >
+                restart
+                </Button>
+
                 {/*
                 <Box>
                     Avatar using icon:<br/>

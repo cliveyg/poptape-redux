@@ -34,7 +34,7 @@ import '@fontsource/narnoor'
 import '@fontsource-variable/alumni-sans'
 
 // list of themes
-const ta = ["default", "blue", "pink", "funky", "royal", "sweet", "wine", "grey", "mulberry", "green", "dark 1", "dark 2", "xanthous"]
+const ta = ["default", "blue", "pink", "funky", "royal", "sweet", "wine", "grey", "mulberry", "green", "dark 1", "dark 2", "xanthous", "tomato"]
 
 //=============================================================================
 
@@ -74,6 +74,9 @@ const defaultTheme = createTheme({
         snack: {
             //error: '#c2185b',
             error: '#941b0c',
+        },
+        timer: {
+            background: '#92D1C3',
         },
     },
     sideMenuButtons: {
@@ -131,6 +134,9 @@ const pinkTheme = createTheme({
             //error: '#c2185b',
             error: '#941b0c',
         },
+        timer: {
+            background: '#efefef',
+        },
     },
     sideMenuButtons: {
         marginTop: 15,
@@ -185,6 +191,9 @@ const funkyTheme = createTheme({
         },
         snack: {
             error: '#941b0c',
+        },
+        timer: {
+            background: '#e8e2c5',
         },
     },
     sideMenuButtons: {
@@ -241,6 +250,9 @@ const blueTheme = createTheme({
         snack: {
             error: '#941b0c',
         },
+        timer: {
+            background: '#7aa9d7',
+        },
     },
     sideMenuButtons: {
         marginTop: 15,
@@ -296,6 +308,9 @@ const royalTheme = createTheme({
         snack: {
             error: '#93053e',
         },
+        timer: {
+            background: '#b9b6b6',
+        },
     },
     sideMenuButtons: {
         marginTop: 15,
@@ -350,6 +365,9 @@ const sweetTheme = createTheme({
         },
         snack: {
             error: '#810202',
+        },
+        timer: {
+            background: '#d3c2b3',
         },
     },
     sideMenuButtons: {
@@ -409,6 +427,9 @@ const wineTheme = createTheme({
         snack: {
             error: '#810202',
         },
+        timer: {
+            background: '#e1d89f',
+        },
     },
     sideMenuButtons: {
         marginTop: 15,
@@ -467,6 +488,9 @@ const greyTheme = createTheme({
         },
         snack: {
             error: '#F07167',
+        },
+        timer: {
+            background: '#a5ccda',
         },
     },
     sideMenuButtons: {
@@ -542,6 +566,9 @@ const mulberryTheme = createTheme({
         },
         snack: {
             error: '#e43f6f',
+        },
+        timer: {
+            background: '#d2cfcf',
         },
     },
     sideMenuButtons: {
@@ -626,6 +653,9 @@ const greenTheme = createTheme({
         snack: {
             error: '#e43f6f',
         },
+        timer: {
+            background: '#d0f1bf',
+        },
     },
     sideMenuButtons: {
         marginTop: 15,
@@ -691,6 +721,9 @@ const dark1Theme = createTheme({
         },
         snack: {
             error: '#e43f6f',
+        },
+        timer: {
+            background: '#777777',
         },
     },
     sideMenuButtons: {
@@ -765,6 +798,9 @@ const dark2Theme = createTheme({
             //error: '#c2185b',
             error: '#941b0c',
         },
+        timer: {
+            background: '#524a4a',
+        },
     },
     sideMenuButtons: {
         marginTop: 15,
@@ -798,7 +834,7 @@ const xanthousTheme = createTheme({
             main: '#0081a7',
         },
         warning: {
-            main: '#cc8d3c',
+            main: '#f3740e',
         },
         offwhite: {
             main: '#f7b32b'
@@ -823,6 +859,87 @@ const xanthousTheme = createTheme({
         },
         snack: {
             error: '#e3170a',
+        },
+        timer: {
+            background: '#f3b86d',
+        },
+    },
+    sideMenuButtons: {
+        marginTop: 15,
+        textTransform: 'none',
+        marginRight: 15,
+        width: 200,
+    },
+    components: {
+        MuiLink: {
+            defaultProps: {
+                underline: 'none',
+                color: '#e3170a',
+            },
+        },
+        MuiButton: {
+            variants: [
+                {
+                    props: { variant: 'button_a' },
+                    style: {
+                        textTransform: 'none',
+                        ":hover": {
+                            textTransform: 'none',
+                            backgroundColor: '#27474e',
+                            color: '#e1d89f',
+                            //border: '1px solid #1c2321',
+                        },
+                    },
+                },
+            ],
+        },
+    },
+})
+
+//=============================================================================
+
+const tomatoTheme = createTheme({
+    palette: {
+        notifications: '#be0e07',
+        stb_a: '#27474e',
+        success: {
+            main: '#0a9335',
+        },
+        error: {
+            main: '#be0e07',
+        },
+        info: {
+            main: '#0081a7',
+        },
+        warning: {
+            main: '#f3740e',
+        },
+        offwhite: {
+            main: '#e3ccaa'
+        },
+        noom: {
+            color: 'black',
+            backgroundColor: '#FFC67B',
+        },
+        primary: {
+            main: '#f55536',
+            dark: '#7a2857',
+        },
+        secondary: {
+            main: '#5e4352',
+            light: '#a17386',
+            dark: '#3d2c37',
+            smenu: '#FFC67B',
+        },
+        message: {
+            display: 'flex',
+            alignItems: 'center',
+        },
+        snack: {
+            error: '#be0e07',
+        },
+        timer: {
+            background: '#f5eef1',
         },
     },
     sideMenuButtons: {
@@ -930,6 +1047,8 @@ export function selectTheme(tn) {
         return createTheme(defaultTheme, {typography: getFontFam()})
     } else if (theme === 'xanthous') {
         return createTheme(xanthousTheme, {typography: getFontFam()})
+    } else if (theme === 'tomato') {
+        return createTheme(tomatoTheme, {typography: getFontFam()})
     } else {
         // drop into default theme
         return createTheme(defaultTheme, {typography: getFontFam()})

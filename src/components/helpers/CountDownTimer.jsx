@@ -33,10 +33,18 @@ const ProgressWrapper = styled(Box)(({ theme }) => ({
 
 const CountdownText = styled(Typography)(({ theme }) => ({
     fontWeight: 'bold',
-    fontSize: '1.35em',
     marginTop: '1em',
     fontFamily: 'Courier, monospace',
     letterSpacing: '0.05em',
+    [theme.breakpoints.up("xs")]: {
+        fontSize: "1.20rem",
+    },
+    [theme.breakpoints.up("md")]: {
+        fontSize: "1.50rem",
+    },
+    [theme.breakpoints.up("lg")]: {
+        fontSize: "3.50rem",
+    }
 }))
 
 const NoFillCircularProgress = styled(CircularProgress)(({ theme }) => ({
@@ -61,7 +69,7 @@ const NoFillStaticTrack = styled(CircularProgress)(({ theme }) => ({
     top: 0,
     zIndex: 1,
     transition: 'none !important',
-    color: theme.palette.background.paper || '#fff',
+    color: theme.palette.timer.background || '#fff',
     opacity: 1,
     '& .MuiCircularProgress-circle': {
         fill: 'none !important',
@@ -135,9 +143,9 @@ const CountDownTimer = (props) => {
                     : formatCountdown(0)
             )
 
-            if (percentage > 40) {
+            if (percentage > 50) {
                 setAnimatedColor(theme.palette.success.main)
-            } else if (percentage > 15) {
+            } else if (percentage > 25) {
                 setAnimatedColor(theme.palette.warning.main)
             } else {
                 setAnimatedColor(theme.palette.error.main)
@@ -187,7 +195,9 @@ const CountDownTimer = (props) => {
                     }}
                 />
             </ProgressWrapper>
-            <CountdownText>{countdownText}</CountdownText>
+            <Box sx={{position: 'relative', bottom: {xs: '70px', sm: '70px', md: '100px', lg: '240px'}, zIndex: 100}}>
+                <CountdownText>{countdownText}</CountdownText>
+            </Box>
         </Container>
     )
 }
