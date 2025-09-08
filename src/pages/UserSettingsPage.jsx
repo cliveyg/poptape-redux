@@ -77,16 +77,19 @@ export default function UserSettingsPage() {
                                         gap: 1,
                                         '& .MuiToggleButtonGroup-firstButton': {
                                             width: '70px',
+                                            height: '70px',
                                             textTransform: 'none',
                                         },
                                         '& .MuiToggleButtonGroup-middleButton': {
                                             borderLeft: '1px solid #0000001f',
                                             width: '70px',
+                                            height: '70px',
                                             textTransform: 'none',
                                         },
                                         '& .MuiToggleButtonGroup-lastButton': {
                                             borderLeft: '1px solid #0000001f',
                                             width: '70px',
+                                            height: '70px',
                                             textTransform: 'none',
                                         }
                                     }}
@@ -207,6 +210,15 @@ export default function UserSettingsPage() {
                                         }}
                                     >
                                         {t('settings:st_theme_xanthous')}
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        value="tomato"
+                                        onClick={() => {
+                                            let tm = selectTheme('tomato')
+                                            setTheme(tm)
+                                        }}
+                                    >
+                                        {t('settings:st_theme_tomato')}
                                     </ToggleButton>
                                 </ToggleButtonGroup>
                             </FormControl>
