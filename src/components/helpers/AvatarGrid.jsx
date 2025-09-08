@@ -117,12 +117,13 @@ export default function AvatarGrid({ selectTile }) {
                 justifyContent: "space-around",
                 overflow: "hidden",
                 backgroundColor: (theme) => theme.palette.background.paper,
-                width: 330,
-                height: 400,
+                //backgroundColor: "orange",
+                //width: 330,
+                //height: 400,
                 p: 1,
             }}
         >
-            <Grid container spacing={1} columns={8} sx={{ width: "100%", height: "100%" }}>
+            <Grid container spacing={1} columns={{xs: 5, sm: 7, md: 9}}>
                 {avatarList.map((tile, idx) => (
                     <Grid
                         size={{ xs: 1 }}

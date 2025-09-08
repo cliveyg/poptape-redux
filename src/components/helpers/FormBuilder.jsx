@@ -15,7 +15,7 @@ import FormGroup from '@mui/material/FormGroup'
 import Checkbox from '@mui/material/Checkbox'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers'
-//import CurrencyTextField from '@unicef/material-ui-currency-textfield'
+import {useTranslation} from 'react-i18next'
 
 // Styled components for MUI 7+
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -40,6 +40,7 @@ function FormBuilder({
                          submitLabel = 'Submit'
                      }) {
     const [state, setState] = useState({})
+    const { t } = useTranslation()
 
     const handleChange = (e, key) => {
         setState(s => ({
@@ -92,22 +93,23 @@ function FormBuilder({
             let props = m.props || {}
             let required = !!m.props.required
 
+            // React 19: Do not use inputProps for value or defaultValue, pass them directly.
+            // Only use inputProps for things like maxLength, min, max, pattern, etc.
+
             if (type === 'text') {
                 return (
                     <div key={key}>
                         <TextField
                             required={required}
                             margin="dense"
-                            value={state[key] || ''}
+                            value={state[key] ?? ''}
                             label={m.label}
                             name={key}
                             type="text"
-                            inputProps={{
-                                maxLength: m.props.maxlength,
-                                value: m.props.default
-                            }}
+                            slotProps={{ htmlInput: { maxLength: m.props.maxlength } }}
                             onChange={e => handleChange(e, key)}
-                            style={{ width: 500 }}
+                            //style={{ width: 500 }}
+                            fullWidth
                         />
                     </div>
                 )
@@ -117,15 +119,16 @@ function FormBuilder({
                         <TextField
                             required={required}
                             margin="dense"
-                            value={state[key] || ''}
+                            value={state[key] ?? ''}
                             label={m.label}
                             name={key}
                             type="number"
-                            inputProps={{
-                                value: m.props.default
-                            }}
+                            slotProps={{ htmlInput: { min: m.props.min,
+                                                      max: m.props.max,
+                                                      step: m.props.step } }}
                             onChange={e => handleChange(e, key)}
-                            style={{ width: 500 }}
+                            //style={{ width: 500 }}
+                            fullWidth
                         />
                     </div>
                 )
@@ -141,7 +144,7 @@ function FormBuilder({
                         <FormLabel>{m.label}</FormLabel>
                         <Select
                             name={key}
-                            value={state[key] || ''}
+                            value={state[key] ?? ''}
                             style={{ minWidth: 200, marginRight: 20 }}
                             onChange={e => handleChange(e, key)}
                         >
@@ -169,7 +172,7 @@ function FormBuilder({
                         <RadioGroup
                             name={key}
                             required={required}
-                            value={state[key] || ''}
+                            value={state[key] ?? ''}
                             onChange={e => handleChange(e, key)}
                             row
                         >
@@ -194,7 +197,7 @@ function FormBuilder({
                             characterLimit={m.props.maxlength}
                             helperText="Number of characters:   "
                             fullWidth
-                            value={state[key] || ''}
+                            value={state[key] ?? ''}
                             onChange={e => handleChange(e, key)}
                         /><br /><br /><br />
                     </div>
@@ -235,7 +238,7 @@ function FormBuilder({
                                 ampm={false}
                                 disablePast
                                 disabled={m.props.disabled}
-                                value={state[key] || null}
+                                value={state[key] ?? null}
                                 onChange={value => handleDateChange(value, key)}
                                 label={m.label}
                                 slotProps={{ textField: { variant: 'standard' } }}
@@ -268,6 +271,7 @@ function FormBuilder({
                 }
                 <br />
                 <form onSubmit={handleSubmit}>
+
                     {renderForm()}
                     <DivButtons>
                         <Buttons

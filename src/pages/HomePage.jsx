@@ -13,6 +13,7 @@ import {ThemeProvider} from '@mui/material/styles'
 import {selectTheme, setFontFam} from '../assets/scripts/theme'
 import {useTranslation} from 'react-i18next'
 import {useGlobalSettings} from '../components/helpers/GlobalSettings'
+import CountDownTimer from '../components/helpers/CountDownTimer'
 import Avatar from '@mui/material/Avatar'
 
 function HomePage() {
@@ -22,6 +23,10 @@ function HomePage() {
     React.useEffect(() => {
         document.title = 'POPTAPE | ' + t('homepage:hp_title')
     }, [])
+
+    const handleOnComplete = () => {
+        console.log("Completed")
+    }
 
     const [theme, setTheme] = React.useState(selectTheme())
     const [displayValue, setDisplayValue] = React.useState(localStorage.getItem('theme'))
@@ -55,6 +60,13 @@ function HomePage() {
                     profileIcon:<br/>
                     {profileIcon}
                 </Box>
+                <CountDownTimer
+                    duration={10}
+                    colors={["#ff9248", "#a20000"]}
+                    colorValues={[20, 10]}
+                    onComplete={handleOnComplete}
+                />
+                {/*
                 <Box>
                     Avatar using icon:<br/>
                     <Avatar sx={{ height: '40px', width: '40px'}}>
@@ -83,6 +95,7 @@ function HomePage() {
                         }}
                     />
                 </Box>
+                */}
             </Paper>
         </ThemeProvider>
     )

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
@@ -62,7 +62,7 @@ export default function CreateItemForm() {
 
     const { t } = useTranslation()
     const categoriesAndFields = getCategoriesAndFields()
-    console.log(categoriesAndFields)
+    //console.log(categoriesAndFields)
 
     const peckishDefault = {
         variant: 'info',
@@ -76,7 +76,7 @@ export default function CreateItemForm() {
     const [showCats, setShowCats] = useState(true)
     const [chosenCat, setChosenCat] = useState('')
     const [topLevelCat, setTopLevelCat] = useState('')
-    const [topLevelCatArray] = useState(loadCategory(categoriesAndFields['topLevelCats']))
+    const [topLevelCatArray, setTopLevelCatArray] = useState(loadCategory(categoriesAndFields['topLevelCats']))
     const [secondLevelCatArray, setSecondLevelCatArray] = useState('')
     const [secondLevelCat, setSecondLevelCat] = useState()
     const [showSecondLevelCat, setShowSecondLevelCat] = useState(false)
@@ -280,6 +280,35 @@ export default function CreateItemForm() {
         postImages()
         handleClose()
     };
+
+    useEffect(() => {
+        let tlca = categoriesAndFields['topLevelCats']
+
+        for (var i = 0; i < tlca.length; i++) {
+            let trans = t(tlca[i].name)
+            tlca[i].name = trans
+        }
+        setTopLevelCatArray(loadCategory(tlca))
+
+    }, []);
+
+    useEffect(() => {
+
+        let slca = []
+        if (topLevelCat === "vehicles:20001") {
+            slca = categoriesAndFields['vehicleCats']
+        } else {
+            slca = categoriesAndFields['otherCats']
+        }
+
+        for (var i = 0; i < slca.length; i++) {
+            let trans = t(slca[i].name)
+            slca[i].name = trans
+        }
+        setSecondLevelCatArray(loadCategory(slca))
+
+    }, [topLevelCat]);
+
 
     //console.log(categoriesAndFields['topLevelCats'])
     return(
