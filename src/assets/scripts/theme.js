@@ -34,7 +34,7 @@ import '@fontsource/narnoor'
 import '@fontsource-variable/alumni-sans'
 
 // list of themes
-const ta = ["default", "blue", "pink", "funky", "royal", "sweet", "wine", "grey", "mulberry", "green", "dark 1", "dark 2"]
+const ta = ["default", "blue", "pink", "funky", "royal", "sweet", "wine", "grey", "mulberry", "green", "dark 1", "dark 2", "xanthous"]
 
 //=============================================================================
 
@@ -784,6 +784,81 @@ const dark2Theme = createTheme({
 
 //=============================================================================
 
+const xanthousTheme = createTheme({
+    palette: {
+        notifications: '#e3170a',
+        stb_a: '#27474e',
+        success: {
+            main: '#a9e5bb',
+        },
+        error: {
+            main: '#e3170a',
+        },
+        info: {
+            main: '#0081a7',
+        },
+        warning: {
+            main: '#cc8d3c',
+        },
+        offwhite: {
+            main: '#f7b32b'
+        },
+        noom: {
+            color: 'black',
+            backgroundColor: '#fed9b7',
+        },
+        primary: {
+            main: '#2c2929',
+            dark: '#7a2857',
+        },
+        secondary: {
+            main: '#5e4352',
+            light: '#a17386',
+            dark: '#3d2c37',
+            smenu: '#F07167',
+        },
+        message: {
+            display: 'flex',
+            alignItems: 'center',
+        },
+        snack: {
+            error: '#e3170a',
+        },
+    },
+    sideMenuButtons: {
+        marginTop: 15,
+        textTransform: 'none',
+        marginRight: 15,
+        width: 200,
+    },
+    components: {
+        MuiLink: {
+            defaultProps: {
+                underline: 'none',
+                color: '#e3170a',
+            },
+        },
+        MuiButton: {
+            variants: [
+                {
+                    props: { variant: 'button_a' },
+                    style: {
+                        textTransform: 'none',
+                        ":hover": {
+                            textTransform: 'none',
+                            backgroundColor: '#27474e',
+                            color: '#e1d89f',
+                            //border: '1px solid #1c2321',
+                        },
+                    },
+                },
+            ],
+        },
+    },
+})
+
+//=============================================================================
+
 export function setFontFam(ff) {
 
     if (typeof ff !== 'undefined') {
@@ -853,6 +928,8 @@ export function selectTheme(tn) {
         return createTheme(dark2Theme, {typography: getFontFam()})
     } else if (theme === 'default') {
         return createTheme(defaultTheme, {typography: getFontFam()})
+    } else if (theme === 'xanthous') {
+        return createTheme(xanthousTheme, {typography: getFontFam()})
     } else {
         // drop into default theme
         return createTheme(defaultTheme, {typography: getFontFam()})

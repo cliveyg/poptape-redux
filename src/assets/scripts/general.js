@@ -38,33 +38,33 @@ export function getErrorMessage(e, status, caller) {
 export function getCategoriesAndFields() {
 
     const topLevelCats = [
-        {"name": "Vehicles", "value": "vehicles:20001"},
-        {"name": "Collectables & Art", "value": "collectables-art:30000"},
-        {"name": "Electronics", "value": "electronics:40000"},
-        {"name": "Books", "value": "books:50000"},
-        {"name": "Toys", "value": "toys:60000"},
-        {"name": "Music", "value": "music:70000"},
-        {"name": "Business & Industrial", "value": "business-industrial:80000"},
-        {"name": "Misc", "value": "misc:10000"},
+        {"name": "items:cif_tlc_vehicles", "value": "vehicles:20001"},
+        {"name": "items:cif_tlc_collectables", "value": "collectables-art:30000"},
+        {"name": "items:cif_tlc_electronics", "value": "electronics:40000"},
+        {"name": "items:cif_tlc_books", "value": "books:50000"},
+        {"name": "items:cif_tlc_toys", "value": "toys:60000"},
+        {"name": "items:cif_tlc_music", "value": "music:70000"},
+        {"name": "items:cif_tlc_business", "value": "business-industrial:80000"},
+        {"name": "items:cif_tlc_misc", "value": "misc:10000"},
     ]
 
     const vehicleCats = [
-        {"name": "Autoparts", "value": "autoparts:20010"},
-        {"name": "Boats", "value": "boats:20100"},
-        {"name": "Cars", "value": "cars:21000"},
-        {"name": "Motorcycles", "value": "motorcycles:22000"},
-        {"name": "Trucks & Vans", "value": "trucks-vans:25000"},
-        {"name": "Other Industrial Vehicles", "value": "other-industrial-vehicles:27000"},
-        {"name": "Buses", "value": "buses:28000"}
+        {"name": "items:cif_slc_autoparts", "value": "autoparts:20010"},
+        {"name": "items:cif_slc_boats", "value": "boats:20100"},
+        {"name": "items:cif_slc_cars", "value": "cars:21000"},
+        {"name": "items:cif_slc_motorbikes", "value": "motorcycles:22000"},
+        {"name": "items:cif_slc_trucks", "value": "trucks-vans:25000"},
+        {"name": "items:cif_slc_other_vehicles", "value": "other-industrial-vehicles:27000"},
+        {"name": "items:cif_slc_buses", "value": "buses:28000"}
     ]
 
     const otherCats = [
-        {"name": "Cat", "value": "cat-a:0001"},
-        {"name": "Mouse", "value": "cat-b:0002"},
-        {"name": "Dog", "value": "cat-c:0003"},
-        {"name": "Giraffe", "value": "cat-d:0004"},
-        {"name": "Lion", "value": "cat-e:0005"},
-        {"name": "Sheep", "value": "cat-f:0006"},
+        {"name": "items:cif_slc_cat", "value": "cat-a:0001"},
+        {"name": "items:cif_slc_mouse", "value": "cat-b:0002"},
+        {"name": "items:cif_slc_dog", "value": "cat-c:0003"},
+        {"name": "items:cif_slc_giraffe", "value": "cat-d:0004"},
+        {"name": "items:cif_slc_lion", "value": "cat-e:0005"},
+        {"name": "items:cif_slc_sheep", "value": "cat-f:0006"},
     ]
 
     const standardFields = [
@@ -97,7 +97,7 @@ export function getCategoriesAndFields() {
     ]
 
     const carFields = [
-        {key: "name", label: "Name", type: "text", props: {required: true, maxlength: 150}},
+        {key: "title", label: "Item Title", type: "text", props: {required: true, maxlength: 150}},
         {
             key: "description", label: "Description", type: "maxtext", props: {
                 required: true,

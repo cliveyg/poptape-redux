@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar'
-import Cookies from 'js-cookie'
 import request from 'superagent'
 
 // avatar images
@@ -66,25 +65,6 @@ function AvatarChooser({ avatarSize = null, avatarObj = null }) {
             if (publicId) {
                 profileURL = `/profile/${publicId}`
             }
-/*
-            req.get(profileURL)
-                .set("Accept", "application/json")
-                .set("Content-Type", "application/json")
-                .set("x-access-token", Cookies.get("access-token"))
-                .then((res) => {
-                    console.log("*#############")
-                    if (res.body.bespoke_avatar !== null) {
-                        setCurrentAvatarObj(res.body.bespoke_avatar)
-                    } else {
-                        setCurrentAvatarName(res.body.standard_avatar)
-                        //setCurrentAvatarObj()
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-
- */
         }
     }, [profile, avatarObj, publicId])
 
@@ -105,42 +85,6 @@ function AvatarChooser({ avatarSize = null, avatarObj = null }) {
             setCurrentAvatarObj(avatar_01)
         }
     }, [currentAvatarObj, currentAvatarName])
-
-    // Always set size, default to small
-    /*
-    useEffect(() => {
-        if (!currentAvatarSize) setCurrentAvatarSize("small")
-    }, [currentAvatarSize])
-
-     */
-
-    // If avatarObj changes in props, use it
-
-    /*
-    useEffect(() => {
-        console.log("avaratObj chnage din props")
-        console.log(avatarObj)
-        console.log(typeof avatarObj)
-        if (avatarObj != null) {
-            console.log("Get's here")
-            setCurrentAvatarObj(avatarObj)
-        }
-    }, [avatarObj])
-
-     */
-
-    /*
-    // Choose appropriate avatar size style
-    const avatarStyle =
-        avatarSizes[
-            currentAvatarSize === "xl"
-                ? "xl"
-                : currentAvatarSize === "large"
-                    ? "large"
-                    : "small"
-            ];
-
-     */
 
     return (
         <Avatar

@@ -199,6 +199,15 @@ export default function UserSettingsPage() {
                                     >
                                         {t('settings:st_theme_dark2')}
                                     </ToggleButton>
+                                    <ToggleButton
+                                        value="xanthous"
+                                        onClick={() => {
+                                            let tm = selectTheme('xanthous')
+                                            setTheme(tm)
+                                        }}
+                                    >
+                                        {t('settings:st_theme_xanthous')}
+                                    </ToggleButton>
                                 </ToggleButtonGroup>
                             </FormControl>
                         </Box>

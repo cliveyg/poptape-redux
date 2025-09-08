@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { styled } from '@mui/material/styles'
+//import { styled } from '@mui/material/styles'
 import Cookies from 'js-cookie'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
@@ -7,13 +7,13 @@ import Box from '@mui/material/Box'
 import AvatarGrid from '../helpers/AvatarGrid'
 import CustomizedSnackbars from '../information/CustomSnackbars'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
+//import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import Grid from '@mui/material/Grid'
 import { useNavigate } from 'react-router'
 import superagent from 'superagent'
 import {selectTheme} from '../../assets/scripts/theme'
-import {getIcon} from '../helpers/ProfileIcon.jsx'
+import {getIcon} from '../helpers/ProfileIcon'
 import {ThemeProvider} from '@mui/material/styles'
 import {useGlobalSettings} from '../helpers/GlobalSettings'
 import Avatar from '@mui/material/Avatar'
@@ -224,10 +224,7 @@ function ProfileOwner() {
                     aria-labelledby="customized-dialog-title"
                     open={openDialog}
                 >
-                    <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-
-                    </DialogTitle>
-                    <DialogContent dividers>
+                    <DialogContent onClose={handleClose} sx={{ p:0, m:0}}>
                         <AvatarGrid selectTile={selectTile} />
                     </DialogContent>
                 </Dialog>
