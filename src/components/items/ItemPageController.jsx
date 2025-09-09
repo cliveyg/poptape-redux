@@ -94,12 +94,13 @@ export default function ItemPageController({item}) {
                 </Box>
                 :
                 <>
-                    <Box>
+                    <Box sx={{ backgroundColor: 'purple' }}>
                         <Typography sx={{ marginBottom: 25, fontSize: "1.6em", }} variant="h4" component="h4">
-                            {item.name}
+                            ITEM NAME {item.name}
                         </Typography>
                     </Box>
-                    <Box display="flex" flexDirection="row">
+                    <Box sx={{ backgroundColor: 'pink' }} display="flex" flexDirection="row">
+                        blah
                         <Box flex={5}>
                             {ownerView ?
                                 <>
