@@ -203,6 +203,15 @@ export default function UserSettingsPage() {
                                         {t('settings:st_theme_dark2')}
                                     </ToggleButton>
                                     <ToggleButton
+                                        value="dark 3"
+                                        onClick={() => {
+                                            let tm = selectTheme('dark 3')
+                                            setTheme(tm)
+                                        }}
+                                    >
+                                        {t('settings:st_theme_dark3')}
+                                    </ToggleButton>
+                                    <ToggleButton
                                         value="xanthous"
                                         onClick={() => {
                                             let tm = selectTheme('xanthous')
@@ -219,6 +228,15 @@ export default function UserSettingsPage() {
                                         }}
                                     >
                                         {t('settings:st_theme_tomato')}
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        value="peagreen"
+                                        onClick={() => {
+                                            let tm = selectTheme('peagreen')
+                                            setTheme(tm)
+                                        }}
+                                    >
+                                        {t('settings:st_theme_peagreen')}
                                     </ToggleButton>
                                 </ToggleButtonGroup>
                             </FormControl>
@@ -621,6 +639,39 @@ export default function UserSettingsPage() {
                                         }}
                                     >
                                         Alumni Sans
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        value="Literata Variable"
+                                        sx={{ fontFamily: 'Literata Variable' }}
+                                        onClick={() => {
+                                            setFontFam('Literata Variable')
+                                            let tm = selectTheme()
+                                            setTheme(tm)
+                                        }}
+                                    >
+                                        Literata
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        value="Comfortaa Variable"
+                                        sx={{ fontFamily: 'Comfortaa Variable' }}
+                                        onClick={() => {
+                                            setFontFam('Comfortaa Variable')
+                                            let tm = selectTheme()
+                                            setTheme(tm)
+                                        }}
+                                    >
+                                        Comfortaa
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        value="Kode Mono Variable"
+                                        sx={{ fontFamily: 'Kode Mono Variable' }}
+                                        onClick={() => {
+                                            setFontFam('Kode Mono Variable')
+                                            let tm = selectTheme()
+                                            setTheme(tm)
+                                        }}
+                                    >
+                                        Kode Mono
                                     </ToggleButton>
                                 </ToggleButtonGroup>
                             </FormControl>

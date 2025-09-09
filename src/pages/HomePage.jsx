@@ -1,46 +1,42 @@
-import React, {useState, useReducer} from 'react'
+import React, {useState} from 'react'
 import '../css/poptape.css'
 import TopNavBar from '../components/navigation/TopNavBar'
-import LanguageSwitcher from '../components/helpers/LanguageSwitcher'
 import Link from '@mui/material/Link'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import ToggleButton from '@mui/material/ToggleButton'
 import Typography from '@mui/material/Typography'
 import {ThemeProvider} from '@mui/material/styles'
-import {selectTheme, setFontFam} from '../assets/scripts/theme'
+import {selectTheme} from '../assets/scripts/theme'
 import {useTranslation} from 'react-i18next'
 import {useGlobalSettings} from '../components/helpers/GlobalSettings'
 import CountDownTimer from '../components/helpers/CountDownTimer'
-import Avatar from '@mui/material/Avatar'
+import { purple } from '@mui/material/colors'
+//import Avatar from '@mui/material/Avatar'
 
 function HomePage() {
     const { t } = useTranslation()
     const { profileIcon, setProfileIcon, profileImageString, setProfileImageString } = useGlobalSettings()
 
-    const [duration, setDuration] = useState(7)
+    const [duration, setDuration] = useState(5)
     React.useEffect(() => {
         document.title = 'POPTAPE | ' + t('homepage:hp_title')
     }, [])
 
     const handleOnComplete = () => {
-        console.log("Completed")
+        console.log("Timer finished")
     }
 
-    const [, forceUpdate] = React.useReducer(x => x + 1, 0)
-
-    const [theme, setTheme] = React.useState(selectTheme())
+    const [theme, _] = React.useState(selectTheme())
     const [key, setKey] = useState(0)
-    const [displayValue, setDisplayValue] = React.useState(localStorage.getItem('theme'))
-    const [font, setFont] = React.useState(localStorage.getItem('font'))
 
-    const handleFontChange = (event, newFont) => {
-        setFont(newFont)
-    }
-    const handleThemeChange = (event, newDisplayValue) => {
-        setDisplayValue(newDisplayValue)
+    const setCTFont = () => {
+        const f = localStorage.getItem('font') || 'Courier'
+        const monoFonts = ["Kode Mono Variable", "Cutive Mono", "Courier New", "Anonymous Pro", "Share Tech Mono"]
+        if (monoFonts.includes(f)) {
+            return f
+        }
+        return 'Courier'
     }
 
     return (
@@ -63,17 +59,33 @@ function HomePage() {
                 <Box>
                     profileIcon:<br/>
                     {profileIcon}
+                    <br/>
                 </Box>
                 <div key={key}>
                 <CountDownTimer
                     duration={duration}
-                    //colors={["#ff9248", "#a20000"]}
-                    //colorValues={[20, 10]}
+                    infont={setCTFont}
                     onComplete={handleOnComplete}
                 />
                 </div>
                 <Button
                     onClick={() => setKey((k) => k + 1)}
+                    variant='outlined'
+                    sx={[
+                        {
+                            textTransform: 'none'
+                        },
+                        {
+                            color: theme.palette.getContrastText(theme.palette.secondary.light),
+                            backgroundColor: theme.palette.secondary.light
+                        },
+                        {
+                            '&:hover': {
+                                color: theme.palette.error.main,
+                                backgroundColor: theme.palette.getContrastText(theme.palette.error.main)
+                            }
+                        }
+                    ]}
                 >
                 restart
                 </Button>
