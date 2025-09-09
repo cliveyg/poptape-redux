@@ -9,6 +9,10 @@ export function getFieldFromToken(token, field) {
     return base64decoded[field]
 }
 
+export function numberWithCommas(n) {
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export function getErrorMessage(e, status, caller) {
 
     let retErr = {

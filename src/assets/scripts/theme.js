@@ -8,7 +8,9 @@ import '@fontsource-variable/baloo-2'
 import '@fontsource/pacifico'
 import '@fontsource-variable/dosis'
 import '@fontsource/noto-serif-grantha'
-import '@fontsource/zen-kaku-gothic-new'
+import '@fontsource/zen-kaku-gothic-new/500.css'
+import '@fontsource-variable/comfortaa'
+import '@fontsource-variable/literata'
 import '@fontsource/kulim-park'
 import '@fontsource/port-lligat-slab'
 import '@fontsource/lateef'
@@ -32,9 +34,10 @@ import '@fontsource/lekton'
 import '@fontsource/anonymous-pro'
 import '@fontsource/narnoor'
 import '@fontsource-variable/alumni-sans'
+import '@fontsource-variable/kode-mono'
 
 // list of themes
-const ta = ["default", "blue", "pink", "funky", "royal", "sweet", "wine", "grey", "mulberry", "green", "dark 1", "dark 2", "xanthous", "tomato"]
+const ta = ["default", "blue", "pink", "funky", "royal", "sweet", "wine", "grey", "mulberry", "green", "dark 1", "dark 2", "dark 3", "xanthous", "tomato", "peagreen"]
 
 //=============================================================================
 
@@ -820,6 +823,66 @@ const dark2Theme = createTheme({
 
 //=============================================================================
 
+const dark3Theme = createTheme({
+    palette: {
+        notifications: green[200],
+        success: {
+            main: '#1e9d24', // another green
+        },
+        error: {
+            main: '#ce0909',
+        },
+        info: {
+            main: blue[300],
+        },
+        warning: {
+            main: '#f3740e',
+        },
+        offwhite: {
+            main: '#232020'
+        },
+        mode: 'dark',
+        noom: {
+            color: 'black',
+            backgroundColor: '#FFA500',
+        },
+        primary: {
+            main: '#bdbdba',
+        },
+        secondary: {
+            main: '#92add1',
+            smenu: '#ce6d05'
+        },
+        message: {
+            display: 'flex',
+            alignItems: 'center',
+        },
+        snack: {
+            //error: '#c2185b',
+            error: '#941b0c',
+        },
+        timer: {
+            background: '#524a4a',
+        },
+    },
+    sideMenuButtons: {
+        marginTop: 15,
+        textTransform: 'none',
+        marginRight: 15,
+        width: 200,
+    },
+    components: {
+        MuiLink: {
+            defaultProps: {
+                underline: 'none',
+                color: '#eebb41',
+            },
+        },
+    },
+})
+
+//=============================================================================
+
 const xanthousTheme = createTheme({
     palette: {
         notifications: '#e3170a',
@@ -976,6 +1039,84 @@ const tomatoTheme = createTheme({
 
 //=============================================================================
 
+const peagreenTheme = createTheme({
+    palette: {
+        notifications: '#be0e07',
+        stb_a: '#27474e',
+        success: {
+            main: '#237e3f',
+        },
+        error: {
+            main: '#da0902',
+        },
+        info: {
+            main: '#0081a7',
+        },
+        warning: {
+            main: '#e86e0e',
+        },
+        offwhite: {
+            main: '#6fa6bd'
+        },
+        noom: {
+            color: 'black',
+            backgroundColor: '#FFC67B',
+        },
+        primary: {
+            main: '#A0CA92',
+            dark: '#7a2857',
+        },
+        secondary: {
+            main: '#ccd2d0',
+            light: '#a17386',
+            dark: '#3d2c37',
+            smenu: '#FFC67B',
+        },
+        message: {
+            display: 'flex',
+            alignItems: 'center',
+        },
+        snack: {
+            error: '#be0e07',
+        },
+        timer: {
+            background: '#7dadbe',
+        },
+    },
+    sideMenuButtons: {
+        marginTop: 15,
+        textTransform: 'none',
+        marginRight: 15,
+        width: 200,
+    },
+    components: {
+        MuiLink: {
+            defaultProps: {
+                underline: 'none',
+                color: '#ebf8f8',
+            },
+        },
+        MuiButton: {
+            variants: [
+                {
+                    props: { variant: 'button_a' },
+                    style: {
+                        textTransform: 'none',
+                        ":hover": {
+                            textTransform: 'none',
+                            backgroundColor: '#27474e',
+                            color: '#e1d89f',
+                            //border: '1px solid #1c2321',
+                        },
+                    },
+                },
+            ],
+        },
+    },
+})
+
+//=============================================================================
+
 export function setFontFam(ff) {
 
     if (typeof ff !== 'undefined') {
@@ -1043,12 +1184,16 @@ export function selectTheme(tn) {
         return createTheme(dark1Theme, {typography: getFontFam()})
     } else if (theme === 'dark 2') {
         return createTheme(dark2Theme, {typography: getFontFam()})
+    } else if (theme === 'dark 3') {
+        return createTheme(dark3Theme, {typography: getFontFam()})
     } else if (theme === 'default') {
         return createTheme(defaultTheme, {typography: getFontFam()})
     } else if (theme === 'xanthous') {
         return createTheme(xanthousTheme, {typography: getFontFam()})
     } else if (theme === 'tomato') {
         return createTheme(tomatoTheme, {typography: getFontFam()})
+    } else if (theme === 'peagreen') {
+        return createTheme(peagreenTheme, {typography: getFontFam()})
     } else {
         // drop into default theme
         return createTheme(defaultTheme, {typography: getFontFam()})

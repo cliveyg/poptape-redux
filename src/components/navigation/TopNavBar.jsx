@@ -469,7 +469,7 @@ export default function TopNavBar() {
                                 color='inherit'
                             >
                                 <Badge badgeContent={37}
-                                       sx={{'& .MuiBadge-badge': {color: 'black', backgroundColor: 'notifications'}}}>
+                                       sx={{'& .MuiBadge-badge': {color: 'black'/*theme.palette.secondary.smenu*/, backgroundColor: 'notifications'}}}>
                                     <NotificationsIcon/>
                                 </Badge>
                             </IconButton>

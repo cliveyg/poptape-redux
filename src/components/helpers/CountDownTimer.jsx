@@ -31,10 +31,10 @@ const ProgressWrapper = styled(Box)(({ theme }) => ({
     position: 'relative',
 }))
 
-const CountdownText = styled(Typography)(({ theme }) => ({
+const CountdownText = styled(Typography)(({ ctfont, theme }) => ({
     fontWeight: 'bold',
     marginTop: '1em',
-    fontFamily: 'Courier, monospace',
+    fontFamily: ctfont,
     letterSpacing: '0.05em',
     [theme.breakpoints.up("xs")]: {
         fontSize: "1.20rem",
@@ -52,7 +52,7 @@ const NoFillCircularProgress = styled(CircularProgress)(({ theme }) => ({
     left: 0,
     top: 0,
     zIndex: 2,
-    transition: 'color 1s',
+    transition: 'color 2s',
     '& .MuiCircularProgress-circle': {
         fill: 'none !important',
         transition: 'none !important',
@@ -97,10 +97,10 @@ function formatCountdown(remainingMs) {
     let text = ''
 
     if (showDays) {
-        if (days > 1) {
-            text += `${days} day,`
+        if (days === 1) {
+            text += `${days} day, `
         } else {
-            text += `${days} days,`
+            text += `${days} days, `
         }
     }
 
@@ -116,13 +116,14 @@ function formatCountdown(remainingMs) {
 }
 
 const CountDownTimer = (props) => {
-    const { duration, colors = [], colorValues = [], onComplete } = props
+    const { duration, colors = [], colorValues = [], infont, onComplete } = props
     const theme = useTheme()
     const { size, thickness } = useProgressSize()
 
     const [countdownText, setCountdownText] = useState()
     const [countdownPercentage, setCountdownPercentage] = useState(100)
     const [animatedColor, setAnimatedColor] = useState(theme.palette.success.main)
+    const [timerFont, setTimerFont] = useState(infont || 'Courier')
     const completeRef = useRef(false)
 
     useEffect(() => {
@@ -196,7 +197,7 @@ const CountDownTimer = (props) => {
                 />
             </ProgressWrapper>
             <Box sx={{position: 'relative', bottom: {xs: '70px', sm: '70px', md: '100px', lg: '240px'}, zIndex: 100}}>
-                <CountdownText>{countdownText}</CountdownText>
+                <CountdownText ctfont={timerFont}>{countdownText}</CountdownText>
             </Box>
         </Container>
     )
