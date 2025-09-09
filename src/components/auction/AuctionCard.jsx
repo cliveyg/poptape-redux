@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, Button, Typography, Box } from '@mui/material'
-//import CurrencyTextField from '@unicef/material-ui-currency-textfield'
+import CurrencyTextField from '../helpers/CurrencyTextField'
+//import CurrencyInput from 'react-currency-input-field'
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import CustomizedSnackbars from '../information/CustomSnackbars'
@@ -19,8 +20,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const FieldSurround = styled('div')(({ theme }) => ({
-    borderRadius: 5,
-    backgroundColor: theme.palette.primary.main,
+    borderRadius: '5px',
+    //backgroundColor: theme.palette.primary.main,
+    backgroundColor: '#fff',
     padding: '15px 35px',
     fontSize: '1.2em',
     textAlign: 'center',
@@ -39,18 +41,22 @@ const BidButton = styled(Button)(({ theme }) => ({
 
 const AuctionCard = (props) => {
 
-    const [bidValue, setBidValue] = useState(0.00);
-    const [showSnack, setShowSnack] = useState(false);
-    const [watching, setWatching] = useState(false);
-    const minBid = props.minBid;
+    const [bidValue, setBidValue] = useState(0.00)
+    const [showSnack, setShowSnack] = useState(false)
+    const [watching, setWatching] = useState(false)
+    const [currency, setCurrency] = useState(localStorage.getItem('currency') || "GBP")
+    const [locale, setLocale] = useState(localStorage.getItem('locale') || "en-GB")
+    const minBid = props.minBid
     //const formattedMinBid = numberWithCommas(props.minBid);
     const formattedMinBid = numberWithCommas(8000)
+
+
 
     const peckish = {
         variant: 'warning',
         duration: 1900,
         message: 'Ooopsy!',
-    };
+    }
 
     useEffect(() => {
         const accessToken = Cookies.get('access-token');
@@ -85,8 +91,14 @@ const AuctionCard = (props) => {
     };
 
     const onChange = (value) => {
-        setBidValue(value);
+        setBidValue(value)
+        console.log("Value is ["+value+"]")
     };
+
+    //const handleOnValueChange = (event, name) => {
+    //    console.log(event)
+    //    console.log(name)
+    //}
 
     const openSnack = () => {
         setShowSnack((prev) => !prev);
@@ -113,21 +125,31 @@ const AuctionCard = (props) => {
             <StyledCard>
                 <CardContent>
                     <FieldSurround>
-                        {/*
+                        {/*}
+                        <CurrencyInput
+                            name="input-name"
+                            //defaultValue={bidValue}
+                            value={bidValue}
+                            decimalsLimit={2}
+                            onValueChange={handleOnValueChange}
+                            placeholder="Enter amount"
+                            intlConfig={{ locale: locale, currency: currency }}
+                            step={1}
+                        />
+                        */}
+
                         <CurrencyTextField
                             variant="outlined"
                             value={bidValue}
                             currencySymbol="£"
                             outputFormat="number"
                             decimalCharacter="."
+                            fullWidth
                             digitGroupSeparator=","
-                            InputProps={{
-                                sx: { fontSize: 25 },
-                            }}
-                            style={{ borderRadius: 4, padding: 7, backgroundColor: "#ffffff" }}
+                            //sx={{ fontSize: 25, borderRadius: 4, padding: 7, backgroundColor: "#ffffff" }}
                             onChange={(event, value) => onChange(value)}
                         />
-                        */}
+
                     </FieldSurround>
                     <div>
                         <BidButton

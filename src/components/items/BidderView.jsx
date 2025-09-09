@@ -4,14 +4,15 @@ import Cookies from 'js-cookie'
 import Box from '@mui/material/Box'
 import BidViewer from '../auction/BidViewer'
 import AuctionCard from '../auction/AuctionCard'
-import InformationBox from '../auction/InformationBox';
-//import SellerInfoCard from '../seller/SellerInfoCard';
+import InformationBox from '../auction/InformationBox'
+import SellerInfoCard from '../helpers/SellerInfoCard'
 import request from 'superagent'
 //import {numberWithCommas} from '../../assets/scripts/general'
 
 const BidderBox = styled('div')({
     borderRadius: 10,
     width: '100%',
+    backgroundColor: 'greenyellow'
 });
 
 const BidderView = ({ item, auction, currentLot }) => {
@@ -186,14 +187,14 @@ const BidderView = ({ item, auction, currentLot }) => {
                 </Box>
             </Box>
             <Box>
-                SellerInfoCard Component Goes Here
-                {/*
                 <SellerInfoCard
-                    publicId={auction.public_id}
+                    publicId="77c9657f-01bb-4bd4-a1bd-295bae9ba71b"
                     auction={auction}
-                    itemLocation={item.location}
+                    itemLocation='Derby'
+                    //publicId={auction.public_id}
+                    //auction={auction}
+                    //itemLocation={item.location}
                 />
-                */}
             </Box>
             <Box>
                 {bidViewerComp}
