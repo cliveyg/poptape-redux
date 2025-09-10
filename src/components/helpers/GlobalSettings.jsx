@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 import FaceIcon from '@mui/icons-material/Face'
-import { getIcon, getImageString } from './ProfileIcon.jsx'
+import { getIcon, getImageString } from './ProfileIcon'
 import superagent from 'superagent'
 import Cookies from 'js-cookie'
 

@@ -125,7 +125,7 @@ const CountDownTimer = (props) => {
     const [animatedColor, setAnimatedColor] = useState(theme.palette.success.main)
     const [timerFont, setTimerFont] = useState(infont || 'Courier')
     const completeRef = useRef(false)
-    
+
     useEffect(() => {
 
         let startTime = Date.now()
