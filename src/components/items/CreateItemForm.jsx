@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 import superagent from 'superagent'
 import { styled } from '@mui/material/styles'
+import DropzoneDialog from '../helpers/DropzoneDialog/DropzoneDialog'
 
 // Styles
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -95,6 +96,9 @@ export default function CreateItemForm() {
     const [date] = useState(new Date().getTime())
     const [peckish, setPeckish] = useState(peckishDefault)
     const [model, setModel] = useState({})
+    const [files, setFiles] = useState([])
+
+    const initialFiles = useMemo(() => files, [files])
 
     const handleChange = useCallback((e, key) => {
         const value = e.target.value
@@ -369,6 +373,28 @@ export default function CreateItemForm() {
                     onSubmit={onSubmit}
                 />
             )}
+            {showDropzone && (
+                <DropzoneDialog
+                    open={open}
+                    onClose={() => setOpen(false)}
+                    onSave={(selectedFiles) => {
+                        console.log("in onSave")
+                        setFiles(selectedFiles)
+                        setOpen(false)
+                    }}
+                    onChange={(selectedFiles) => setFiles(selectedFiles)}
+                    dialogTitle={t('helpers:dzd_title')}
+                    maxFileSize={5000000}
+                    showPreviews={true}
+                    showFileNamesInPreview={true}
+                    acceptedFiles={['image/jpeg', 'image/jpg', 'image/tiff', 'image/png']}
+                    filesLimit={5}
+                    cancelButtonText={t('helpers:dzd_cancel')}
+                    submitButtonText={t('helpers:dzd_upload')}
+                    initialFiles={initialFiles}
+                />
+            )}
+
         </Box>
     )
 }

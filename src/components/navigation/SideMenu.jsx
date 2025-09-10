@@ -4,7 +4,7 @@ import { selectTheme } from '../../assets/scripts/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
-import CreateSideMenuItem from '../helpers/CreateSideMenuItem'
+import CreateSideMenuItem from './CreateSideMenuItem.jsx'
 
 export default function SideMenu({selected}) {
 

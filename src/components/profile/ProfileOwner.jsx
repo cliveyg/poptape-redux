@@ -13,7 +13,7 @@ import Grid from '@mui/material/Grid'
 import { useNavigate } from 'react-router'
 import superagent from 'superagent'
 import {selectTheme} from '../../assets/scripts/theme'
-import {getIcon} from '../helpers/ProfileIcon'
+import {getIcon} from './ProfileIcon.jsx'
 import {ThemeProvider} from '@mui/material/styles'
 import {useGlobalSettings} from '../helpers/GlobalSettings'
 import Avatar from '@mui/material/Avatar'
@@ -87,12 +87,12 @@ function ProfileOwner() {
             .set("x-access-token", Cookies.get("access-token"))
             .then((res) => {
                 console.log(res)
-                setPeckish({ variant: "success", message: "Profile updated" })
+                setPeckish({ variant: "success", message: t('profile:pr_profile_updated') })
                 openSnack()
             })
             .catch((err) => {
                 console.log(err)
-                setPeckish({ variant: "error", message: "Computer says no" })
+                setPeckish({ variant: "error", message: t('profile:pr_profile_update_fail') })
                 openSnack()
             })
     }
@@ -195,7 +195,7 @@ function ProfileOwner() {
                                 maxLength: 500,
                             }}
                             characterLimit={500}
-                            helperText="Number of characters:&nbsp;&nbsp;&nbsp;"
+                            helperText={t('profile:pr_no_of_chars')}
                             fullWidth
                             value={aboutMe}
                             onChange={handleAboutMeChange}
