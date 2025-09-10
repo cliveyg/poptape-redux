@@ -7,6 +7,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import Dropzone from 'react-dropzone'
 import PreviewList from './PreviewList'
 import CustomSnackbar from '../../information/CustomSnackbar'
+import {useTranslation} from 'react-i18next'
 
 const Root = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -43,7 +44,7 @@ function DropzoneAreaBase({
                               onAdd,
                               onDelete,
                               onAlert,
-                              dropzoneText = 'Drag and drop a file here or click',
+                              dropzoneText,
                               showPreviews = true,
                               showPreviewsInDropzone = false,
                               showFileNamesInPreview = true,
@@ -52,6 +53,8 @@ function DropzoneAreaBase({
                               reset,
                               ...props
                           }) {
+
+    const { t } = useTranslation()
     const [active, setActive] = React.useState(false)
     const [invalid, setInvalid] = React.useState(false)
     const [snackbar, setSnackbar] = React.useState({ open: false, message: '', variant: 'success', key_date: Date.now() })
@@ -66,7 +69,7 @@ function DropzoneAreaBase({
         if (onAdd) onAdd(newObjs)
         setSnackbar({
             open: true,
-            message: 'File(s) added',
+            message: t('helpers:dzd_file_added'),
             variant: 'success',
             key_date: Date.now(),
             duration: 4000
@@ -75,7 +78,7 @@ function DropzoneAreaBase({
     const handleDropRejected = (rejectedFiles, evt) => {
         setSnackbar({
             open: true,
-            message: 'Invalid file(s)',
+            message: t('helpers:dzd_file_invalid'),
             variant: 'error',
             key_date: Date.now(),
             duration: 4000

@@ -5,6 +5,7 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import DropzoneAreaBase from './DropzoneAreaBase'
+import {useTranslation} from "react-i18next";
 
 // Helper to compare two arrays of files by name/size/type
 function filesAreEqual(a, b) {
@@ -112,6 +113,8 @@ function DropzoneDialog({
     if (clearOnUnmount) setFileObjects([])
   }
 
+  const { t } = useTranslation()
+
   return (
       <Dialog
           {...dialogProps}
@@ -128,15 +131,16 @@ function DropzoneDialog({
               onAdd={handleAdd}
               onDelete={handleDelete}
               showPreviews={showPreviews}
+              dropzoneText={t('helpers:dzd_dialog_text')}
               showPreviewsInDropzone={showPreviewsInDropzone}
               showFileNamesInPreview={showFileNamesInPreview}
           />
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={handleDialogClose}>
+          <Button color="primary" sx={{textTransform: 'none'}} onClick={handleDialogClose}>
             {cancelButtonText}
           </Button>
-          <Button color="primary" disabled={fileObjects.length === 0} onClick={handleSave}>
+          <Button color="primary" sx={{textTransform: 'none'}} disabled={fileObjects.length === 0} onClick={handleSave}>
             {submitButtonText}
           </Button>
         </DialogActions>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Button from '@mui/material/Button'
 import DropzoneDialog from './DropzoneDialog'
+import {useTranslation} from "react-i18next";
 
 function ExampleUsage() {
     const [open, setOpen] = useState(false)
@@ -9,6 +10,7 @@ function ExampleUsage() {
     // Memoize initialFiles so it doesn't change reference unless files change
     // This prevents unnecessary re-renders or infinite loops in DropzoneDialog
     const initialFiles = React.useMemo(() => files, [files])
+    const { t } = useTranslation()
 
     return (
         <div>
@@ -23,18 +25,19 @@ function ExampleUsage() {
                 open={open}
                 onClose={() => setOpen(false)}
                 onSave={(selectedFiles) => {
+                    console.log("in onSave")
                     setFiles(selectedFiles)
                     setOpen(false)
                 }}
                 onChange={(selectedFiles) => setFiles(selectedFiles)}
-                dialogTitle="Upload your files"
+                dialogTitle={t('helpers:dzd_title')}
                 maxFileSize={5000000}
                 showPreviews={true}
                 showFileNamesInPreview={true}
                 acceptedFiles={['image/*', 'application/pdf']}
                 filesLimit={5}
-                cancelButtonText="Cancel"
-                submitButtonText="Upload"
+                cancelButtonText={t('helpers:dzd_cancel')}
+                submitButtonText={t('helpers:dzd_upload')}
                 initialFiles={initialFiles}
             />
             <div>
