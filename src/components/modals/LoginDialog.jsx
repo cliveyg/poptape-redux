@@ -12,10 +12,12 @@ import superagent from 'superagent'
 import {useTranslation} from 'react-i18next'
 import {getErrorMessage, getFieldFromToken} from '../../assets/scripts/general'
 import {useNavigate} from 'react-router'
+import { useGlobalSettings } from '../helpers/GlobalSettings'
 
 export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
 
     const { t } = useTranslation()
+    const { setIsLoggedIn } = useGlobalSettings()
     const navigate = useNavigate()
     const [showLoader, setshowLoader] = React.useState(false)
     const [showSnack, setshowSnack] = React.useState(false)
@@ -55,7 +57,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
             Cookies.set('username', getFieldFromToken(res.body.token, 'username'), { secure: true })
             Cookies.set('public_id', getFieldFromToken(res.body.token, 'public_id'), { secure: true })
             handleClose()
-            //window.location.reload()
+            setIsLoggedIn(true)
             navigate('/', {replace: true})
         })
         .catch(error => {

@@ -13,10 +13,11 @@ import {useGlobalSettings} from '../components/helpers/GlobalSettings'
 import CountDownTimer from '../components/helpers/CountDownTimer'
 //import Avatar from '@mui/material/Avatar'
 import ExampleUsage from '../components/helpers/DropzoneDialog/ExampleUsage'
+import Cookies from 'js-cookie'
 
 function HomePage() {
     const { t } = useTranslation()
-    const { profileIcon, setProfileIcon, profileImageString, setProfileImageString } = useGlobalSettings()
+    const { profileIcon, setProfileIcon, profileImageString, setProfileImageString, isLoggedIn } = useGlobalSettings()
 
     const [duration, setDuration] = useState(5)
     React.useEffect(() => {
@@ -67,6 +68,7 @@ function HomePage() {
                 <div key={key}>
                     <CountDownTimer
                         duration={duration}
+                        key={duration + '-' + (isLoggedIn ? Cookies.get('username') : 'anon')}
                         infont={setCTFont}
                         onComplete={handleOnComplete}
                     />

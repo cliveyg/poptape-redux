@@ -3,7 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import { styled, useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useLayoutEffect } from 'react'
 
 // Responsive size/thickness logic
 function useProgressSize() {
@@ -127,6 +127,7 @@ const CountDownTimer = (props) => {
     const completeRef = useRef(false)
 
     useEffect(() => {
+
         let startTime = Date.now()
         let endTime = startTime + duration * 1000
         let animationFrameId
@@ -144,7 +145,9 @@ const CountDownTimer = (props) => {
                     : formatCountdown(0)
             )
 
-            if (percentage > 50) {
+            if (percentage >= 99.999) {
+                setAnimatedColor(theme.palette.success.main)
+            } else if (percentage > 50) {
                 setAnimatedColor(theme.palette.success.main)
             } else if (percentage > 25) {
                 setAnimatedColor(theme.palette.warning.main)
