@@ -11,10 +11,12 @@ import CustomSnackbar from '../information/CustomSnackbar'
 import superagent from 'superagent'
 import {useTranslation} from 'react-i18next'
 import {getErrorMessage, getFieldFromToken} from '../../assets/scripts/general'
+import {useNavigate} from 'react-router'
 
 export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
 
     const { t } = useTranslation()
+    const navigate = useNavigate()
     const [showLoader, setshowLoader] = React.useState(false)
     const [showSnack, setshowSnack] = React.useState(false)
     const [variant, setVariant] = React.useState('error')
@@ -53,7 +55,8 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
             Cookies.set('username', getFieldFromToken(res.body.token, 'username'), { secure: true })
             Cookies.set('public_id', getFieldFromToken(res.body.token, 'public_id'), { secure: true })
             handleClose()
-            window.location.reload()
+            //window.location.reload()
+            navigate('/', {replace: true})
         })
         .catch(error => {
 

@@ -8,6 +8,7 @@ import Dropzone from 'react-dropzone'
 import PreviewList from './PreviewList'
 import CustomSnackbar from '../../information/CustomSnackbar'
 import {useTranslation} from 'react-i18next'
+import {readFile} from '../../../assets/scripts/general'
 
 const Root = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -160,12 +161,3 @@ function DropzoneAreaBase({
 }
 
 export default DropzoneAreaBase
-
-function readFile(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onload = () => resolve(reader.result)
-        reader.onerror = reject
-        reader.readAsDataURL(file)
-    })
-}

@@ -5,22 +5,8 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import DropzoneAreaBase from './DropzoneAreaBase'
-import {useTranslation} from "react-i18next";
-
-// Helper to compare two arrays of files by name/size/type
-function filesAreEqual(a, b) {
-  if (a.length !== b.length) return false
-  for (let i = 0; i < a.length; i++) {
-    if (
-        a[i].name !== b[i].name ||
-        a[i].size !== b[i].size ||
-        a[i].type !== b[i].type
-    ) {
-      return false
-    }
-  }
-  return true
-}
+import {useTranslation} from 'react-i18next'
+import {createFileFromUrl, readFile, filesAreEqual} from '../../../assets/scripts/general'
 
 function DropzoneDialog({
                           open = false,
@@ -149,19 +135,3 @@ function DropzoneDialog({
 }
 
 export default DropzoneDialog
-
-// Helpers
-async function createFileFromUrl(url) {
-  const response = await fetch(url)
-  const blob = await response.blob()
-  const name = url.split('/').pop()
-  return new File([blob], name || 'file', { type: blob.type })
-}
-function readFile(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = reject
-    reader.readAsDataURL(file)
-  })
-}

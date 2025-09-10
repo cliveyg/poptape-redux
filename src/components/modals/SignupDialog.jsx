@@ -66,7 +66,8 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     handleClose()
                     setshowSnack(false)
                     setNoHide(false)
-                    window.location.reload()
+                    //window.location.reload()
+                    navigate('/', {replace: true})
                 }, 7000)
             })
             .catch(error => {
