@@ -125,13 +125,7 @@ const CountDownTimer = (props) => {
     const [animatedColor, setAnimatedColor] = useState(theme.palette.success.main)
     const [timerFont, setTimerFont] = useState(infont || 'Courier')
     const completeRef = useRef(false)
-
-    // --- KEY FIX: Synchronously reset color before paint when duration changes ---
-    useLayoutEffect(() => {
-        setAnimatedColor(theme.palette.success.main)
-    }, [duration, theme.palette.success.main])
-    // ---------------------------------------------------------------------------
-
+    
     useEffect(() => {
 
         let startTime = Date.now()
