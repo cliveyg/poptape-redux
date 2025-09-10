@@ -1,0 +1,52 @@
+import React, { useState } from 'react'
+import Button from '@mui/material/Button'
+import DropzoneDialog from './DropzoneDialog'
+
+function ExampleUsage() {
+    const [open, setOpen] = useState(false)
+    const [files, setFiles] = useState([])
+
+    // Memoize initialFiles so it doesn't change reference unless files change
+    // This prevents unnecessary re-renders or infinite loops in DropzoneDialog
+    const initialFiles = React.useMemo(() => files, [files])
+
+    return (
+        <div>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={() => setOpen(true)}
+            >
+                Add Files
+            </Button>
+            <DropzoneDialog
+                open={open}
+                onClose={() => setOpen(false)}
+                onSave={(selectedFiles) => {
+                    setFiles(selectedFiles)
+                    setOpen(false)
+                }}
+                onChange={(selectedFiles) => setFiles(selectedFiles)}
+                dialogTitle="Upload your files"
+                maxFileSize={5000000}
+                showPreviews={true}
+                showFileNamesInPreview={true}
+                acceptedFiles={['image/*', 'application/pdf']}
+                filesLimit={5}
+                cancelButtonText="Cancel"
+                submitButtonText="Upload"
+                initialFiles={initialFiles}
+            />
+            <div>
+                <h3>Selected Files</h3>
+                <ul>
+                    {files.map(file => (
+                        <li key={file.name}>{file.name} ({file.type})</li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    )
+}
+
+export default ExampleUsage

@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined'
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined'
 import FormBuilder from '../helpers/FormBuilder'
-import CustomizedSnackbars from '../information/CustomSnackbars'
+import CustomSnackbar from '../information/CustomSnackbar'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
@@ -222,7 +222,7 @@ function AddToAuction(props) {
                     }
 
                     {showSnack &&
-                        <CustomizedSnackbars
+                        <CustomSnackbar
                             duration={duration}
                             key_date={date}
                             variant={peckish.variant}

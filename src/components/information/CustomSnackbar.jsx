@@ -27,44 +27,7 @@ const variantTheme = {
     info: 'info.main',
 }
 
-function MySnackbarContentWrapper(props) {
-    const { className, message, onClose, variant, key_date, duration, ...other } = props
-    const Icon = variantIcon[variant]
-    const theme = selectTheme()
-
-    return (
-        <ThemeProvider theme={theme}>
-            <SnackbarContent
-                sx={{ backgroundColor: variantTheme[variant] }}
-                aria-describedby="client-snackbar"
-                message={[
-                    <Box key="message1" id="client-snackbar" sx={{display: 'flex', alignItems: 'center', }}>
-                        <Icon sx={{ fontSize: 20, opacity: 0.9, marginRight: theme.spacing(1), }} />
-                        {message}
-                    </Box>
-                ]}          action={[
-                    <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
-                        <CloseIcon sx={{ fontSize: 20 }} />
-                    </IconButton>,
-                ]}
-                {...other}
-            />
-        </ThemeProvider>
-    );
-}
-
-/*
-MySnackbarContentWrapper.propTypes = {
-    className: PropTypes.string,
-    message: PropTypes.string,
-    key_date: PropTypes.number,
-    duration: PropTypes.number,
-    onClose: PropTypes.func,
-    variant: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
-}
-*/
-
-export default function CustomizedSnackbars(props) {
+export default function CustomSnackbar(props) {
     const {message, variant, key_date, duration, nohide} = props;
     const [open, setOpen] = useState(true);
 
@@ -88,15 +51,6 @@ export default function CustomizedSnackbars(props) {
                     autoHideDuration={duration}
                     onClose={handleClose}
                 >
-                    { /*
-                    <MySnackbarContentWrapper
-                        onClose={handleClose}
-                        variant={variant}
-                        key_date={key_date}
-                        message={message}
-                    />
-                    */
-                    }
                     <Alert
                         onClose={handleClose}
                         severity={variant}
@@ -116,15 +70,6 @@ export default function CustomizedSnackbars(props) {
                     open={open}
                     onClose={handleClose}
                 >
-                    { /*
-                    <MySnackbarContentWrapper
-                        onClose={handleClose}
-                        variant={variant}
-                        key_date={key_date}
-                        message={message}
-                    />
-                    */
-                    }
                     <Alert
                         onClose={handleClose}
                         severity={variant}

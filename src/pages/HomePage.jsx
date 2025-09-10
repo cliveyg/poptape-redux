@@ -13,6 +13,7 @@ import {useGlobalSettings} from '../components/helpers/GlobalSettings'
 import CountDownTimer from '../components/helpers/CountDownTimer'
 import { purple } from '@mui/material/colors'
 //import Avatar from '@mui/material/Avatar'
+import ExampleUsage from '../components/helpers/DropzoneDialog/ExampleUsage'
 
 function HomePage() {
     const { t } = useTranslation()
@@ -61,12 +62,15 @@ function HomePage() {
                     {profileIcon}
                     <br/>
                 </Box>
+                <Box>
+                    <ExampleUsage />
+                </Box>
                 <div key={key}>
-                <CountDownTimer
-                    duration={duration}
-                    infont={setCTFont}
-                    onComplete={handleOnComplete}
-                />
+                    <CountDownTimer
+                        duration={duration}
+                        infont={setCTFont}
+                        onComplete={handleOnComplete}
+                    />
                 </div>
                 <Button
                     onClick={() => setKey((k) => k + 1)}

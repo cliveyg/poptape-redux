@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import CircularProgress from '@mui/material/CircularProgress'
 import Cookies from 'js-cookie'
-import CustomizedSnackbars from '../information/CustomSnackbars'
+import CustomSnackbar from '../information/CustomSnackbar'
 import superagent from 'superagent'
 import {useTranslation} from 'react-i18next'
 import {getErrorMessage, getFieldFromToken} from '../../assets/scripts/general'
@@ -127,7 +127,7 @@ export default function LoginDialog({ isDialogOpened, handleCloseDialog }) {
             </Dialog>
             </form>
             {showSnack ?
-                <CustomizedSnackbars
+                <CustomSnackbar
                     duration={duration}
                     key_date={date}
                     variant={variant}

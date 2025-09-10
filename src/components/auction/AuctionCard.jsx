@@ -4,7 +4,7 @@ import CurrencyTextField from '../helpers/CurrencyTextField'
 //import CurrencyInput from 'react-currency-input-field'
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt'
 import VisibilityIcon from '@mui/icons-material/Visibility'
-import CustomizedSnackbars from '../information/CustomSnackbars'
+import CustomSnackbar from '../information/CustomSnackbar'
 import Cookies from 'js-cookie'
 import request from 'superagent'
 import { styled } from '@mui/system'
@@ -207,7 +207,7 @@ const AuctionCard = (props) => {
                 </CardContent>
             </StyledCard>
             {showSnack && (
-                <CustomizedSnackbars
+                <CustomSnackbar
                     duration={peckish.duration}
                     key_date={new Date().getTime()}
                     variant={peckish.variant}
