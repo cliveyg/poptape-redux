@@ -8,7 +8,7 @@ import AccountPageController from '../components/account/AccountPageController'
 import { useLocation } from 'react-router'
 import {useTranslation} from 'react-i18next'
 import {getErrorMessage} from '../assets/scripts/general'
-import CustomizedSnackbars from '../components/information/CustomSnackbars'
+import CustomSnackbar from '../components/information/CustomSnackbar'
 
 export default function UserAccountPage() {
 
@@ -88,7 +88,7 @@ export default function UserAccountPage() {
                 </Box>
             }
             {showSnack ?
-                <CustomizedSnackbars
+                <CustomSnackbar
                     duration={duration}
                     key_date={date}
                     variant={variant}

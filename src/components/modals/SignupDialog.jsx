@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import CircularProgress from '@mui/material/CircularProgress'
-import CustomizedSnackbars from '../information/CustomSnackbars'
+import CustomSnackbar from '../information/CustomSnackbar'
 import superagent from 'superagent'
 import {useTranslation} from 'react-i18next'
 import Cookies from 'js-cookie'
@@ -66,7 +66,8 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     handleClose()
                     setshowSnack(false)
                     setNoHide(false)
-                    window.location.reload()
+                    //window.location.reload()
+                    navigate('/', {replace: true})
                 }, 7000)
             })
             .catch(error => {
@@ -158,7 +159,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
             </Dialog>
             </form>
             {showSnack ?
-                <CustomizedSnackbars
+                <CustomSnackbar
                     duration={duration}
                     key_date={date}
                     variant={variant}

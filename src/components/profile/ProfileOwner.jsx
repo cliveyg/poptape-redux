@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import AvatarGrid from '../helpers/AvatarGrid'
-import CustomizedSnackbars from '../information/CustomSnackbars'
+import CustomSnackbar from '../information/CustomSnackbar'
 import Dialog from '@mui/material/Dialog'
 //import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
@@ -230,7 +230,7 @@ function ProfileOwner() {
                 </Dialog>
             </Box>
             {showSnack ? (
-                <CustomizedSnackbars
+                <CustomSnackbar
                     duration={duration}
                     key_date={date}
                     variant={peckish.variant}

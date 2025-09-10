@@ -10,7 +10,7 @@ import Box from '@mui/material/Box'
 import AvatarChooser from '../helpers/AvatarChooser'
 import AvatarGrid from '../helpers/AvatarGrid'
 //import { DropzoneDialog } from "material-ui-dropzone"
-import CustomizedSnackbars from '../information/CustomSnackbars'
+import CustomSnackbar from '../information/CustomSnackbar'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
@@ -356,7 +356,7 @@ function Profile() {
                 </Dialog>
             </Box>
             {showSnack ? (
-                <CustomizedSnackbars
+                <CustomSnackbar
                     duration={duration}
                     key_date={date}
                     variant={peckish.variant}

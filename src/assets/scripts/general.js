@@ -1,7 +1,14 @@
+//=============================================================================
+//====== various random helper functions
+//=============================================================================
+
+
 export function isValidUUID(uuid) {
     const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/i;
     return uuidRegex.test(uuid);
 }
+
+//=============================================================================
 
 export function getFieldFromToken(token, field) {
     const tokenArray = token.split(".")
@@ -9,9 +16,49 @@ export function getFieldFromToken(token, field) {
     return base64decoded[field]
 }
 
+//=============================================================================
+
 export function numberWithCommas(n) {
     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+//=============================================================================
+
+export async function createFileFromUrl(url) {
+    const response = await fetch(url)
+    const blob = await response.blob()
+    const name = url.split('/').pop()
+    return new File([blob], name || 'file', { type: blob.type })
+}
+
+//=============================================================================
+
+export function readFile(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = reject
+        reader.readAsDataURL(file)
+    })
+}
+
+//=============================================================================
+
+export function filesAreEqual(a, b) {
+    if (a.length !== b.length) return false
+    for (let i = 0; i < a.length; i++) {
+        if (
+            a[i].name !== b[i].name ||
+            a[i].size !== b[i].size ||
+            a[i].type !== b[i].type
+        ) {
+            return false
+        }
+    }
+    return true
+}
+
+//=============================================================================
 
 export function getErrorMessage(e, status, caller) {
 
@@ -36,6 +83,8 @@ export function getErrorMessage(e, status, caller) {
 
     return retErr
 }
+
+//=============================================================================
 
 // this function is a workaround to test the create item page
 // it will be replaced by a categories microservice

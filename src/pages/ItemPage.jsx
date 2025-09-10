@@ -7,7 +7,7 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import { selectTheme } from '../assets/scripts/theme'
 import { isValidUUID } from '../assets/scripts/general'
-import CustomizedSnackbars from '../components/information/CustomSnackbars'
+import CustomSnackbar from '../components/information/CustomSnackbar'
 import superagent from 'superagent'
 import TopNavBar from '../components/navigation/TopNavBar'
 
@@ -124,7 +124,7 @@ export default function ItemPage({inItem}) {
                         <ItemPageController item={'meep'} />
 
                         {showSnack ?
-                            <CustomizedSnackbars
+                            <CustomSnackbar
                                 duration={duration}
                                 key_date={date}
                                 variant={variant}

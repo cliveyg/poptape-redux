@@ -32,7 +32,6 @@ import SignupDialog from '../modals/SignupDialog'
 import { useTranslation } from 'react-i18next'
 
 import { useGlobalSettings } from '../helpers/GlobalSettings.jsx'
-
 import Link from '@mui/material/Link'
 import '../../css/poptape.css'
 import superagent from 'superagent'
@@ -405,7 +404,7 @@ export default function TopNavBar() {
                         component='div'
                         sx={{ mr: 2, display: { xs: 'none', sm: 'block' } }}
                     >
-                        <Link sx={{color: 'white'}} href='/'>poptape</Link>
+                        <Link sx={{color: 'white', cursor: 'pointer'}} onClick={() => navigate('/', {replace: true})}>poptape</Link>
                     </Typography>
                     <SearchBox />
                     <Box sx={{ flexGrow: 1 }} />

@@ -4,7 +4,7 @@ import '../css/poptape.css'
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import { selectTheme } from '../assets/scripts/theme'
-import CustomizedSnackbars from '../components/information/CustomSnackbars'
+import CustomSnackbar from '../components/information/CustomSnackbar'
 import TopNavBar from "../components/navigation/TopNavBar.jsx";
 import Button from "@mui/material/Button";
 
@@ -39,7 +39,7 @@ export default function TestPage() {
                     In test page<br/>
                     <Button onClick={showSnackFn}>press me</Button>
                     {showSnack ?
-                        <CustomizedSnackbars
+                        <CustomSnackbar
                             duration={duration}
                             key_date={date}
                             variant={variant}

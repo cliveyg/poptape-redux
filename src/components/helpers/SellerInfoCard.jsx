@@ -11,7 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { blue } from '@mui/material/colors'
 import Box from '@mui/material/Box'
 import Cookies from 'js-cookie'
-import CustomizedSnackbars from '../information/CustomSnackbars'
+import CustomSnackbar from '../information/CustomSnackbar'
 import { styled } from '@mui/material/styles'
 import superagent from 'superagent'
 
@@ -327,7 +327,7 @@ const SellerInfoCard = ({ publicId, auction, itemLocation }) => {
                 </>
             )}
             {showSnack ? (
-                <CustomizedSnackbars
+                <CustomSnackbar
                     duration={duration}
                     key_date={date}
                     variant={peckish.variant}
