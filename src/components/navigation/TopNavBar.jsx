@@ -39,7 +39,7 @@ import superagent from 'superagent'
 export default function TopNavBar() {
 
     const { t } = useTranslation()
-    const { profileIcon, setProfileIcon } = useGlobalSettings()
+    const { profileIcon, isLoggedIn, setIsLoggedIn } = useGlobalSettings()
 
     const theme = selectTheme()
     const [anchorEl, setAnchorEl] = React.useState(null)
@@ -47,7 +47,7 @@ export default function TopNavBar() {
 
     const isMenuOpen = Boolean(anchorEl)
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-    const [loggedIn, setLoggedIn] = React.useState(Cookies.get('access-token') || false)
+    //const [loggedIn, setLoggedIn] = React.useState(Cookies.get('access-token') || false)
     const [username, setUsername] = React.useState(Cookies.get('username') || null)
     const [notifs, setNotifs] = React.useState(43)
     const [mails, setMails] = React.useState(0)
@@ -65,7 +65,7 @@ export default function TopNavBar() {
     }
 
     /*
-    if (loggedIn) {
+    if (isLoggedIn) {
         console.log('Should be getting message data here')
         //getMessageData()
         setNotifs(3)
@@ -128,11 +128,9 @@ export default function TopNavBar() {
         Cookies.remove('account-access-token')
         // not sure whether to remove lang setting or not
         //localStorage.removeItem('i18nextLng')
-        if (window.location.pathname === '/') {
-            window.location.reload()
-        } else {
-            navigate('/', {replace: true})
-        }
+        setIsLoggedIn(false)
+        handleMenuClose()
+        navigate('/', {replace: true})
     }
 
     const handleMobileMenuOpen = (event) => {
@@ -240,7 +238,7 @@ export default function TopNavBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            {!loggedIn ?
+            {!isLoggedIn ?
                 <Box>
                     <MenuItem onClick={() => handleLoginOpen()}>
                         <IconButton
@@ -408,7 +406,7 @@ export default function TopNavBar() {
                     </Typography>
                     <SearchBox />
                     <Box sx={{ flexGrow: 1 }} />
-                    {!loggedIn ?
+                    {!isLoggedIn ?
                         <>
                             <Button
                                 variant='outlined'
@@ -440,7 +438,7 @@ export default function TopNavBar() {
                                          handleCloseDialog={() => setIsLoginOpen(false)}
                             />
                             <SignupDialog isDialogOpened={isSignupOpen}
-                                         handleCloseDialog={() => setIsSignupOpen(false)}
+                                          handleCloseDialog={() => setIsSignupOpen(false)}
                             />
                         </>
                     :
