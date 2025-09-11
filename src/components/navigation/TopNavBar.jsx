@@ -35,6 +35,7 @@ import { useGlobalSettings } from '../helpers/GlobalSettings.jsx'
 import Link from '@mui/material/Link'
 import '../../css/poptape.css'
 import superagent from 'superagent'
+import CustomLink from "../helpers/CustomLink";
 
 export default function TopNavBar() {
 
@@ -47,7 +48,6 @@ export default function TopNavBar() {
 
     const isMenuOpen = Boolean(anchorEl)
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-    //const [loggedIn, setLoggedIn] = React.useState(Cookies.get('access-token') || false)
     const [username, setUsername] = React.useState(Cookies.get('username') || null)
     const [notifs, setNotifs] = React.useState(43)
     const [mails, setMails] = React.useState(0)
@@ -56,6 +56,8 @@ export default function TopNavBar() {
 
     const [isLoginOpen, setIsLoginOpen] = React.useState(false)
     const handleLoginOpen = () => {
+        setMobileMoreAnchorEl(null)
+        setAnchorEl(null)
         setIsLoginOpen(!isLoginOpen)
     }
 
@@ -78,8 +80,7 @@ export default function TopNavBar() {
             setMessages(true)
         }
     }
-
-     */
+    */
 
     function getMessageData() {
 
@@ -391,7 +392,7 @@ export default function TopNavBar() {
                         edge='start'
                         color='inherit'
                         aria-label='go to homepage'
-                        sx={{ mr: 2 }}
+                        sx={{ mr: 2, color: theme.palette.poptape_header}}
                         onClick={() => navigate('/', {replace: true})}
                     >
                         <HiveIcon />
@@ -402,7 +403,7 @@ export default function TopNavBar() {
                         component='div'
                         sx={{ mr: 2, display: { xs: 'none', sm: 'block' } }}
                     >
-                        <Link sx={{color: 'white', cursor: 'pointer'}} onClick={() => navigate('/', {replace: true})}>poptape</Link>
+                        <CustomLink colour={theme.palette.poptape_header} url='/' replace={true} text='poptape' />
                     </Typography>
                     <SearchBox />
                     <Box sx={{ flexGrow: 1 }} />

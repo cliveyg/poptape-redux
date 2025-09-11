@@ -44,6 +44,7 @@ const ta = ["default", "blue", "pink", "funky", "royal", "sweet", "wine", "grey"
 const defaultTheme = createTheme({
     palette: {
         notifications: green[200],
+        poptape_header: '#ffffff',
         success: {
             main: '#1e9d24', // another green
         },
@@ -103,6 +104,7 @@ const defaultTheme = createTheme({
 const pinkTheme = createTheme({
     palette: {
         notifications: green[200],
+        poptape_header: '#ffffff',
         success: {
             main: '#1e9d24', // another green
         },
@@ -162,6 +164,7 @@ const pinkTheme = createTheme({
 const funkyTheme = createTheme({
     palette: {
         notifications: '#c6ecae',
+        poptape_header: '#ffffff',
         success: {
             main: '#94c9a9',
         },
@@ -220,6 +223,7 @@ const funkyTheme = createTheme({
 const blueTheme = createTheme({
     palette: {
         notifications: green[200],
+        poptape_header: '#ffffff',
         success: {
             main: '#1e9d24', // another green
         },
@@ -278,6 +282,7 @@ const blueTheme = createTheme({
 const royalTheme = createTheme({
     palette: {
         notifications: green[200],
+        poptape_header: '#ffffff',
         success: {
             main: '#285e29', // another green
         },
@@ -336,6 +341,7 @@ const royalTheme = createTheme({
 const sweetTheme = createTheme({
     palette: {
         notifications: '#c6ecae',
+        poptape_header: '#ffffff',
         success: {
             main: '#00afb9',
         },
@@ -394,6 +400,7 @@ const sweetTheme = createTheme({
 const wineTheme = createTheme({
     palette: {
         notifications: '#c6ecae',
+        poptape_header: '#ffffff',
         success: {
             main: '#345e2d',
         },
@@ -455,6 +462,7 @@ const wineTheme = createTheme({
 const greyTheme = createTheme({
     palette: {
         notifications: '#0081a7',
+        poptape_header: '#ffffff',
         stb_a: '#27474e',
         success: {
             main: '#00AFB9',
@@ -533,6 +541,7 @@ const greyTheme = createTheme({
 const mulberryTheme = createTheme({
     palette: {
         notifications: '#f56476',
+        poptape_header: '#ffffff',
         stb_a: '#27474e',
         success: {
             main: '#5f9f43',
@@ -611,6 +620,7 @@ const mulberryTheme = createTheme({
 const greenTheme = createTheme({
     palette: {
         notifications: '#f56476',
+        poptape_header: '#ffffff',
         stb_a: '#27474e',
         success: {
             main: '#9abd97',
@@ -697,6 +707,7 @@ const greenTheme = createTheme({
 const dark1Theme = createTheme({
     palette: {
         notifications: '#f56476',
+        poptape_header: '#ffffff',
         stb_a: '#27474e',
         success: {
             main: '#9abd97',
@@ -766,6 +777,7 @@ const dark1Theme = createTheme({
 const dark2Theme = createTheme({
     palette: {
         notifications: green[200],
+        poptape_header: '#ffffff',
         success: {
             main: '#1e9d24', // another green
         },
@@ -826,6 +838,7 @@ const dark2Theme = createTheme({
 const dark3Theme = createTheme({
     palette: {
         notifications: green[200],
+        poptape_header: '#ffffff',
         success: {
             main: '#1e9d24', // another green
         },
@@ -886,6 +899,7 @@ const dark3Theme = createTheme({
 const xanthousTheme = createTheme({
     palette: {
         notifications: '#e3170a',
+        poptape_header: '#ffffff',
         stb_a: '#27474e',
         success: {
             main: '#a9e5bb',
@@ -964,6 +978,7 @@ const xanthousTheme = createTheme({
 const tomatoTheme = createTheme({
     palette: {
         notifications: '#be0e07',
+        poptape_header: '#ffffff',
         stb_a: '#27474e',
         success: {
             main: '#0a9335',
@@ -1042,6 +1057,7 @@ const tomatoTheme = createTheme({
 const peagreenTheme = createTheme({
     palette: {
         notifications: '#be0e07',
+        poptape_header: '#151a13',
         stb_a: '#27474e',
         success: {
             main: '#237e3f',

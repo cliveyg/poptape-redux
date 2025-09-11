@@ -14,9 +14,12 @@ import CountDownTimer from '../components/helpers/CountDownTimer'
 //import Avatar from '@mui/material/Avatar'
 import ExampleUsage from '../components/helpers/DropzoneDialog/ExampleUsage'
 import Cookies from 'js-cookie'
+import {useNavigate} from "react-router";
+import CustomLink from "../components/helpers/CustomLink.jsx";
 
 function HomePage() {
     const { t } = useTranslation()
+    const navigate = useNavigate()
     const { profileIcon, setProfileIcon, profileImageString, setProfileImageString, isLoggedIn } = useGlobalSettings()
 
     const [duration, setDuration] = useState(5)
@@ -53,9 +56,9 @@ function HomePage() {
                 fontFamily: {...theme.typography.body1},
             }}
             >
-                <Box><Typography>homepage wibble</Typography><br />This is some text and a <Link href="/item/create" underline='none' sx={{ textDecoration: 'none'}}>create item</Link></Box>
+                <Box><Typography>homepage wibble</Typography><br />This is some text and a <CustomLink url='/item/create' text='create item'/> link</Box>
                 <Box>This is a <Link href="/item/f7884d63-7507-43ed-8196-8ee0b6455ed6" underline='none'>linky</Link> to a non existent item</Box>
-                <Box>Link to <Link href="/test/woop">test page</Link></Box>
+                <Box>Test custom link to <CustomLink url='/test/woop' text='test page'/></Box>
                 <Box>{t('homepage:hp_test')}</Box>
                 <Box>
                     profileIcon:<br/>

@@ -2,5 +2,8 @@
   "pr_title": "perfil",
   "pr_about_you_label": "Sobre você",
   "pr_update_button": "Atualizar",
-  "pr_choose_avatar": "Atualizar avatar"
+  "pr_choose_avatar": "Atualizar avatar",
+  "pr_no_of_chars": "Número de caracteres: ",
+  "pr_profile_updated": "Perfil atualizado",
+  "pr_profile_update_fail": "O computador diz não"
 }
