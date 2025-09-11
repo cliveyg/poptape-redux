@@ -14,12 +14,10 @@ import CountDownTimer from '../components/helpers/CountDownTimer'
 //import Avatar from '@mui/material/Avatar'
 import ExampleUsage from '../components/helpers/DropzoneDialog/ExampleUsage'
 import Cookies from 'js-cookie'
-import {useNavigate} from "react-router";
-import CustomLink from "../components/helpers/CustomLink.jsx";
+import CustomLink from '../components/helpers/CustomLink'
 
 function HomePage() {
     const { t } = useTranslation()
-    const navigate = useNavigate()
     const { profileIcon, setProfileIcon, profileImageString, setProfileImageString, isLoggedIn } = useGlobalSettings()
 
     const [duration, setDuration] = useState(5)
