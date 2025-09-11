@@ -63,6 +63,7 @@ function DropzoneAreaBase({
     const [snackbar, setSnackbar] = React.useState({ open: false, message: '', variant: 'success', key_date: Date.now() })
 
     const handleDropAccepted = async (acceptedFiles, evt) => {
+        setInvalid(false)
         const newObjs = await Promise.all(
             acceptedFiles.map(async (file) => ({
                 file,
@@ -94,6 +95,22 @@ function DropzoneAreaBase({
         if (onDelete) onDelete(fileObjects[idx], idx)
     }
 
+    const handleDragEnter = () => {
+        setActive(true)
+        setInvalid(false)
+    }
+    const handleDragLeave = () => {
+        setActive(false)
+        setInvalid(false)
+    }
+
+    let Container = Root
+    if (invalid) {
+        Container = Invalid
+    } else if (active) {
+        Container = Active
+    }
+
     const getIcon = getPreviewIcon ??
         ((fileObj) => {
             if (fileObj.file.type.startsWith('image/')) {
@@ -107,12 +124,13 @@ function DropzoneAreaBase({
             <Dropzone
                 onDropAccepted={handleDropAccepted}
                 onDropRejected={handleDropRejected}
+                onDragEnter={handleDragEnter}
+                onDragLeave={handleDragLeave}
                 {...props}
             >
                 {({ getRootProps, getInputProps, isDragActive }) => {
-                    const RootComp = invalid ? Invalid : (isDragActive || active ? Active : Root)
                     return (
-                        <RootComp {...getRootProps()} tabIndex={0}>
+                        <Container {...getRootProps()} tabIndex={0}>
                             <input {...getInputProps()} />
                             <div style={{ textAlign: 'center' }}>
                                 <Icon style={{ width: 51, height: 51, color: theme.palette.primary.main }} />
@@ -135,7 +153,7 @@ function DropzoneAreaBase({
                                     />
                                 </div>
                             )}
-                        </RootComp>
+                        </Container>
                     )
                 }}
             </Dropzone>
