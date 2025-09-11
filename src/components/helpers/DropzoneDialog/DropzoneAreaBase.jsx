@@ -9,6 +9,7 @@ import PreviewList from './PreviewList'
 import CustomSnackbar from '../../information/CustomSnackbar'
 import {useTranslation} from 'react-i18next'
 import {readFile} from '../../../assets/scripts/general'
+import {selectTheme} from '../../../assets/scripts/theme'
 
 const Root = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -56,6 +57,7 @@ function DropzoneAreaBase({
                           }) {
 
     const { t } = useTranslation()
+    const theme = selectTheme()
     const [active, setActive] = React.useState(false)
     const [invalid, setInvalid] = React.useState(false)
     const [snackbar, setSnackbar] = React.useState({ open: false, message: '', variant: 'success', key_date: Date.now() })
@@ -113,7 +115,7 @@ function DropzoneAreaBase({
                         <RootComp {...getRootProps()} tabIndex={0}>
                             <input {...getInputProps()} />
                             <div style={{ textAlign: 'center' }}>
-                                <Icon style={{ width: 51, height: 51, color: '#888' }} />
+                                <Icon style={{ width: 51, height: 51, color: theme.palette.primary.main }} />
                                 <Typography variant="subtitle1" style={{ margin: 24 }}>
                                     {dropzoneText}
                                 </Typography>

@@ -35,6 +35,7 @@ function ExampleUsage() {
                 showPreviews={true}
                 showFileNamesInPreview={true}
                 acceptedFiles={['image/jpeg', 'image/jpg', 'image/tiff', 'image/png']}
+                accept={{ 'image/*': ['.jpeg', '.jpg', '.png'] }}
                 filesLimit={5}
                 cancelButtonText={t('helpers:dzd_cancel')}
                 submitButtonText={t('helpers:dzd_upload')}
