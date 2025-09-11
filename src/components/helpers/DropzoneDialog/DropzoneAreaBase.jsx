@@ -60,10 +60,34 @@ function DropzoneAreaBase({
     const theme = selectTheme()
     const [active, setActive] = React.useState(false)
     const [invalid, setInvalid] = React.useState(false)
+    // Add a counter to force snackbar key uniqueness for every snackbar call
+    const [snackbarCounter, setSnackbarCounter] = React.useState(0)
     const [snackbar, setSnackbar] = React.useState({ open: false, message: '', variant: 'success', key_date: Date.now() })
+    const invalidTimeoutRef = React.useRef(null)
+
+    // Helper to always set a new key_date and open the snackbar, even for repeat messages
+    const showSnackbar = (message, variant) => {
+        setSnackbarCounter(c => c + 1)
+        setSnackbar({
+            open: false,
+            message: '',
+            variant: '',
+            key_date: Date.now() + snackbarCounter // ensure uniqueness
+        })
+        setTimeout(() => {
+            setSnackbar({
+                open: true,
+                message,
+                variant,
+                key_date: Date.now() + snackbarCounter,
+                duration: 4000
+            })
+        }, 10) // very short delay forces re-render
+    }
 
     const handleDropAccepted = async (acceptedFiles, evt) => {
         setInvalid(false)
+        setActive(false)
         const newObjs = await Promise.all(
             acceptedFiles.map(async (file) => ({
                 file,
@@ -71,23 +95,19 @@ function DropzoneAreaBase({
             }))
         )
         if (onAdd) onAdd(newObjs)
-        setSnackbar({
-            open: true,
-            message: t('helpers:dzd_file_added'),
-            variant: 'success',
-            key_date: Date.now(),
-            duration: 4000
-        })
+        showSnackbar(t('helpers:dzd_file_added'), 'success')
     }
     const handleDropRejected = (rejectedFiles, evt) => {
-        setSnackbar({
-            open: true,
-            message: t('helpers:dzd_file_invalid'),
-            variant: 'error',
-            key_date: Date.now(),
-            duration: 4000
-        })
+        showSnackbar(t('helpers:dzd_file_invalid'), 'error')
         setInvalid(true)
+        // clear any existing timer
+        if (invalidTimeoutRef.current) {
+            clearTimeout(invalidTimeoutRef.current);
+        }
+        invalidTimeoutRef.current = setTimeout(() => {
+            setInvalid(false);
+            invalidTimeoutRef.current = null;
+        }, 2000);
     }
     const handleSnackbarClose = () => setSnackbar({ ...snackbar, open: false })
 
