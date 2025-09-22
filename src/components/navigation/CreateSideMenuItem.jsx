@@ -126,7 +126,9 @@ export default function CreateSideMenuItem({menuItem, username, selected}) {
                             width: 170,
                             mb: 1,
                             height: theme.spacing(4),
+                            //color: theme.palette.secondary.smenu,
                         }}
+                        //color={theme.palette.secondary.smenu}
                         color='primary'
                         variant={variant}
                         size='small'

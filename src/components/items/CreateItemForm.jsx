@@ -14,6 +14,8 @@ import { useNavigate } from 'react-router'
 import superagent from 'superagent'
 import { styled } from '@mui/material/styles'
 import DropzoneDialog from '../helpers/DropzoneDialog/DropzoneDialog'
+import Cookies from 'js-cookie'
+import AddToAuction from './AddToAuction'
 
 // Styles
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -156,6 +158,8 @@ export default function CreateItemForm() {
         formModel['category'] = chosenCat
         setModel(formModel);
 
+        console.log(JSON.stringify(formModel))
+
         superagent.post('/items')
             .send(JSON.stringify(formModel))
             .set('Accept', 'application/json')
@@ -254,13 +258,16 @@ export default function CreateItemForm() {
                         });
                         setProgress((p) => p + interval)
                         if (res.status === 204) {
-                            return req
+
+                            return superagent
                                 .post('/fotos')
                                 .send(JSON.stringify(fotoData))
                                 .set('Accept', 'application/json')
                                 .set('Content-Type', 'application/json')
                                 .set('x-access-token', Cookies.get('access-token'))
-                                .then(() => updateResults([...uploadResults]))
+                                .then((res) => {
+                                    updateResults([...uploadResults])
+                                })
                                 .catch((fotosErr) => {
                                     console.log('Error posting to fotos microservice')
                                     console.log(fotosErr)
@@ -268,7 +275,7 @@ export default function CreateItemForm() {
                         }
                     })
                     .catch((err) => {
-                        console.log(err)
+                        //console.log(err)
                         uploadResults.push({
                             url: bucket + '/' + currentS3URL.fields.key,
                             originalFilename: currentFile.name,
@@ -376,14 +383,16 @@ export default function CreateItemForm() {
             {showDropzone && (
                 <DropzoneDialog
                     open={open}
-                    onClose={() => setOpen(false)}
+                    onClose={() => setOpenUpload(false)}
                     onSave={(selectedFiles) => {
                         console.log("in onSave")
                         setFiles(selectedFiles)
-                        setOpen(false)
+                        setOpenUpload(false)
+                        handleSave(selectedFiles)
                     }}
                     onChange={(selectedFiles) => setFiles(selectedFiles)}
-                    dialogTitle={t('helpers:dzd_title')}
+                    dialogTitle={t('helpers:dzd_photo_title')}
+                    fileAddMess={t('helpers:dzd_file_photo_added')}
                     maxFileSize={5000000}
                     showPreviews={true}
                     showFileNamesInPreview={true}
@@ -394,7 +403,54 @@ export default function CreateItemForm() {
                     initialFiles={initialFiles}
                 />
             )}
-
+            {showResults &&
+                <div>
+                    <Paper>
+                        <Typography variant="h5">
+                            {progress > 99 ?
+                                <>
+                                    Images Uploaded<br /><br />
+                                </>
+                                :
+                                <>
+                                    Uploading Images...<br /><br />
+                                </>
+                            }
+                        </Typography>
+                        <Typography variant="body1">
+                            Images uploaded: {results.length}/{noOfFiles} <br /><br />
+                        </Typography>
+                        <div>
+                            {progress === 0 ?
+                                <LinearProgress color="secondary" />
+                                :
+                                <LinearProgress color="secondary" variant="determinate" value={progress} />
+                            }
+                        </div>
+                        <div>
+                            <>
+                                {results.map(result => (
+                                    <span key={result.url}>
+                    <img src={result.url} alt="" />
+                  </span>
+                                ))}
+                            </>
+                        </div>
+                        {progress > 99 &&
+                            <>
+                                Add to auction here
+                                {/*
+                                <AddToAuction
+                                    itemId={itemId}
+                                    itemName={model.name}
+                                    onSuccess={onSuccess}
+                                />
+                                */}
+                            </>
+                        }
+                    </Paper>
+                </div>
+            }
         </Box>
     )
 }

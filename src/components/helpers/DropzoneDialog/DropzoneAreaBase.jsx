@@ -37,7 +37,7 @@ const Active = styled(Root)(({ theme }) => ({
 }))
 
 const Invalid = styled(Root)(({ theme }) => ({
-    backgroundImage: `repeating-linear-gradient(-45deg, ${theme.palette.error.light}, ${theme.palette.error.light} 25px, ${theme.palette.error.dark} 25px, ${theme.palette.error.dark} 50px)`,
+    backgroundImage: `repeating-linear-gradient(-45deg, ${theme.palette.error.light}, ${theme.palette.error.light} 25px, ${theme.palette.error.main} 25px, ${theme.palette.error.main} 50px)`,
     borderColor: theme.palette.error.main
 }))
 
@@ -47,6 +47,7 @@ function DropzoneAreaBase({
                               onDelete,
                               onAlert,
                               dropzoneText,
+                              fileAddMess,
                               showPreviews = true,
                               showPreviewsInDropzone = false,
                               showFileNamesInPreview = true,
@@ -95,7 +96,7 @@ function DropzoneAreaBase({
             }))
         )
         if (onAdd) onAdd(newObjs)
-        showSnackbar(t('helpers:dzd_file_added'), 'success')
+        showSnackbar(fileAddMess, 'success')
     }
     const handleDropRejected = (rejectedFiles, evt) => {
         showSnackbar(t('helpers:dzd_file_invalid'), 'error')

@@ -55,7 +55,7 @@ function HomePage() {
             }}
             >
                 <Box><Typography>homepage wibble</Typography><br />This is some text and a <CustomLink url='/item/create' text='create item'/> link</Box>
-                <Box>This is a <Link href="/item/f7884d63-7507-43ed-8196-8ee0b6455ed6" underline='none'>linky</Link> to a non existent item</Box>
+                <Box>This is a <CustomLink url='/item/bbdfcdd2-732f-4fe4-9c35-36021c2b8200' text='linky'/> to an item</Box>
                 <Box>Test custom link to <CustomLink url='/test/woop' text='test page'/></Box>
                 <Box>{t('homepage:hp_test')}</Box>
                 <Box>

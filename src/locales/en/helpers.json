@@ -1,8 +1,11 @@
 {
-  "dzd_dialog_text": "Drag and drop a file here or click",
+  "dzd_dialog_photo_text": "Drag and drop photo(s) here or click",
+  "dzd_dialog_text": "Drag and drop file(s) here or click",
+  "dzd_file_photo_added": "Photos added",
   "dzd_file_added": "File(s) added",
   "dzd_file_invalid": "Invalid file(s)",
-  "dzd_title": "Upload your files",
+  "dzd_photo_title": "Upload your photo(s)",
+  "dzd_title": "Upload your file(s)",
   "dzd_cancel": "Cancel",
   "dzd_upload": "Upload"
 }
