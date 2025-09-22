@@ -150,7 +150,7 @@ export function getCategoriesAndFields() {
     ]
 
     const carFields = [
-        {key: "title", label: "Item Title", type: "text", props: {required: true, maxlength: 150}},
+        {key: "name", label: "Item Title", type: "text", props: {required: true, maxlength: 150}},
         {
             key: "description", label: "Description", type: "maxtext", props: {
                 required: true,

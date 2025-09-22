@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 scratch.txt
 scratchpad
+
+# test data folder
+poptape-input-test-data
+poptape-input-test-data/*

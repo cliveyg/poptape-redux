@@ -12,10 +12,12 @@ import {useTranslation} from 'react-i18next'
 import Cookies from 'js-cookie'
 import {getFieldFromToken, getErrorMessage} from '../../assets/scripts/general'
 import { useNavigate } from 'react-router'
+import {useGlobalSettings} from '../helpers/GlobalSettings'
 
 export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
 
     const { t } = useTranslation()
+    const { setIsLoggedIn } = useGlobalSettings()
     const [showLoader, setshowLoader] = React.useState(false)
     const [showSnack, setshowSnack] = React.useState(false)
     const [variant, setVariant] = React.useState('error')
@@ -67,6 +69,7 @@ export default function SignupDialog({ isDialogOpened, handleCloseDialog }) {
                     setshowSnack(false)
                     setNoHide(false)
                     //window.location.reload()
+                    setIsLoggedIn(true)
                     navigate('/', {replace: true})
                 }, 7000)
             })

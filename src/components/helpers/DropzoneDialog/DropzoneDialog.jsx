@@ -27,8 +27,11 @@ function DropzoneDialog({
                           onDelete,
                           ...dropzoneAreaProps
                         }) {
+
+  const { t } = useTranslation()
   const [fileObjects, setFileObjects] = useState([])
   const prevFilesRef = useRef([])
+  const [dropzoneText, _] = useState(dialogProps.dialogTitle || t('helpers:dzd_dialog_text'))
 
   // Only initialize fileObjects when dialog opens
   useEffect(() => {
@@ -99,8 +102,6 @@ function DropzoneDialog({
     if (clearOnUnmount) setFileObjects([])
   }
 
-  const { t } = useTranslation()
-
   return (
       <Dialog
           {...dialogProps}
@@ -117,7 +118,8 @@ function DropzoneDialog({
               onAdd={handleAdd}
               onDelete={handleDelete}
               showPreviews={showPreviews}
-              dropzoneText={t('helpers:dzd_dialog_text')}
+              dropzoneText={dropzoneText}
+              fileAddMess={dialogProps.fileAddMess || t('helpers:dzd_file_added')}
               showPreviewsInDropzone={showPreviewsInDropzone}
               showFileNamesInPreview={showFileNamesInPreview}
           />

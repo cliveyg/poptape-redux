@@ -8,7 +8,7 @@ import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined'
 import FormBuilder from '../helpers/FormBuilder'
 import CustomSnackbar from '../information/CustomSnackbar'
 import Cookies from 'js-cookie'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import {useTranslation} from 'react-i18next'
 import superagent from 'superagent'
 
@@ -59,14 +59,16 @@ const soloEnAuction = [
     }
 ];
 
-const { t } = useTranslation()
 
-const peckishDefault = {
-    variant: "info",
-    message: t('items:ata_default_message')
-};
 
 function AddToAuction(props) {
+
+    const { t } = useTranslation()
+
+    const peckishDefault = {
+        variant: "info",
+        message: t('items:ata_default_message')
+    };
 
     const navigate = useNavigate();
     const [showSnack, setShowSnack] = useState(false);

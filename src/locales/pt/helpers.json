@@ -1,7 +1,10 @@
 {
+  "dzd_dialog_photo_text": "Arraste e solte uma foto aqui ou clique",
   "dzd_dialog_text": "Arraste e solte um arquivo aqui ou clique",
-  "dzd_file_added": "Arquivo(s) adicionado",
-  "dzd_file_invalid": "Arquivo(s) inválido",
+  "dzd_file_photo_added": "Fotos adicionados",
+  "dzd_file_added": "Arquivos adicionado",
+  "dzd_file_invalid": "Arquivo inválido",
+  "dzd_photo_title": "Carregue seus fotos",
   "dzd_title": "Carregue seus arquivos",
   "dzd_cancel": "Cancelar",
   "dzd_upload": "Carregar"
