@@ -10,9 +10,10 @@ import { isValidUUID } from '../assets/scripts/general'
 import CustomSnackbar from '../components/information/CustomSnackbar'
 import superagent from 'superagent'
 import TopNavBar from '../components/navigation/TopNavBar'
+import { useTranslation } from 'react-i18next'
 
 export default function ItemPage({inItem}) {
-    console.log('In ItemPage')
+    console.log('In ItemPage and inItem is ['+inItem+']')
 
     const [item, setItem] = React.useState(inItem || null)
     const [gotItem, setGotItem] = React.useState(false)
@@ -22,6 +23,10 @@ export default function ItemPage({inItem}) {
     const [showSnack, setshowSnack] = React.useState(false)
     const duration = 2000
     const date = new Date().getTime()
+    const { t } = useTranslation()
+
+    //console.log("Params are ["+JSON.stringify(params)+"]")
+    console.log('In ItemPage and item is ['+JSON.stringify(item)+']')
 
     const Gotty = () => {
         setGotItem(true)
@@ -31,39 +36,43 @@ export default function ItemPage({inItem}) {
 
         if (item === null) {
 
-            superagent.get('/items/'+ip.item_id)
+            console.log("Calling api server with url [/api/item/"+ip.item_id+"/fotos]")
+
+            superagent.get('/api/item/'+ip.item_id+'/fotos')
                 .set('Accept', 'application/json')
                 .set('Content-Type', 'application/json')
                 .then(res => {
                     let rItem = res.body
                     rItem['item_id'] = ip.item_id
-                    superagent.get('/fotos/item/'+rItem.item_id)
-                        .set('Accept', 'application/json')
-                        .set('Content-Type', 'application/json')
-                        .then(res => {
-                            rItem['fotos'] = res.body.fotos
-                            setItem(rItem)
-                            setGotItem(true)
-                        })
-                        .catch(err => {
-                            if (err.status === 404) {
-                                rItem['fotos'] = []
-                                setItem(rItem)
-                                setGotItem(true)
-                            } else {
-                                console.log(err)
-                                setMessage('Unable to retrieve photos for item')
-                                setVariant('error')
-                                setshowSnack(true)
-                                setTimeout(function() {
-                                    setshowSnack(false)
-                                }, duration)
-                            }
-                        })
+                    setItem(rItem)
+                    setGotItem(true)
+                    // superagent.get('/fotos/item/'+rItem.item_id)
+                    //     .set('Accept', 'application/json')
+                    //     .set('Content-Type', 'application/json')
+                    //     .then(res => {
+                    //         rItem['fotos'] = res.body.fotos
+                    //         setItem(rItem)
+                    //         setGotItem(true)
+                    //     })
+                    //     .catch(err => {
+                    //         if (err.status === 404) {
+                    //             rItem['fotos'] = []
+                    //             setItem(rItem)
+                    //             setGotItem(true)
+                    //         } else {
+                    //             console.log(err)
+                    //             setMessage('Unable to retrieve photos for item')
+                    //             setVariant('error')
+                    //             setshowSnack(true)
+                    //             setTimeout(function() {
+                    //                 setshowSnack(false)
+                    //             }, duration)
+                    //         }
+                    //     })
                 })
                 .catch(err => {
                     console.log(err)
-                    setMessage('Unable to retrieve item')
+                    setMessage(t('items:ip_error_mess_1'))
                     setVariant('error')
                     setshowSnack(true)
                     setTimeout(function() {
@@ -74,23 +83,29 @@ export default function ItemPage({inItem}) {
 
     }
 
+
+    React.useEffect(() => {
+        //Runs only on the first render
+        CheckItem()
+    }, []);
+
     const CheckItem = () => {
         if (!gotItem) {
-            console.log('not got the item...')
+            console.log('CheckItem() not got the item...')
             if (params.item_id !== null && params.item_id !== undefined ) {
                 if (isValidUUID(params.item_id)) {
                     console.log('valid uuid')
-                    //getItemData(params)
-                    //setMessage('Valid uuid')
-                    //setVariant('success')
-                    //setshowSnack(true)
-                    //setTimeout(function() {
-                    //    setshowSnack(false)
-                    //}, duration)
+                    getItemData(params)
+                    // setMessage('Valid uuid')
+                    // setVariant('success')
+                    // setshowSnack(true)
+                    // setTimeout(function() {
+                    //     setshowSnack(false)
+                    // }, duration)
                 } else {
                     //TODO: snackbar?
                     console.log('invalid item uuid in url')
-                    setMessage('Invalid item id')
+                    setMessage(t('items:ip_error_mess_2'))
                     setVariant('error')
                     setshowSnack(true)
                     setTimeout(function() {
@@ -107,7 +122,6 @@ export default function ItemPage({inItem}) {
 
     return (
         <>
-            <CheckItem />
             <header>
                 <TopNavBar />
             </header>
@@ -120,9 +134,11 @@ export default function ItemPage({inItem}) {
                         backgroundColor: 'offwhite.main',
                     }}
                     >
-                        In item page<br/>
-                        <ItemPageController item={'meep'} />
-
+                        {gotItem ?
+                            <ItemPageController item={item}/>
+                            :
+                            null
+                        }
                         {showSnack ?
                             <CustomSnackbar
                                 duration={duration}

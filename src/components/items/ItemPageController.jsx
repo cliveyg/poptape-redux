@@ -6,12 +6,13 @@ import BidderView from './BidderView'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Cookies from 'js-cookie'
+import Gallery from '../helpers/Gallery'
 
 export default function ItemPageController({item}) {
 
     console.log('In ItemPageController')
     if (item !== null && item !== undefined){
-        console.log('got our item')
+         console.log('got our item')
     }
 
     const [showError, setShowError] = React.useState(true)
@@ -20,6 +21,7 @@ export default function ItemPageController({item}) {
     const [bidderViewComp, setBidderViewComp] = React.useState(null)
     const [auction, setAuction] = React.useState(null)
     const [currentLot, setCurrentLot] = React.useState(null)
+    //const [gotItem, setGotItem] = React.useState(false)
 
     const getAuctionHouseData = () => {
         const auctionhouseURL = '/auctionhouse/auction/item/'
@@ -47,6 +49,8 @@ export default function ItemPageController({item}) {
     }
 
     function setAuctionLotData() {
+
+        console.log("ITPC setAuctionLotData")
         const ownerViewComp =
             <OwnerView
                 item = {item}
@@ -96,7 +100,7 @@ export default function ItemPageController({item}) {
                 <>
                     <Box sx={{ backgroundColor: 'purple' }}>
                         <Typography sx={{ marginBottom: 25, fontSize: "1.6em", }} variant="h4" component="h4">
-                            ITEM NAME {item.name}
+                            {item.name}
                         </Typography>
                     </Box>
                     <Box sx={{ backgroundColor: 'pink' }} display="flex" flexDirection="row">
@@ -113,15 +117,15 @@ export default function ItemPageController({item}) {
                             }
                         </Box>
                         <Box flex={5} sx={{backgroundColor: 'orange'}}>
-                            {/*<Gallery
-                                item = {this.state.item}
-                            />*/}
-                            Gallery goes here
+                            <Gallery
+                                item = {item}
+                            />
+                            {/*Gallery goes here*/}
                         </Box>
                     </Box>
                     <Box>
                         {/*<DisplayFields
-                            item = {this.state.item}
+                            item = {item}
                         />*/}
                         DisplayFields goes here
                     </Box>

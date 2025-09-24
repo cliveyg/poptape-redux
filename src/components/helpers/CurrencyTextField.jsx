@@ -10,6 +10,7 @@ const CurrencyTextField = ({
                                onChange,
                                onBlur,
                                onFocus,
+                               //digitGroupSeparator,
                                ...others
                            }) => {
     const inputRef = useRef(null)

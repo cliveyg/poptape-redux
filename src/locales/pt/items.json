@@ -34,5 +34,7 @@
   "ata_sell_multiple": "Vender Em Um Leilão Múltiplo",
   "ata_show_item": "Mostrar Este Item",
   "ata_show_my_items": "Mostrar Meus Itens",
-  "ata_create_another": "Criar Mais"
+  "ata_create_another": "Criar Mais",
+  "ip_error_mess_1": "Não foi possível recuperar o item",
+  "ip_error_mess_2": "Id do item inválido"
 }
