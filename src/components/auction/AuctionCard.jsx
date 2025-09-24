@@ -61,6 +61,8 @@ const AuctionCard = (props) => {
     useEffect(() => {
         const accessToken = Cookies.get('access-token');
         if (accessToken) {
+            console.log("In AuctionCard get watchlist")
+            /*
             request
                 .get('/list/watchlist')
                 .set('Accept', 'application/json')
@@ -73,22 +75,28 @@ const AuctionCard = (props) => {
                     }
                 })
                 .catch((err) => console.log(err));
+
+             */
         }
     }, [props.itemId]);
 
     const sendToWatchlist = (putOnList) => {
-        const uuidData = { uuid: props.itemId };
-        const method = putOnList ? 'post' : 'delete';
+        const uuidData = { uuid: props.itemId }
+        const method = putOnList ? 'post' : 'delete'
+        console.log("In sendToWatchlist")
+        /*
         request[method]('/list/watchlist')
             .send(JSON.stringify(uuidData))
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('x-access-token', Cookies.get('access-token'))
             .then(() => {
-                setWatching(putOnList);
+                setWatching(putOnList)
             })
-            .catch((err) => console.log(err));
-    };
+            .catch((err) => console.log(err))
+
+         */
+    }
 
     const onChange = (value) => {
         setBidValue(value)
@@ -125,7 +133,7 @@ const AuctionCard = (props) => {
             <StyledCard>
                 <CardContent>
                     <FieldSurround>
-                        {/*}
+                        {/*
                         <CurrencyInput
                             name="input-name"
                             //defaultValue={bidValue}
@@ -137,18 +145,20 @@ const AuctionCard = (props) => {
                             step={1}
                         />
                         */}
-
+                        CurrTxtField
+                        {/*
                         <CurrencyTextField
                             variant="outlined"
                             value={bidValue}
                             currencySymbol="£"
                             outputFormat="number"
-                            decimalCharacter="."
+                            //decimalCharacter="."
                             fullWidth
-                            digitGroupSeparator=","
+                            //digitGroupSeparator=","
                             //sx={{ fontSize: 25, borderRadius: 4, padding: 7, backgroundColor: "#ffffff" }}
                             onChange={(event, value) => onChange(value)}
                         />
+                        */}
 
                     </FieldSurround>
                     <div>

@@ -103,7 +103,7 @@ const SellerInfoCard = ({ publicId, auction, itemLocation }) => {
                 console.log(err);
             }
         }
-        fetchData();
+        //fetchData();
         return () => { isMounted = false; };
         // eslint-disable-next-line
     }, [publicId]);

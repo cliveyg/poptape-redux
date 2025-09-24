@@ -240,7 +240,7 @@ export default function CreateItemForm() {
 
                 fotoData['item_id'] = id
                 fotoData['foto_id'] = currentS3URL.fields.key
-                fotoData['s3_url'] = bucket + currentS3URL.fields.key
+                fotoData['s3_url'] = bucket + "/" + currentS3URL.fields.key
                 fotoData['size'] = currentFile.size
                 fotoData['type'] = currentFile.type
                 fotoData['lastModified'] = currentFile.lastModified
