@@ -63,9 +63,6 @@ function HomePage() {
                     {profileIcon}
                     <br/>
                 </Box>
-                <Box>
-                    <ExampleUsage />
-                </Box>
                 <div key={key}>
                     <CountDownTimer
                         duration={duration}

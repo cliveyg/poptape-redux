@@ -6,6 +6,8 @@ import LinearProgress from '@mui/material/LinearProgress'
 import Select from '@mui/material/Select'
 import FormLabel from '@mui/material/FormLabel'
 import Button from '@mui/material/Button'
+import ImageList from '@mui/material/ImageList'
+import ImageListItem from '@mui/material/ImageListItem'
 import {getCategoriesAndFields} from '../../assets/scripts/general'
 import FormBuilder from '../helpers/FormBuilder'
 import MenuItem from '@mui/material/MenuItem'
@@ -65,7 +67,6 @@ export default function CreateItemForm() {
 
     const { t } = useTranslation()
     const categoriesAndFields = getCategoriesAndFields()
-    //console.log(categoriesAndFields)
 
     const peckishDefault = {
         variant: 'info',
@@ -101,6 +102,15 @@ export default function CreateItemForm() {
     const [files, setFiles] = useState([])
 
     const initialFiles = useMemo(() => files, [files])
+
+    function srcset(image, size, rows = 1, cols = 1) {
+        return {
+            src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+            srcSet: `${image}?w=${size * cols}&h=${
+                size * rows
+            }&fit=crop&auto=format&dpr=2 2x`,
+        };
+    }
 
     const handleChange = useCallback((e, key) => {
         const value = e.target.value
@@ -148,11 +158,15 @@ export default function CreateItemForm() {
             message = t('errors:unauthorized')
         } else if (err.status === 502) {
             variant = "error"
-            message = t('errors:bad_gqteway')
+            message = t('errors:bad_gateway')
         }
         setPeckish({ variant, message })
         openSnack()
     };
+
+    const onSuccess = () => {
+        console.log("On success!")
+    }
 
     const onSubmit = (formModel) => {
         formModel['category'] = chosenCat
@@ -160,23 +174,23 @@ export default function CreateItemForm() {
 
         console.log(JSON.stringify(formModel))
 
-        superagent.post('/items')
-            .send(JSON.stringify(formModel))
-            .set('Accept', 'application/json')
-            .set('Content-Type', 'application/json')
-            .set('x-access-token', Cookies.get('access-token'))
-            .then((res) => {
-                let s3urls = res.body.s3_urls
-                setUrls([s3urls])
-                setItemId(res.body.item_id)
-                setBucketURL(res.body.bucket_url)
-                setPeckish({ variant: 'success', message: t('items:cif_default_message') })
-                openSnack()
-                setShowForm(false)
-                setShowCats(false)
-                setShowDropzone(true)
-            })
-            .catch(onFail)
+        // superagent.post('/items')
+        //     .send(JSON.stringify(formModel))
+        //     .set('Accept', 'application/json')
+        //     .set('Content-Type', 'application/json')
+        //     .set('x-access-token', Cookies.get('access-token'))
+        //     .then((res) => {
+        //         let s3urls = res.body.s3_urls
+        //         setUrls([s3urls])
+        //         setItemId(res.body.item_id)
+        //         setBucketURL(res.body.bucket_url)
+        //         setPeckish({ variant: 'success', message: t('items:cif_default_message') })
+        //         openSnack()
+        //         setShowForm(false)
+        //         setShowCats(false)
+        //         setShowDropzone(true)
+        //     })
+        //     .catch(onFail)
     }
 
     const handleSave = (selectedFiles) => {
@@ -295,7 +309,8 @@ export default function CreateItemForm() {
     useEffect(() => {
         let tlca = categoriesAndFields['topLevelCats']
 
-        for (var i = 0; i < tlca.length; i++) {
+        // translation functionality
+        for (let i = 0; i < tlca.length; i++) {
             let trans = t(tlca[i].name)
             tlca[i].name = trans
         }
@@ -312,7 +327,8 @@ export default function CreateItemForm() {
             slca = categoriesAndFields['otherCats']
         }
 
-        for (var i = 0; i < slca.length; i++) {
+        // translation functionality
+        for (let i = 0; i < slca.length; i++) {
             let trans = t(slca[i].name)
             slca[i].name = trans
         }
@@ -420,32 +436,38 @@ export default function CreateItemForm() {
                         <Typography variant="body1">
                             Images uploaded: {results.length}/{noOfFiles} <br /><br />
                         </Typography>
-                        <div>
+                        <Box>
                             {progress === 0 ?
                                 <LinearProgress color="secondary" />
                                 :
                                 <LinearProgress color="secondary" variant="determinate" value={progress} />
                             }
-                        </div>
-                        <div>
-                            <>
-                                {results.map(result => (
-                                    <span key={result.url}>
-                    <img src={result.url} alt="" />
-                  </span>
+                        </Box>
+                        <Box>
+                            <ImageList
+                                sx={{ width: 300, height: 250 }}
+                                variant="quilted"
+                                cols={4}
+                                rowHeight={121}
+                            >
+                                {results.map((result) => (
+                                    <ImageListItem key={result.url}>
+                                        <img
+                                            {...srcset(result.url, 121)}
+                                            alt=""
+                                            loading="lazy"
+                                        />
+                                    </ImageListItem>
                                 ))}
-                            </>
-                        </div>
+                            </ImageList>
+                        </Box>
                         {progress > 99 &&
                             <>
-                                Add to auction here
-                                {/*
                                 <AddToAuction
                                     itemId={itemId}
                                     itemName={model.name}
                                     onSuccess={onSuccess}
                                 />
-                                */}
                             </>
                         }
                     </Paper>

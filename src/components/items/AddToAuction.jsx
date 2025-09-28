@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, {useState, useCallback, useEffect} from 'react'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
@@ -11,8 +11,9 @@ import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router'
 import {useTranslation} from 'react-i18next'
 import superagent from 'superagent'
+import {addToAuctionFields} from '../../assets/scripts/general'
 
-// Styles
+// styles
 const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3, 2)
 }));
@@ -22,48 +23,10 @@ const Dropbuttons = styled(Button)(({ theme }) => ({
     marginRight: 20
 }));
 
-// Auction form fields
-//TODO: Get these from somewhere else and add i18 support
-const soloEnAuction = [
-    { key: "start_time", label: "Auction start", type: "datetime", props: { disabled: false, required: true } },
-    { key: "end_time", label: "Auction end", type: "datetime", props: { disabled: false, required: true } },
-    { key: "quantity", label: "Quantity", type: "number", props: { required: true } },
-    { key: "start_price", label: "Starting price (optional)", type: "currency", props: { required: false } },
-    { key: "reserve_price", label: "Reserve price (optional)", type: "currency", props: { required: false } },
-    { key: "min_increment", label: "Minimum increment", type: "currency", props: { required: true } },
-    {
-        key: "delivery_options", label: "Delivery options", type: "checkbox",
-        props: {
-            items: [
-                { label: "Post", value: "postage", order: 1 },
-                { label: "Delivery", value: "delivery", order: 2 },
-                { label: "Collection", value: "collection", order: 3 },
-            ],
-        }
-    },
-    {
-        key: "payments_accepted", label: "Payment options", type: "checkbox",
-        props: {
-            items: [
-                { label: "Cash", value: "pay_cash", order: 1 },
-                { label: "Mastercard", value: "pay_mastercard", order: 2 },
-                { label: "Visa", value: "pay_visa", order: 3 },
-                { label: "American Express", value: "pay_amex", order: 4 },
-                { label: "Bank transfer", value: "pay_bank_transfer", order: 5 },
-                { label: "Paypal", value: "pay_paypal", order: 6 },
-                { label: "Bitcoin", value: "pay_bitcoin", order: 7 },
-                { label: "Cheque", value: "pay_cheque", order: 8 },
-                { label: "Venmo", value: "pay_venmo", order: 9 },
-            ],
-        }
-    }
-];
-
-
-
 function AddToAuction(props) {
 
     const { t } = useTranslation()
+    const auctionFields = addToAuctionFields()
 
     const peckishDefault = {
         variant: "info",
@@ -84,10 +47,20 @@ function AddToAuction(props) {
     const [showAuctionForm, setShowAuctionForm] = useState(false);
     const [formTitle] = useState(t('items:ata_form_builder_title'));
     const [formBlurb] = useState(t('items:ata_form_builder_blurb'));
-    const [formFields] = useState(soloEnAuction);
+    const [formFields, setFormFields] = useState(auctionFields['soloEnAuction']);
     const [date] = useState(new Date().getTime());
     const [peckish, setPeckish] = useState(peckishDefault);
     const [model, setModel] = useState({});
+
+    useEffect(() => {
+        const ff = formFields
+        // translation functionality
+        for (let i = 0; i < ff.length; i++) {
+            let trans = t(ff[i].name)
+            ff[i].name = trans
+        }
+        setFormFields(ff)
+    }, [])
 
     const openSnack = useCallback(() => {
         setShowSnack(false);
@@ -107,6 +80,7 @@ function AddToAuction(props) {
     }, [props, showAuctionForm, showAddToAuctionButtons, showSuccessButtons, itemId, itemName]);
 
     const onFail = (err) => {
+        console.log(err)
         let variant = "warning"
         let message = t('errors:something_went_bang')
         if (err.status === 400) {
@@ -117,17 +91,21 @@ function AddToAuction(props) {
             message = t('errors:unauthorized')
         } else if (err.status === 502) {
             variant = "error"
-            message = t('errors:bad_gqteway')
+            message = t('errors:bad_gateway')
         }
         setPeckish({ variant, message })
         openSnack()
     };
 
     const onSubmit = (model) => {
+        //TODO: Move currency stuff to account related tings
         model['type'] = 'EN'
         model['currency'] = 'GBP'
         model['item_id'] = itemId
         setModel(model)
+
+        console.log("Input data is ["+JSON.stringify(model)+"]")
+
         superagent.post('/auctionhouse/solo/auction/')
             .send(JSON.stringify(model))
             .set('Accept', 'application/json')
@@ -136,7 +114,7 @@ function AddToAuction(props) {
             .then(res => {
                 const auction_id = res.body.auction_id
                 const lot_id = res.body.lot_id
-                req.post('/auction/' + auction_id + '/' + lot_id)
+                superagent.post('/auction/' + auction_id + '/lot/' + lot_id)
                     .send()
                     .set('Accept', 'application/json')
                     .set('Content-Type', 'application/json')

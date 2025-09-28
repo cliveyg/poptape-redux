@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, Button, Typography, Box } from '@mui/material'
-import CurrencyTextField from '../helpers/CurrencyTextField'
 //import CurrencyInput from 'react-currency-input-field'
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt'
 import VisibilityIcon from '@mui/icons-material/Visibility'
