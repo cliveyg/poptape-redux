@@ -5,6 +5,6 @@
   "server": "Sorry, we have a problem in our system. Please try again later",
   "fields_incorrect": "Some of your fields are incorrect",
   "something_went_bang": "Something went wrong",
-  "bad_gqteway": "The server is unavailable right now",
+  "bad_gateway": "The server is unavailable right now",
   "unauthorized": "Unauthorized"
 }

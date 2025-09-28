@@ -11,10 +11,12 @@ import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import MaxTextField from '../helpers/MaxTextField'
+import CurrencyField from './CurrencyField'
 import FormGroup from '@mui/material/FormGroup'
 import Checkbox from '@mui/material/Checkbox'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers'
+import { de, enGB, zhCN } from 'date-fns/locale'
 import {useTranslation} from 'react-i18next'
 
 // Styled components for MUI 7+
@@ -63,11 +65,8 @@ function FormBuilder({
         }))
     }
 
-    const setCurrency = (v, key) => {
-        setState(s => ({
-            ...s,
-            [key]: v
-        }))
+    const setCurrency = (key, value) => {
+        setState(prev => ({ ...prev, [key]: value }))
     }
 
     const clearForm = e => {
@@ -98,7 +97,7 @@ function FormBuilder({
 
             if (type === 'text') {
                 return (
-                    <div key={key}>
+                    <div key={key} style={{ marginBottom: 10 }}>
                         <TextField
                             required={required}
                             margin="dense"
@@ -115,7 +114,7 @@ function FormBuilder({
                 )
             } else if (type === 'number') {
                 return (
-                    <div key={key}>
+                    <div key={key} style={{ marginBottom: 10 }}>
                         <TextField
                             required={required}
                             margin="dense"
@@ -124,8 +123,8 @@ function FormBuilder({
                             name={key}
                             type="number"
                             slotProps={{ htmlInput: { min: m.props.min,
-                                                      max: m.props.max,
-                                                      step: m.props.step } }}
+                                    max: m.props.max,
+                                    step: m.props.step } }}
                             onChange={e => handleChange(e, key)}
                             //style={{ width: 500 }}
                             fullWidth
@@ -139,7 +138,7 @@ function FormBuilder({
                     </MenuItem>
                 ))
                 return (
-                    <div key={key}>
+                    <div key={key} style={{ marginBottom: 10 }}>
                         <br />
                         <FormLabel>{m.label}</FormLabel>
                         <Select
@@ -166,7 +165,7 @@ function FormBuilder({
                     />
                 ))
                 return (
-                    <div key={key}>
+                    <div key={key} style={{ marginBottom: 10 }}>
                         <br />
                         <FormLabel>{m.label}</FormLabel>
                         <RadioGroup
@@ -182,7 +181,7 @@ function FormBuilder({
                 )
             } else if (type === 'maxtext') {
                 return (
-                    <div key={key}>
+                    <div key={key} style={{ marginBottom: 10 }}>
                         <MaxTextField
                             multiline
                             rows={m.props.rows}
@@ -219,7 +218,7 @@ function FormBuilder({
                     />
                 ))
                 return (
-                    <div key={key}>
+                    <div key={key} style={{ marginBottom: 10 }}>
                         <br />
                         <FormLabel>{m.label}</FormLabel>
                         <FormGroup row>
@@ -231,9 +230,9 @@ function FormBuilder({
                 )
             } else if (type === 'datetime') {
                 return (
-                    <div key={key}>
+                    <div key={key} style={{ marginBottom: 10 }}>
                         <br />
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
                             <DateTimePicker
                                 ampm={false}
                                 disablePast
@@ -248,9 +247,20 @@ function FormBuilder({
                 )
             } else if (type === 'currency') {
                 return (
-                    <div key={key}>
+                    <div key={key} style={{ marginBottom: 10 }}>
                         <br />
-                        Some currency thing
+                        {console.log(`key is ${key}`)}
+                        <CurrencyField
+                            name={key}
+                            value={state[key]}
+                            required={required}
+                            onChange={setCurrency}
+                            currencySymbol="£"
+                            decimalSeparator="."
+                            thousandSeparator=","
+                            label={m.label}
+                            precision={2}
+                        />
                         <br />
                     </div>
                 )

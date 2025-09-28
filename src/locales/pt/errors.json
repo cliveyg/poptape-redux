@@ -5,6 +5,6 @@
   "server": "Descupla, temos uma problema na sistema. Tenta mais tarde",
   "fields_incorrect": "Alguns dos seus dados estão incorretos",
   "something_went_bang": "Algo deu errado",
-  "bad_gqteway": "O servidor não está disponível no momento",
+  "bad_gateway": "O servidor não está disponível no momento",
   "unauthorized": "Não autorizado"
 }
