@@ -172,25 +172,25 @@ export default function CreateItemForm() {
         formModel['category'] = chosenCat
         setModel(formModel);
 
-        console.log(JSON.stringify(formModel))
+        //console.log(JSON.stringify(formModel))
 
-        // superagent.post('/items')
-        //     .send(JSON.stringify(formModel))
-        //     .set('Accept', 'application/json')
-        //     .set('Content-Type', 'application/json')
-        //     .set('x-access-token', Cookies.get('access-token'))
-        //     .then((res) => {
-        //         let s3urls = res.body.s3_urls
-        //         setUrls([s3urls])
-        //         setItemId(res.body.item_id)
-        //         setBucketURL(res.body.bucket_url)
-        //         setPeckish({ variant: 'success', message: t('items:cif_default_message') })
-        //         openSnack()
-        //         setShowForm(false)
-        //         setShowCats(false)
-        //         setShowDropzone(true)
-        //     })
-        //     .catch(onFail)
+        superagent.post('/items')
+            .send(JSON.stringify(formModel))
+            .set('Accept', 'application/json')
+            .set('Content-Type', 'application/json')
+            .set('x-access-token', Cookies.get('access-token'))
+            .then((res) => {
+                let s3urls = res.body.s3_urls
+                setUrls([s3urls])
+                setItemId(res.body.item_id)
+                setBucketURL(res.body.bucket_url)
+                setPeckish({ variant: 'success', message: t('items:cif_default_message') })
+                openSnack()
+                setShowForm(false)
+                setShowCats(false)
+                setShowDropzone(true)
+            })
+            .catch(onFail)
     }
 
     const handleSave = (selectedFiles) => {
